@@ -5,7 +5,7 @@
       <nz-header><h1>注册</h1></nz-header>
       <nz-content style="background: #ECECEC;padding:30px;">
         <div>
-          <form nz-form (ngSubmit)="loadOne()">
+          <form nz-form #f="ngForm" (ngSubmit)="loadOne()">
 
             <nz-form-item>
               <nz-form-label nzRequired [nzSpan]="7">用户名</nz-form-label>
@@ -22,7 +22,7 @@
             <nz-form-item>
               <nz-form-label nzRequired [nzSpan]="7">密码</nz-form-label>
               <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl1">
-                <input nz-input name="password" minlength="6" maxlength="20" required placeholder="The more complex the better"  [(ngModel)]="user.userPassword"/>
+                <input nz-input type="password" name="password" minlength="6" maxlength="20" required placeholder="The more complex the better" #userPassWord="ngModel" [(ngModel)]="user.userPassword"/>
                 <ng-template #combineTpl1 let-control>
                   <ng-container *ngIf="control.hasError('maxlength')">最长20位</ng-container>
                   <ng-container *ngIf="control.hasError('minlength')">最短 6位</ng-container>
@@ -33,16 +33,14 @@
 
             <nz-form-item>
               <nz-form-label nzRequired [nzSpan]="7">确认密码</nz-form-label>
-              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl2" [nzExtra]="combineTpl22">
-                <input nz-input name="checkpassword"  maxlength="12" required placeholder="Confirm password" [(ngModel)]="checkPassword" (keyup)="matchPassword(checkPassword)"/>
-                <ng-template #combineTpl2 let-control>
-                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
-                  <!-- <ng-container *ngIf="result">两次不一致</ng-container> -->
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzExtra]="combineTpl23" nzValidateStatus={{a}}>
+                <input nz-input type="password" name="checkpassword"  maxlength="20" required placeholder="Confirm password" 
+                [(ngModel)]="checkPassword" [disabled]="!userPassWord.valid" #rePassword="ngModel" (keyup)="matchPassword(checkPassword)"/>
+
+                <ng-template #combineTpl23 let-control>
+                  <ng-container *ngIf="result"><text style="color: red;">两次输入密码不一致<br/></text></ng-container>
                 </ng-template>
 
-                <ng-template #combineTpl22 let-control>
-                  <ng-container *ngIf="result">两次不一致123123</ng-container>
-                </ng-template>
 
               </nz-form-control>
             </nz-form-item>
@@ -85,13 +83,25 @@
                 </ng-template>
               </nz-form-control>
             </nz-form-item>
+
+        <!-- <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">手机号</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl4">
+                <input nz-input name="phone" maxlength="11" minlength="11" placeholder="Call me！" #Phone="ngModel" pattern="^[1][3,4,5,7,8][0-9]{9}$" required [(ngModel)]="user.userCall"/>
+                <ng-template #combineTpl4 let-control>
+                  <ng-container *ngIf="control.hasError('minlength')">11位</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                  <ng-container *ngIf="Phone.valid">输入不正确</ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item> -->
             
             <br />
 
             <nz-form-item>
               <div nz-col nzSpan="3"></div>
               <nz-form-control [nzSpan]="24">
-                <button nz-button nzType="primary" [nzLoading]="isLoadingOne">注册</button>
+                <button nz-button nzType="primary" [disabled]="!f.valid" [nzLoading]="isLoadingOne">注册</button>
                 <button nz-button (click)="resetForm($event)">重置</button>
               </nz-form-control>
             </nz-form-item>

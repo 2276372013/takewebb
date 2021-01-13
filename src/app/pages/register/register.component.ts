@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { User } from 'src/app/interfaceEntity/Entity/user.interface';
 // import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +19,8 @@ export class RegisterComponent implements OnInit {
   reuser:User;
   checkPassword: string;
   result:boolean;
-  resultx="";
+  a="";
+  @ViewChild('rePassword') rePassword:any;
 
   constructor( private router: Router,private registerService: RegisterService) { 
     this.user = new User(); 
@@ -32,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
     this.registerService.register(this.user).subscribe(
       (result: Msg) => {
-        console.log(result);
         if ((result.status === 200) && (result.data === 1)){
           alert("注册成功了");
           this.router.navigate(['welcome']);
@@ -49,19 +49,13 @@ export class RegisterComponent implements OnInit {
   }
 
   matchPassword(Password: string) {
-    console.log(Password)
     if (this.user.userPassword === Password) {
-      // console.log("this.user.userPassword"+this.user.userPassword);
-      // console.log("Password"+Password);
-      // this.checkResult = true;
+      this.a = "success";
       this.result = false;
     } else {
-      // console.log("this.user.userPassword"+this.user.userPassword);
-      // console.log("Password"+Password);
-      this.resultx="error";
+      this.a = "error";
       this.result = true;
     }
-    console.log(this.result);
   }
 
   resetForm(e: MouseEvent): void {
@@ -71,5 +65,4 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
 }
