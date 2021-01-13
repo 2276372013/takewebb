@@ -1,0 +1,26 @@
+body{
+  width: 100%;
+  position: relative;
+}
+p {
+  margin: 0;
+}
+.a{
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+h1{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+[nz-form] {
+  max-width: 600px;
+}
+
+button {
+  margin-left: 80px;
+}

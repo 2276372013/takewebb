@@ -1,0 +1,106 @@
+<div nz-row class="a">
+  <div nz-col nzSpan="8"></div>
+  <div nz-col nzSpan="8">
+    <nz-layout>
+      <nz-header><h1>注册</h1></nz-header>
+      <nz-content style="background: #ECECEC;padding:30px;">
+        <div>
+          <form nz-form (ngSubmit)="loadOne()">
+
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">用户名</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl">
+                <input nz-input [ngModel]="''" name="username" minlength="6" maxlength="12" required placeholder="your name" [(ngModel)]="user.userName"/>
+                <ng-template #combineTpl let-control>
+                  <ng-container *ngIf="control.hasError('maxlength')">最长12位</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength')">最短 6位</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">密码</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl1">
+                <input nz-input name="password" minlength="6" maxlength="20" required placeholder="The more complex the better"  [(ngModel)]="user.userPassword"/>
+                <ng-template #combineTpl1 let-control>
+                  <ng-container *ngIf="control.hasError('maxlength')">最长20位</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength')">最短 6位</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">确认密码</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl2" [nzExtra]="combineTpl22">
+                <input nz-input name="checkpassword"  maxlength="12" required placeholder="Confirm password" [(ngModel)]="checkPassword" (keyup)="matchPassword(checkPassword)"/>
+                <ng-template #combineTpl2 let-control>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                  <!-- <ng-container *ngIf="result">两次不一致</ng-container> -->
+                </ng-template>
+
+                <ng-template #combineTpl22 let-control>
+                  <ng-container *ngIf="result">两次不一致123123</ng-container>
+                </ng-template>
+
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">Email</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl3">
+                <input nz-input [ngModel]="'Input Email'" required name="email" email placeholder="Main contact information" [(ngModel)]="user.userEmail"/>
+                <ng-template #combineTpl3 let-control>
+                  <ng-container *ngIf="control.hasError('email')">错误的邮箱格式</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7">性别</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12">
+                <nz-radio-group [(ngModel)]="user.userSex" ngDefaultControl name="sex">
+                  <label nz-radio nzValue="1">男</label>
+                  <label nz-radio nzValue="0">女</label>
+                </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="7">生日</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12">
+                <nz-date-picker [(ngModel)]="user.userBirth" ngDefaultControl name="birthday"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nzRequired [nzSpan]="7">手机号</nz-form-label>
+              <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl4">
+                <input nz-input name="phone" maxlength="11" minlength="11" placeholder="Call me！" required [(ngModel)]="user.userCall"/>
+                <ng-template #combineTpl4 let-control>
+                  <ng-container *ngIf="control.hasError('minlength')">11位</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+            
+            <br />
+
+            <nz-form-item>
+              <div nz-col nzSpan="3"></div>
+              <nz-form-control [nzSpan]="24">
+                <button nz-button nzType="primary" [nzLoading]="isLoadingOne">注册</button>
+                <button nz-button (click)="resetForm($event)">重置</button>
+              </nz-form-control>
+            </nz-form-item>
+
+          </form>
+        </div>
+      </nz-content>
+      <nz-footer></nz-footer>
+    </nz-layout>
+  </div>
+  <div nz-col nzSpan="8"></div>
+ </div>
