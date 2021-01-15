@@ -22,6 +22,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 @NgModule({
   declarations: [],
   imports: [
@@ -49,7 +50,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     ReactiveFormsModule,
     FormsModule,
     NzDatePickerModule,
-    NzRadioModule
+    NzRadioModule,
+    NzNotificationModule
   ],
   exports:[
     CommonModule,
@@ -75,7 +77,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     FormsModule,
     NzTableModule,
     NzDatePickerModule,
-    NzRadioModule
+    NzRadioModule,
+    NzNotificationModule
   ]
 })
 export class ShareModule {

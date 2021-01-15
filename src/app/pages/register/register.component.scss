@@ -13,9 +13,11 @@ p {
   transform: translate(-50%, -50%);
 }
 h1{
+  margin: 0px;
   color: white;
   text-transform: uppercase;
   font-weight: 500;
+  display: inline-block
 }
 [nz-form] {
   max-width: 600px;
@@ -23,4 +25,7 @@ h1{
 
 button {
   margin-left: 80px;
+}
+i{
+  display: inline-block
 }

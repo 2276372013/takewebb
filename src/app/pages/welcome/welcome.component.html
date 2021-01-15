@@ -3,8 +3,19 @@
     <h1>Login</h1>
     <input type="text" name="" value="" placeholder="username" [(ngModel)]="user.userName">
     <input type="password" name="" value="" placeholder="password" [(ngModel)]="user.userPassword">
+    <div nz-row class="login-form-margin">
+      <div nz-col [nzSpan]="12">
+        <label nz-checkbox formControlName="remember">
+          <span>Remember me</span>
+        </label>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <a class="login-form-forgot">Forgot password</a>
+      </div>
+    </div>
     <input type="submit" name="" value="Login" (click)="login()">
+    <span>Or</span> <a (click)=register()> register now! </a>
   </div>
   
-  <img src="../../../assets/images/login.jpg" alt="">
+  <div class="img-bg"></div>
 </div>

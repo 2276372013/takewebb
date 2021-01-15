@@ -1,10 +1,11 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
+import { Component, OnInit,TemplateRef,ViewChild  } from '@angular/core';
 import { User } from 'src/app/interfaceEntity/Entity/user.interface';
 // import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/service/register.service';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
-
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { config } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,26 +21,26 @@ export class RegisterComponent implements OnInit {
   checkPassword: string;
   result:boolean;
   a="";
-  @ViewChild('rePassword') rePassword:any;
+  buttonDisplay:boolean;
 
-  constructor( private router: Router,private registerService: RegisterService) { 
+  constructor( private router: Router,private registerService: RegisterService,private notification: NzNotificationService) { 
     this.user = new User(); 
     this.reuser = new User(); 
-    // this.validateForm = this.fb.group({});
   }
 
-  loadOne(): void {
+  loadOne(template: TemplateRef<any>): void {
     this.isLoadingOne = true;
 
     this.registerService.register(this.user).subscribe(
       (result: Msg) => {
+        console.log(result);
         if ((result.status === 200) && (result.data === 1)){
-          alert("注册成功了");
-          this.router.navigate(['welcome']);
-
+         this.buttonDisplay = true;
+          this.notification.template(template);
         }else{
-          alert("注册失败了");
+          this.buttonDisplay = false;
           this.isLoadingOne = false;
+          this.notification.template(template);
         }
       }
     )
@@ -48,10 +49,16 @@ export class RegisterComponent implements OnInit {
     // }, 5000);
   }
 
+  registerSuccess(){
+    this.notification.remove();
+    this.router.navigate(['welcome']);
+  }
+
   matchPassword(Password: string) {
     if (this.user.userPassword === Password) {
       this.a = "success";
       this.result = false;
+      // this.notification.template(template);
     } else {
       this.a = "error";
       this.result = true;
@@ -64,5 +71,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  back(){
+    console.log("welcome");
+    this.router.navigate(['welcome']);
   }
 }

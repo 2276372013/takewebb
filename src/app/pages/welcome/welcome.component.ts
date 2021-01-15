@@ -35,5 +35,9 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  register(){
+    this.router.navigate(['register']);
+  }
   
 }
