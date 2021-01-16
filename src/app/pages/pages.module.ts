@@ -14,7 +14,7 @@ import { LoginService } from '../service/login.service';
 import { RegisterService } from '../service/register.service';
 import { TestComponent } from './test/test.component';
 import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.component';
-
+import { ForgetService } from '../service/updataPass.Service';
 //
 @NgModule({
   //declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道。
@@ -51,7 +51,8 @@ import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.com
 //providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（你也可以在组件级别指定服务提供商，这通常是首选方式。）
   providers: [
     LoginService,
-    RegisterService
+    RegisterService,
+    ForgetService
   ]
 })
 //bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。
