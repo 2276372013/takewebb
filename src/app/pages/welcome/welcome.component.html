@@ -1,4 +1,4 @@
-<div class = "a">
+<div class="a">
   <div class="box">
     <h1>Login</h1>
     <input type="text" name="" value="" placeholder="username" [(ngModel)]="user.userName">
@@ -13,9 +13,37 @@
         <a class="login-form-forgot">Forgot password</a>
       </div>
     </div>
-    <input type="submit" name="" value="Login" (click)="login()">
+    <input type="submit" name="" value="Login" (click)="login(template)">
     <span>Or</span> <a (click)=register()> register now! </a>
   </div>
-  
+
   <div class="img-bg"></div>
 </div>
+
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i *ngIf="buttonDisplay" nz-icon nzType="smile" style="color: rgb(16, 233, 52);"></i>
+        <i *ngIf="!buttonDisplay" nz-icon nzType="frown" style="color: rgb(233, 16, 16);"></i>
+      </span>
+      <div class="ant-notification-notice-message">Notification Title</div>
+      <div class="ant-notification-notice-description">
+        This is the content of the notification. This is the content of the notification. This is the content of the
+        notification.
+      </div>
+    </div>
+  </div>
+  <br />
+  <div *ngIf="buttonDisplay">
+    <button nz-button nzType="text">
+      Now...登录成功！
+    </button>
+  </div>
+  <div *ngIf="!buttonDisplay">
+    <button nz-button [nzType]="'primary'" nzDanger (click)="resetForm($event)">
+      No...登录失败，请重试！
+    </button>
+  </div>
+
+</ng-template>

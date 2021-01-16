@@ -1,4 +1,4 @@
-import { Component, OnInit,TemplateRef,ViewChild  } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import { User } from 'src/app/interfaceEntity/Entity/user.interface';
 // import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

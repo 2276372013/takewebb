@@ -24,6 +24,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 @NgModule({
   declarations: [],
   imports: [
@@ -53,7 +54,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzDatePickerModule,
     NzRadioModule,
     NzNotificationModule,
-    NzResultModule
+    NzResultModule,
+    NzTagModule,
   ],
   exports:[
     CommonModule,
@@ -81,7 +83,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzDatePickerModule,
     NzRadioModule,
     NzNotificationModule,
-    NzResultModule
+    NzResultModule,
+    NzTagModule
   ]
 })
 export class ShareModule {
