@@ -74,7 +74,6 @@ export class RegisterComponent implements OnInit {
   }
 
   back(){
-    console.log("welcome");
     this.router.navigate(['welcome']);
   }
 }

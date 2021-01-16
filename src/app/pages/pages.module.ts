@@ -23,10 +23,10 @@ import { TestComponent } from './test/test.component';
     NoFoundComponent,
     WelcomeComponent,
     TestComponent,
+    NoFoundComponent
   ],
     //imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
   imports: [
-    // WelcomeModule,
     CommonModule,
     ShareModule,
     // BrowserModule,
@@ -44,6 +44,7 @@ import { TestComponent } from './test/test.component';
     WelcomeComponent,
     ShareModule,
     TestComponent,
+    NoFoundComponent
   ],
 //providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（你也可以在组件级别指定服务提供商，这通常是首选方式。）
   providers: [
