@@ -10,7 +10,7 @@
         </label>
       </div>
       <div nz-col [nzSpan]="12">
-        <a class="login-form-forgot">Forgot password</a>
+        <a class="login-form-forgot" (click)=forgot()>Forgot password</a>
       </div>
     </div>
     <input type="submit" name="" value="Login" (click)="login(template)">

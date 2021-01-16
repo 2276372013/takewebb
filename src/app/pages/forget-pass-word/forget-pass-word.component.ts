@@ -7,14 +7,13 @@ import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { config } from 'rxjs';
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-forget-pass-word',
+  templateUrl: './forget-pass-word.component.html',
+  styleUrls: ['./forget-pass-word.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class ForgetPassWordComponent implements OnInit {
   passwordVisible = false;
   checkPassword?: string;
-  userBirth = null;
   isLoadingOne = false;
   userSex = '1';
   user:User;
@@ -76,4 +75,5 @@ export class RegisterComponent implements OnInit {
   back(){
     this.router.navigate(['welcome']);
   }
+
 }

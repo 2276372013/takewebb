@@ -37,7 +37,6 @@ export class WelcomeComponent implements OnInit {
         }
       }
     )
-
   }
 
   ngOnInit(): void { }
@@ -49,5 +48,10 @@ export class WelcomeComponent implements OnInit {
   resetForm(e: MouseEvent): void {
     location.reload();
   }
+
+  forgot(){
+    this.router.navigate(['forgot']);
+  }
+
 
 }

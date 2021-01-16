@@ -13,6 +13,7 @@ import { ShareModule } from '../share/share.module';
 import { LoginService } from '../service/login.service';
 import { RegisterService } from '../service/register.service';
 import { TestComponent } from './test/test.component';
+import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.component';
 
 //
 @NgModule({
@@ -23,7 +24,8 @@ import { TestComponent } from './test/test.component';
     NoFoundComponent,
     WelcomeComponent,
     TestComponent,
-    NoFoundComponent
+    NoFoundComponent,
+    ForgetPassWordComponent
   ],
     //imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
   imports: [
