@@ -6,6 +6,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconsProviderModule } from '../share/icons-provider.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from '../pages/pages.module';
+import { Interceptor } from '../httpInterceptors/Interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -22,8 +24,9 @@ import { PagesModule } from '../pages/pages.module';
     PagesModule,
     AppRoutingModule,
   ],
+  //启用token
+  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
   providers: [],
-
 })
 export class CoreModule {
   // 该代码保证CoreModule 只能被AppModule引入
