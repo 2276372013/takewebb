@@ -25,8 +25,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AppRoutingModule,
   ],
   //启用token
-  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
-  providers: [],
+  //import { Interceptor } from '../httpInterceptors/Interceptor';
+  //import { HTTP_INTERCEPTORS } from '@angular/common/http';
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
+  // providers: [],
 })
 export class CoreModule {
   // 该代码保证CoreModule 只能被AppModule引入

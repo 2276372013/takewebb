@@ -8,11 +8,11 @@ export class ForgetService {
   constructor(private httpClient: HttpClient) {}
   public securityCode(user: User) {
    console.log(user);
-   return this.httpClient.post('http://localhost:8080/securityCode', user);
+   return this.httpClient.post('http://localhost:8080/takeit/user/securityCode', user);
   }
 
   public updatePassword(user: User, code: string) {
-   return this.httpClient.post('http://localhost:8080/updatePassword?code=' + code, user);
+   return this.httpClient.post('http://localhost:8080/takeit/user/updatePassword?code=' + code, user);
   }
 
 }

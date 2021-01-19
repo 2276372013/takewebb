@@ -13,5 +13,7 @@ export class PublicComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  resetForm(e: MouseEvent): void {
+    console.log(localStorage.getItem('token'));
+  }
 }

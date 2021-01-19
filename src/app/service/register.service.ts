@@ -8,6 +8,6 @@ export class RegisterService{
   constructor(private httpClient: HttpClient) {}
   public register(user:User): Observable<any>{
     console.log(user);
-    return this.httpClient.post('http://localhost:8080/insertUser', user);
+    return this.httpClient.post('http://localhost:8080/takeit/user/insertUser', user);
   }
 }

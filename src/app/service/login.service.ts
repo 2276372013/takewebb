@@ -11,6 +11,6 @@ export class LoginService{
     const body = {userName: user.userName, userPassword: user.userPassword};
     // window.sessionStorage.setItem('isLogin', 'true');
     console.log(user);
-    return this.httpClient.post('http://localhost:8080/login', body);
+    return this.httpClient.post('http://localhost:8080/takeit/user/login', body);
   }
 }

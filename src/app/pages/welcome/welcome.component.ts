@@ -15,14 +15,12 @@ export class WelcomeComponent implements OnInit {
   public userName: string;
   public userPassword: string;
   public user: User;
-  public num = 111111;
   buttonDisplay: boolean;
   constructor(private router: Router, private loginService: LoginService, private notification: NzNotificationService) {
     this.user = new User();
   }
 
   public login(template: TemplateRef<any>) {
-    this.user.userName = this.num.toString();
 
     this.loginService.login(this.user).subscribe(
       (result: Msg) => {
@@ -30,6 +28,7 @@ export class WelcomeComponent implements OnInit {
         if ((result.status === 200) && (result.data === true)) {
           this.buttonDisplay = true;
           this.notification.template(template);
+          localStorage.setItem('token', result.token);
           this.router.navigate(['public']);
         } else {
           this.buttonDisplay = false;
