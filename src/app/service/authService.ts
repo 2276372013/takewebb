@@ -7,7 +7,9 @@ export class AuthService{
   constructor(private router: Router){}
 
   public getAuthorizationToken(){
+    console.log("token");
     const token = sessionStorage.getItem("token");
+    console.log("token"+token);
     if(token){
       const jwt = token;
       return jwt;

@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from '../pages/pages.module';
 import { Interceptor } from '../httpInterceptors/Interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { CommonInterceptor } from "../httpInterceptors/common.interceptors";
 @NgModule({
   declarations: [],
   imports: [
@@ -27,7 +27,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   //启用token
   //import { Interceptor } from '../httpInterceptors/Interceptor';
   //import { HTTP_INTERCEPTORS } from '@angular/common/http';
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CommonInterceptor, multi: true }],
   // providers: [],
 })
 export class CoreModule {
