@@ -92,7 +92,8 @@ export class ForgetPassWordComponent implements OnInit {
   
       this.forgetService.updatePassword(this.user).subscribe(
         (result: Msg) => {
-          if ((result.status === 200) && (result.data === 1)){
+          console.log(result);
+          if ((result.data === 1)){
            this.buttonDisplay = true;
             this.notification.template(template);
           }else{
