@@ -78,10 +78,12 @@
   
               <nz-form-item>
                 <nz-form-label nzRequired [nzSpan]="7">验证码</nz-form-label>
-                <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl4">
-                  <input nz-input name="phone" maxlength="11" minlength="11" #Phone="ngModel" placeholder="Call me！"
+                <nz-form-control nzHasFeedback [nzSpan]="6" [nzErrorTip]="combineTpl4">
+                  <input  nz-input name="phone" maxlength="11" minlength="11" #Phone="ngModel" placeholder="Call me！"
                     pattern="^[1][0-9]{10}$" required [(ngModel)]="user.userCall" />
-                    <!-- 验证码 显示 -->
+
+                    <button class="input" nz-button nzType="primary">发送验证码</button>
+
                   <ng-template #combineTpl4 let-control>
                     <ng-container *ngIf="control.hasError('minlength')">11位</ng-container>
                     <ng-container *ngIf="control.hasError('required')">必填项</ng-container>
@@ -137,3 +139,4 @@
   
   
   </div>
+  

@@ -25,8 +25,15 @@ body{
   
   button {
     margin-left: 80px;
+    display: inline-block;
+    
   }
   i{
     display: inline-block;
     cursor: pointer;
+  }
+  
+  .input{
+    margin-left: 10px;
+    position: absolute;
   }
