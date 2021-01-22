@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
     this.registerService.register(this.user).subscribe(
       (result: Msg) => {
-        console.log(result);
         if ((result.status === 200) && (result.data === 1)){
          this.buttonDisplay = true;
           this.notification.template(template);

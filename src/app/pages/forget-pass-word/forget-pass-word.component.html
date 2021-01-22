@@ -34,7 +34,7 @@
                     [type]="passwordVisible ? 'text' : 'password'"/>
                   </nz-input-group>
                     <ng-template #suffixTemplate1>
-                      <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                      <i nz-icon [nzType]="passwordVisible ? 'eye' : 'eye-invisible'" (click)="passwordVisible = !passwordVisible"></i>
                     </ng-template>
                   <ng-template #combineTpl1 let-control>
                     <ng-container *ngIf="control.hasError('maxlength')">最长20位</ng-container>
@@ -54,7 +54,7 @@
                     [type]="passwordVisible ? 'text' : 'password'"/>
                   </nz-input-group>
                     <ng-template #suffixTemplate2>
-                      <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                      <i nz-icon [nzType]="passwordVisible ? 'eye' : 'eye-invisible'" (click)="passwordVisible = !passwordVisible"></i>
                     </ng-template>
                   <ng-template #combineTpl23 let-control>
                     <ng-container *ngIf="result"><text style="color: red;">两次输入密码不一致<br /></text></ng-container>
@@ -81,6 +81,7 @@
                 <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="combineTpl4">
                   <input nz-input name="phone" maxlength="11" minlength="11" #Phone="ngModel" placeholder="Call me！"
                     pattern="^[1][0-9]{10}$" required [(ngModel)]="user.userCall" />
+                    <!-- 验证码 显示 -->
                   <ng-template #combineTpl4 let-control>
                     <ng-container *ngIf="control.hasError('minlength')">11位</ng-container>
                     <ng-container *ngIf="control.hasError('required')">必填项</ng-container>

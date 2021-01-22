@@ -24,11 +24,10 @@ export class WelcomeComponent implements OnInit {
 
     this.loginService.login(this.user).subscribe(
       (result: Msg) => {
-        console.log(result);
         if ((result.status === 200) && (result.data === true)) {
           this.buttonDisplay = true;
           this.notification.template(template);
-          localStorage.setItem('token', result.token);
+          sessionStorage.setItem('token', result.token);
           this.router.navigate(['public']);
         } else {
           this.buttonDisplay = false;

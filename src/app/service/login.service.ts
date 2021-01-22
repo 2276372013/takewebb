@@ -7,10 +7,8 @@ import { User } from '../interfaceEntity/Entity/user.interface';
 export class LoginService{
   constructor(private httpClient: HttpClient) {}
   public login(user:User): Observable<any>{
-    // post
     const body = {userName: user.userName, userPassword: user.userPassword};
     // window.sessionStorage.setItem('isLogin', 'true');
-    console.log(user);
     return this.httpClient.post('http://localhost:8080/takeit/user/login', body);
   }
 }

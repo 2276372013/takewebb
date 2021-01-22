@@ -52,7 +52,7 @@ import { ForgetService } from '../service/updataPass.Service';
   providers: [
     LoginService,
     RegisterService,
-    ForgetService
+    ForgetService,
   ]
 })
 //bootstrap —— 应用的主视图，称为根组件。它是应用中所有其它视图的宿主。只有根模块才应该设置这个 bootstrap 属性。

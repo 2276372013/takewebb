@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-public',
@@ -9,11 +11,8 @@ export class PublicComponent implements OnInit {
 
   isCollapsed = false;
   
-  constructor() { }
+  constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
-  }
-  resetForm(e: MouseEvent): void {
-    console.log(localStorage.getItem('token'));
   }
 }

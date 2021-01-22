@@ -6,7 +6,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconsProviderModule } from '../share/icons-provider.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagesModule } from '../pages/pages.module';
-import { Interceptor } from '../httpInterceptors/Interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonInterceptor } from "../httpInterceptors/common.interceptors";
 @NgModule({
@@ -38,7 +37,6 @@ export class CoreModule {
   // @Optional() 当core 没找到的时候  给 parentModule 赋值一个NULL
   // ANGULAR 依赖注入里面 第一次加载的时候 没有加载coreModule 所以会抛出一个错误 所以要加第二个装饰器
   constructor(@SkipSelf() @Optional() parentModule: CoreModule){
-    console.log('coreModule');
     if(parentModule){
       throw new Error('CoreModule 只能被appModule引入');
     }

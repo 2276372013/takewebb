@@ -18,11 +18,9 @@ export class TestComponent implements OnInit {
   }
 
   onChange(result: Date): void {
-    console.log('onChange: ', result);
   }
 
   getWeek(result: Date): void {
-    console.log('week: ', getISOWeek(result));
   }
 
   changeLanguage(): void {
