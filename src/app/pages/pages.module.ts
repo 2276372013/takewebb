@@ -14,7 +14,7 @@ import { LoginService } from '../service/login.service';
 import { RegisterService } from '../service/register.service';
 import { TestComponent } from './test/test.component';
 import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.component';
-import { ForgetService } from '../service/updataPass.Service';
+import { ForgetService } from '../service/forgetPassword.service';
 //
 @NgModule({
   //declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道。
