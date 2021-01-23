@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { LoginService } from 'src/app/service/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-public',
@@ -9,10 +9,14 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class PublicComponent implements OnInit {
 
-  isCollapsed = false;
+  isCollapsed = true;
   
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService,private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  navigate(){
+    this.router.navigate(['public/edituser']);
   }
 }

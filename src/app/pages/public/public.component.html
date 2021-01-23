@@ -2,13 +2,26 @@
   <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+      <a href="http://localhost:4200/welcome" target="_blank">
+        <img src="../../../assets/images/housekeeper.png" alt="logo">
+        <h1>Personal goods Manager</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>物品 管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Monitor</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Workplace</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="关联 好友" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">Welcome</a>
@@ -21,10 +34,16 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+      <li nz-submenu nzOpen nzTitle="我的 信息" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+            <a routerLink="/welcome">Welcome</a>
+          </li>
+          <li nz-menu-item nzMatchRouter (click)="navigate()">
+            <a>修改信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Workplace</a>
           </li>
         </ul>
       </li>
@@ -33,15 +52,26 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
+        <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+          <li nz-menu-item>nav 1</li>
+          <li nz-menu-item nzSelected>nav 2</li>
+          <li nz-menu-item>nav 3</li>
+        </ul>
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
       </div>
     </nz-header>
     <nz-content>
+      <nz-breadcrumb class="breadcrumb">
+        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+        <nz-breadcrumb-item>List</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+      </nz-breadcrumb>
       <div class="inner-content">
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
   </nz-layout>
 </nz-layout>

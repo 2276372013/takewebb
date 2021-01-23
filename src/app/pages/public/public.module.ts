@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TestComponent } from '../test/test.component';
 import { EditUserInformationComponent } from './edit-user-information/edit-user-information.component';
-import { publicRoutingModule } from './public-routing.module';
 
 @NgModule({
   declarations: [
@@ -10,10 +9,10 @@ import { publicRoutingModule } from './public-routing.module';
   ],
 
   imports: [
-    publicRoutingModule
   ],
   exports:[
-    TestComponent
+    TestComponent,
+    EditUserInformationComponent
   ],
   providers: [
     // LoginService

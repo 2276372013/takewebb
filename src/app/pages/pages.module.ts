@@ -12,9 +12,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ShareModule } from '../share/share.module';
 import { LoginService } from '../service/login.service';
 import { RegisterService } from '../service/register.service';
-import { TestComponent } from './test/test.component';
 import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.component';
 import { ForgetService } from '../service/forgetPassword.service';
+import { PublicModule } from './public/public.module';
 //
 @NgModule({
   //declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道。
@@ -23,7 +23,6 @@ import { ForgetService } from '../service/forgetPassword.service';
     PublicComponent,
     NoFoundComponent,
     WelcomeComponent,
-    TestComponent,
     NoFoundComponent,
     ForgetPassWordComponent
   ],
@@ -37,6 +36,7 @@ import { ForgetService } from '../service/forgetPassword.service';
     HttpClientModule ,
     BrowserAnimationsModule ,
     pagesRoutingModule,
+    PublicModule,
   ],
   //exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
   exports:[
@@ -45,7 +45,6 @@ import { ForgetService } from '../service/forgetPassword.service';
     NoFoundComponent,
     WelcomeComponent,
     ShareModule,
-    TestComponent,
     NoFoundComponent
   ],
 //providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（你也可以在组件级别指定服务提供商，这通常是首选方式。）
