@@ -1,4 +1,5 @@
 :host {
+  width: 100%;
     display: flex;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -55,6 +56,7 @@
     vertical-align: middle;
   }
   
+
   nz-header {
     padding: 0;
     width: 100%;
