@@ -5,7 +5,6 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-
 registerLocaleData(zh);
 
 @NgModule({
@@ -13,7 +12,7 @@ registerLocaleData(zh);
     AppComponent
   ],
   imports: [
-    CoreModule
+    CoreModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]

@@ -17,7 +17,7 @@ import { CommonInterceptor } from "../httpInterceptors/common.interceptors";
     HttpClientModule,
     IconsProviderModule,
     PagesModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   exports:[
     PagesModule,

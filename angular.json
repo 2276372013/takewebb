@@ -36,7 +36,10 @@
               "src/theme.less",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/echarts/dist/echarts.min.js",
+              "node_modules/echarts/dist/extension/bmap.js"
+            ]
           },
           "configurations": {
             "production": {

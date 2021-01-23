@@ -3,7 +3,6 @@ import { NoFoundComponent } from './no-found/no-found.component';
 import { RegisterComponent } from './register/register.component';
 import { PublicComponent } from './public/public.component';
 import { IconsProviderModule } from '../share/icons-provider.module';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { pagesRoutingModule } from './pages-routing.module';
@@ -15,6 +14,8 @@ import { RegisterService } from '../service/register.service';
 import { ForgetPassWordComponent } from './forget-pass-word/forget-pass-word.component';
 import { ForgetService } from '../service/forgetPassword.service';
 import { PublicModule } from './public/public.module';
+import {NgxEchartsModule} from 'ngx-echarts';
+import * as echarts from 'echarts';
 //
 @NgModule({
   //declarations（可声明对象表） —— 那些属于本 NgModule 的组件、指令、管道。
@@ -24,7 +25,7 @@ import { PublicModule } from './public/public.module';
     NoFoundComponent,
     WelcomeComponent,
     NoFoundComponent,
-    ForgetPassWordComponent
+    ForgetPassWordComponent,
   ],
     //imports（导入表） —— 那些导出了本模块中的组件模板所需的类的其它模块。
   imports: [
@@ -32,11 +33,13 @@ import { PublicModule } from './public/public.module';
     ShareModule,
     // BrowserModule,
     IconsProviderModule,
-    FormsModule,
     HttpClientModule ,
     BrowserAnimationsModule ,
     pagesRoutingModule,
     PublicModule,
+    NgxEchartsModule.forRoot({
+      echarts,
+    })
   ],
   //exports（导出表） —— 那些能在其它模块的组件模板中使用的可声明对象的子集。
   exports:[
@@ -45,7 +48,8 @@ import { PublicModule } from './public/public.module';
     NoFoundComponent,
     WelcomeComponent,
     ShareModule,
-    NoFoundComponent
+    NoFoundComponent,
+    NgxEchartsModule,
   ],
 //providers —— 本模块向全局服务中贡献的那些服务的创建器。 这些服务能被本应用中的任何部分使用。（你也可以在组件级别指定服务提供商，这通常是首选方式。）
   providers: [
