@@ -19,4 +19,8 @@ export class PublicComponent implements OnInit {
   navigate(){
     this.router.navigate(['public/edituser']);
   }
+
+  navigate1(){
+    this.router.navigate(['public/goodslist']);
+  }
 }

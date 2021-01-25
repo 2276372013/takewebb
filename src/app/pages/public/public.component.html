@@ -10,8 +10,8 @@
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>物品 管理</a>
+          <li nz-menu-item nzMatchRouter (click)="navigate1()">
+            <a>物品 列表</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
@@ -72,6 +72,6 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+    <nz-footer>Goods Manager ©2021 Implement By WangHaoLiang</nz-footer>
   </nz-layout>
 </nz-layout>
