@@ -10,7 +10,7 @@
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
         <ul>
-          <li nz-menu-item nzMatchRouter (click)="navigate1()">
+          <li nz-menu-item nzMatchRouter (click)="navigate('goodslist')">
             <a>物品 列表</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -39,7 +39,7 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">Welcome</a>
           </li>
-          <li nz-menu-item nzMatchRouter (click)="navigate()">
+          <li nz-menu-item nzMatchRouter (click)="navigate('edituser')">
             <a>修改信息</a>
           </li>
           <li nz-menu-item nzMatchRouter>

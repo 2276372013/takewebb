@@ -62,8 +62,6 @@ export class ForgetPassWordComponent implements OnInit {
     this.verifyCode.disable = false;
     this.settime();
     this.forgetService.securityCode(this.user.userEmail).subscribe((data: Msg) => {
-      // this.result = data.data;
-      console.log(data);
       this.verifyCode.countdown = 1;
     });
   }
@@ -92,7 +90,6 @@ export class ForgetPassWordComponent implements OnInit {
   
       this.forgetService.updatePassword(this.user).subscribe(
         (result: Msg) => {
-          console.log(result);
           if ((result.data === 1)){
            this.buttonDisplay = true;
             this.notification.template(template);
