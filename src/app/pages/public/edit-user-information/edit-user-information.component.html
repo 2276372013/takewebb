@@ -1,5 +1,5 @@
 <img src="../../../../assets/images/NewYear_cattle_left.png" alt="2021 Happy New Year!" class="left_cattle">
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value,template)">
   <nz-form-item>
     <nz-form-label [nzSpan]="7">用户名</nz-form-label>
     <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
@@ -79,3 +79,32 @@
 
 </form>
 <img src="../../../../assets/images/NewYear_cattle_right.png" alt="2021 Happy New Year!"  class="right_cattle">
+
+<ng-template #template>
+  <div class="ant-notification-notice-content">
+    <div class="ant-notification-notice-with-icon">
+      <span class="ant-notification-notice-icon">
+        <i *ngIf="buttonDisplay" nz-icon nzType="smile" style="color: rgb(16, 142, 233);"></i>
+        <i *ngIf="!buttonDisplay" nz-icon nzType="frown" style="color: rgb(16, 142, 233);"></i>
+      </span>
+      <div class="ant-notification-notice-message">Notification Title</div>
+      <div class="ant-notification-notice-description">
+        This is the content of the notification. This is the content of the notification. This is the content of the
+        notification.
+      </div>
+    </div>
+  </div>
+  <br />
+  <div *ngIf="buttonDisplay">
+    <button nz-button [nzType]="'primary'">
+      Now...修改成功！
+    </button>
+  </div>
+  <div *ngIf="!buttonDisplay">
+    <button nz-button [nzType]="'primary'">
+      No...修改失败，请重试！
+    </button>
+  </div>
+
+</ng-template>
+

@@ -5,6 +5,6 @@ export class User {
   userEmail: string;
   userCall: string; 
   userSex: number; 
-  userBirth: string; 
+  userBirth: Date; 
   userLevel: number; 
 }
