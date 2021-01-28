@@ -3,13 +3,13 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="7">用户名</nz-form-label>
     <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating...">
-      <input nz-input formControlName="userName" [placeholder]="username"/>
+      <input nz-input formControlName="userName"/>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>E-mail</nz-form-label>
+    <nz-form-label [nzSpan]="7">E-mail</nz-form-label>
     <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="emailErrorTpl">
-      <input nz-input formControlName="email" placeholder="email" type="email" />
+      <input nz-input formControlName="userEmail" placeholder="email" type="email" />
       <ng-template #emailErrorTpl let-control>
         <ng-container *ngIf="control.hasError('email')">
           The input is not valid E-mail!
@@ -21,36 +21,61 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Password</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your password!">
-      <input nz-input type="password" formControlName="password" (ngModelChange)="validateConfirmPassword()" />
+    <nz-form-label [nzSpan]="7">Password</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzErrorTip="Please input your password!">
+      <input nz-input type="password" formControlName="userPassword" (ngModelChange)="validateConfirmPassword()" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Confirm Password</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="passwordErrorTpl">
+    <nz-form-label [nzSpan]="7">Confirm Password</nz-form-label>
+    <nz-form-control [nzSpan]="12" [nzErrorTip]="passwordErrorTpl">
       <input nz-input type="password" formControlName="confirm" placeholder="confirm your password" />
       <ng-template #passwordErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">
-          Please confirm your password!
-        </ng-container>
         <ng-container *ngIf="control.hasError('confirm')">
           Password is inconsistent!
         </ng-container>
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
-    <nz-form-control [nzSpan]="12" nzErrorTip="Please write something here!">
-      <textarea formControlName="comment" nz-input rows="2" placeholder="write any thing"></textarea>
+    <nz-form-label [nzSpan]="7">性别</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <nz-radio-group ngDefaultControl formControlName="userSex">
+        <label nz-radio nzValue="1">男</label>
+        <label nz-radio nzValue="2">女</label>
+      </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
+
+<nz-form-item>
+  <nz-form-label [nzSpan]="7">生日</nz-form-label>
+  <nz-form-control nzHasFeedback [nzSpan]="12">
+    <nz-date-picker ngDefaultControl formControlName="userBirth"></nz-date-picker>
+  </nz-form-control>
+</nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7">手机号</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="phoneErrorTpl">
+      <input nz-input formControlName="userCall" placeholder="phone" type="phone" />
+      <ng-template #phoneErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('pattern')">
+          The input is not valid phone!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('required')">
+          Please input your phone!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-control [nzOffset]="7" [nzSpan]="12">
       <button nz-button nzType="primary" [disabled]="!validateForm.valid">Submit</button>
       <button nz-button (click)="resetForm($event)">Reset</button>
     </nz-form-control>
   </nz-form-item>
+
 </form>
 <img src="../../../../assets/images/NewYear_cattle_right.png" alt="2021 Happy New Year!"  class="right_cattle">

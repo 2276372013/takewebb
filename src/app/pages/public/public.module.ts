@@ -5,6 +5,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { ShareModule } from '.././../share/share.module';
 import { GoodsListComponent } from './goods-list/goods-list.component';
+import { BeforeUpdataUserService } from '../../service/beforeUpdataUser.service';
 @NgModule({
   declarations: [
     TestComponent,
@@ -26,7 +27,7 @@ import { GoodsListComponent } from './goods-list/goods-list.component';
     GoodsListComponent
   ],
   providers: [
-    // LoginService
+    BeforeUpdataUserService,
   ]
 })
 

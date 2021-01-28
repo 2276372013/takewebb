@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
+import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
+import { BeforeUpdataUserService } from 'src/app/service/beforeUpdataUser.service';
 @Component({
   selector: 'app-edit-user-information',
   templateUrl: './edit-user-information.component.html',
@@ -9,14 +11,18 @@ import { Observable, Observer } from 'rxjs';
 export class EditUserInformationComponent implements OnInit {
 
   validateForm: FormGroup;
-  username = "aaa";
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; comment: string }): void {
+  submitForm(value: { userName: string; userEmail: string; userPassword: string;userSex: string; userBirth: string; userCall: string }): void {
     for (const key in this.validateForm.controls) {
+      //脏校验
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    console.log(value);
+    this.beforeUpdataUser.updataUser(value).subscribe(
+      (result: Msg) => {
+        console.log(result);
+      }
+    );
   }
 
   resetForm(e: MouseEvent): void {
@@ -47,25 +53,37 @@ export class EditUserInformationComponent implements OnInit {
 
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
-      return { error: true, required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
+      return {};
+    } else if (control.value !== this.validateForm.controls.userPassword.value) {
       return { confirm: true, error: true };
     }
     return {};
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private beforeUpdataUser: BeforeUpdataUserService) {
     this.validateForm = this.fb.group({
-      userName: [{value: '', disabled: true}],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
+      userName: [{ value: '', disabled: true }],
+      userEmail: ['', [Validators.email, Validators.required]],
+      userPassword: ['', []],
       confirm: ['', [this.confirmValidator]],
-      comment: ['', [Validators.required]]
+      userCall: ['', [Validators.required, Validators.pattern('^[1][0-9]{10}$')]],
+      userSex: ['', [Validators.required]],
+      userBirth: ['', [Validators.required]],
     });
+    this.beforeUpdataUser.beforeUpdataUser().subscribe(
+      (result: Msg) => {
+        this.validateForm.patchValue({
+          userEmail: result.data.userEmail,
+          userName: result.data.userName,
+          userCall: result.data.userCall,
+          userSex: result.data.userSex,
+          userBirth: result.data.userBirth,
+        });
+      }
+    );
   }
 
   ngOnInit(): void {
-    
   }
 
 }
