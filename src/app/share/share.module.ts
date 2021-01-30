@@ -27,7 +27,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,6 +37,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzButtonModule,
     NzGridModule,
     NzTableModule,
+    NzAlertModule,
     NzFormModule,
     NzInputModule,
     NzIconModule,
@@ -50,6 +52,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzBadgeModule,
     NzBreadCrumbModule,
     NzEmptyModule,
+    NzToolTipModule,
     NzPopconfirmModule,
     NzCardModule,
     NzStepsModule,
@@ -76,6 +79,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzDividerModule,
     NzMessageModule,
     NzTypographyModule,
+    NzAlertModule,
     NzDescriptionsModule,
     NzBadgeModule,
     NzDrawerModule,
@@ -87,6 +91,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     FormsModule,
     NzTableModule,
     NzDatePickerModule,
+    NzToolTipModule,
     NzRadioModule,
     NzNotificationModule,
     NzResultModule,

@@ -50,7 +50,7 @@ export class GoodsListOntimeComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       data.push({
         id: `${i}`,
-        name: `Edrward ${i}`,
+        name: `${i}`,
         age: 32,
         address: `London Park no. ${i}`
       });

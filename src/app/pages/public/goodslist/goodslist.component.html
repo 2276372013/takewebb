@@ -6,7 +6,7 @@
   [nzScroll]="{ x: '1500px', y: '343.2px'  }" nzTableLayout="fixed">
   <thead>
     <tr>
-      <th nzLeft nzWidth="50px"></th>
+      <th nzLeft nzWidth="50px">口</th>
       <th nzWidth="50px"></th>
       <th nzLeft>编号</th>
       <th nzLeft>名称</th>
@@ -21,7 +21,7 @@
   <tbody>
     <ng-container *ngFor="let data of columnTable.data">
       <tr>
-        <td nzLeft></td>
+        <td nzLeft>口</td>
         <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
         <td nzLeft>{{ data.name }}</td>
         <td nzLeft>{{ data.age }}</td>
