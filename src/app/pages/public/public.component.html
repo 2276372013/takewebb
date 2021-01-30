@@ -4,17 +4,17 @@
     <div class="sidebar-logo">
       <a href="http://localhost:4200/welcome" target="_blank">
         <img src="../../../assets/images/housekeeper.png" alt="logo">
-        <h1>Personal goods Manager</h1>
+        <h1>Personal Goods Manager</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
         <ul>
+          <li nz-menu-item nzMatchRouter (click)="navigate('goodslistontime')">
+            <a>临期 物表</a>
+          </li>
           <li nz-menu-item nzMatchRouter (click)="navigate('goodslist')">
             <a>物品 列表</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Workplace</a>
@@ -24,10 +24,10 @@
       <li nz-submenu nzOpen nzTitle="关联 好友" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+            <a routerLink="/public/friendslist">好友 列表</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
+          <li nz-menu-item nzMatchRouter  (click)="navigate('friendsgoodslist')">
+            <a>好友 物品</a>
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Workplace</a>
@@ -53,9 +53,9 @@
     <nz-header>
       <div class="app-header a">
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-          <li nz-menu-item>nav 1</li>
-          <li nz-menu-item nzSelected>nav 2</li>
-          <li nz-menu-item>nav 3</li>
+          <li nz-menu-item nzSelected>行为 统计</li>
+          <li nz-menu-item>nav 2</li>
+          <li nz-menu-item>退出登陆</li>
         </ul>
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>

@@ -4,13 +4,19 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import {NgxEchartsModule} from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { ShareModule } from '.././../share/share.module';
-import { GoodsListComponent } from './goods-list/goods-list.component';
+import { GoodsListOntimeComponent } from './goodsListOntime/goodsListOntime.component';
 import { BeforeUpdataUserService } from '../../service/beforeUpdataUser.service';
+import { GoodslistComponent } from './goodslist/goodslist.component';
+import { FriendslistComponent } from './friendslist/friendslist.component';
+import { FriendsgoodslistComponent } from './friendsgoodslist/friendsgoodslist.component';
 @NgModule({
   declarations: [
     TestComponent,
     EditUserInformationComponent,
-    GoodsListComponent,
+    GoodsListOntimeComponent,
+    GoodslistComponent,
+    FriendslistComponent,
+    FriendsgoodslistComponent,
   ],
 
   imports: [
@@ -24,7 +30,10 @@ import { BeforeUpdataUserService } from '../../service/beforeUpdataUser.service'
     TestComponent,
     EditUserInformationComponent,
     NgxEchartsModule,
-    GoodsListComponent
+    GoodsListOntimeComponent,
+    GoodslistComponent,
+    FriendslistComponent,
+    FriendsgoodslistComponent,
   ],
   providers: [
     BeforeUpdataUserService,

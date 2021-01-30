@@ -25,6 +25,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @NgModule({
   declarations: [],
@@ -48,8 +50,10 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzBadgeModule,
     NzBreadCrumbModule,
     NzEmptyModule,
+    NzPopconfirmModule,
     NzCardModule,
     NzStepsModule,
+    NzDrawerModule,
     ReactiveFormsModule,
     FormsModule,
     NzDatePickerModule,
@@ -74,6 +78,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzTypographyModule,
     NzDescriptionsModule,
     NzBadgeModule,
+    NzDrawerModule,
     NzBreadCrumbModule,
     NzEmptyModule,
     NzCardModule,
@@ -85,6 +90,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NzRadioModule,
     NzNotificationModule,
     NzResultModule,
+    NzPopconfirmModule,
     NzTagModule
   ]
 })
