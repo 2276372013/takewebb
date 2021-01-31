@@ -9,6 +9,7 @@ import { GoodslistComponent } from './goodslist/goodslist.component';
 import { FriendslistComponent } from './friendslist/friendslist.component';
 import { FriendsgoodslistComponent } from './friendsgoodslist/friendsgoodslist.component';
 import { UsersService } from 'src/app/service/Users.service';
+import { GoodsService } from 'src/app/service/Goods.service';
 @NgModule({
   declarations: [
     TestComponent,
@@ -37,6 +38,7 @@ import { UsersService } from 'src/app/service/Users.service';
   ],
   providers: [
     UsersService,
+    GoodsService
   ]
 })
 

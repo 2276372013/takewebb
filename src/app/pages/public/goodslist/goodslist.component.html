@@ -2,15 +2,22 @@
 <button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="Are you sure delete this task?"
   (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button>Delete</button>
 <br /><br />
-<nz-table #columnTable [nzBordered]="true" [nzOuterBordered]="true" nzPageSize="6" [nzData]="listOfData"
-  [nzScroll]="{ x: '1500px', y: '343.2px'  }" nzTableLayout="fixed">
+<nz-table #columnTable [nzBordered]="true" [nzOuterBordered]="true" nzPageSize="6" [nzData]="goodsList"
+  [nzScroll]="{ x: '1500px', y: '343.2px'  }" nzTableLayout="fixed"  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
   <thead>
     <tr>
-      <th nzLeft nzWidth="50px">口</th>
-      <th nzWidth="50px"></th>
+      <th
+      nzLeft
+      nzWidth="50px"
+      [nzSelections]="listOfSelection"
+      [(nzChecked)]="checked"
+      [nzIndeterminate]="indeterminate"
+      (nzCheckedChange)="onAllChecked($event)"
+    ></th>
+      <th>分享码</th>
       <th nzLeft>编号</th>
       <th nzLeft>名称</th>
-      <th>分享码</th>
+      <th>位置</th>
       <th>权限</th>
       <th>放置时间</th>
       <th>存放时间</th>
@@ -19,23 +26,23 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let data of columnTable.data">
+    <ng-container *ngFor="let item of columnTable.data ,let i = index">
       <tr>
-        <td nzLeft>口</td>
-        <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"></td>
-        <td nzLeft>{{ data.name }}</td>
-        <td nzLeft>{{ data.age }}</td>
-        <td>{{ data.address }}</td>
-        <td>{{ data.address }}</td>
-        <td>{{ data.address }}</td>
-        <td>{{ data.address }}</td>
-        <td>{{ data.address }}</td>
+        <td nzLeft [nzChecked]="setOfCheckedId.has(item.id)" (nzCheckedChange)="onItemChecked(item.id, $event)"></td>
+        <td [nzExpand]="expandSet.has(item.id)" (nzExpandChange)="onExpandChange(item.id, $event)"></td>
+        <td nzLeft>{{ i }}</td>
+        <td nzLeft>{{ item.goodsName }}</td>
+        <td>{{ item.goodsPlace }}</td>
+        <td>{{ item.goodsPublic }}</td>
+        <td>{{ item.placeTime }}</td>
+        <td>{{ item.saveTimes }}</td>
+        <td>{{ item.typeName }}</td>
         <td nzRight>
           <a (click)="open()">详情</a>
         </td>
       </tr>
-      <tr [nzExpand]="expandSet.has(data.id)">
-        <span>{{ data.description }}</span>
+      <tr [nzExpand]="expandSet.has(item.id)">
+        <span>分享码：{{ item.goodsCode }}</span>
       </tr>
     </ng-container>
   </tbody>

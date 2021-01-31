@@ -24,7 +24,7 @@ export class WelcomeComponent implements OnInit {
 
     this.usersService.login(this.user).subscribe(
       (result: Msg) => {
-        if ((result.status === 200) && (result.data === true)) {
+        if ((result.status === 200) && (result.data !== null)) {
           this.buttonDisplay = true;
           this.notification.template(template);
           sessionStorage.setItem('token', result.token);

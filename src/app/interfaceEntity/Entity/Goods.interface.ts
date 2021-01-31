@@ -12,4 +12,5 @@ export interface Goods {
      frequency :String;//'操作频率'
      goodsPhoto :String;//'物品照片
      goodsDescribe :String;//'物品描述'
+     typeName :String;//标签描述
 }
