@@ -17,7 +17,20 @@ export class GoodsListOntimeComponent implements OnInit {
   
   editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
-
+//
+checked = false;
+indeterminate = false;
+listOfCurrentPageData: ItemData[] = [];
+setOfCheckedId = new Set<String>();
+  listOfSelection = [
+    {
+      text: 'Select All Row',
+      onSelect: () => {
+        this.onAllChecked(true);
+      }
+    }
+  ];
+//
   startEdit(id: string): void {
     this.editCache[id].edit = true;
   }
@@ -56,7 +69,32 @@ export class GoodsListOntimeComponent implements OnInit {
       });
     }
     this.listOfData = data;
+    this.listOfCurrentPageData = data;
     this.updateEditCache();
   }
 
+
+  onAllChecked(value: boolean): void {
+    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+    this.refreshCheckedStatus();
+  }
+  updateCheckedSet(id: String, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+  }
+  refreshCheckedStatus(): void {
+    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
+    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+  }
+  onCurrentPageDataChange($event: ItemData[]): void {
+    this.listOfCurrentPageData = $event;
+    this.refreshCheckedStatus();
+  }
+  onItemChecked(id: String, checked: boolean): void {
+    this.updateCheckedSet(id, checked);
+    this.refreshCheckedStatus();
+  }
 }

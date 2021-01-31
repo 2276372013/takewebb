@@ -1,12 +1,9 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { User } from 'src/app/interfaceEntity/Entity/user.interface';
-// import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterService } from 'src/app/service/register.service';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { config } from 'rxjs';
-import { ForgetService } from 'src/app/service/forgetPassword.service';
+import { UsersService } from 'src/app/service/Users.service';
 @Component({
   selector: 'app-forget-pass-word',
   templateUrl: './forget-pass-word.component.html',
@@ -27,7 +24,7 @@ export class ForgetPassWordComponent implements OnInit {
     disable: true,
   };
 
-  constructor( private router: Router,private forgetService: ForgetService,private notification: NzNotificationService) { 
+  constructor( private router: Router,private usersService: UsersService,private notification: NzNotificationService) { 
     this.user = new User(); 
   }
 
@@ -61,7 +58,7 @@ export class ForgetPassWordComponent implements OnInit {
   public securityCode() {
     this.verifyCode.disable = false;
     this.settime();
-    this.forgetService.securityCode(this.user.userEmail).subscribe((data: Msg) => {
+    this.usersService.securityCode(this.user.userEmail).subscribe((data: Msg) => {
       this.verifyCode.countdown = 1;
     });
   }
@@ -88,7 +85,7 @@ export class ForgetPassWordComponent implements OnInit {
     loadOne(template: TemplateRef<any>): void {
       this.isLoadingOne = true;
   
-      this.forgetService.updatePassword(this.user).subscribe(
+      this.usersService.updatePassword(this.user).subscribe(
         (result: Msg) => {
           if ((result.data === 1)){
            this.buttonDisplay = true;

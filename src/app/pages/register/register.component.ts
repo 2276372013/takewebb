@@ -2,10 +2,9 @@ import { Component, OnInit,TemplateRef } from '@angular/core';
 import { User } from 'src/app/interfaceEntity/Entity/user.interface';
 // import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterService } from 'src/app/service/register.service';
+import { UsersService } from 'src/app/service/Users.service';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { config } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -23,7 +22,7 @@ export class RegisterComponent implements OnInit {
   a="";
   buttonDisplay:boolean;
 
-  constructor( private router: Router,private registerService: RegisterService,private notification: NzNotificationService) { 
+  constructor( private router: Router,private usersService: UsersService,private notification: NzNotificationService) { 
     this.user = new User(); 
     this.reuser = new User(); 
   }
@@ -31,7 +30,7 @@ export class RegisterComponent implements OnInit {
   loadOne(template: TemplateRef<any>): void {
     this.isLoadingOne = true;
 
-    this.registerService.register(this.user).subscribe(
+    this.usersService.register(this.user).subscribe(
       (result: Msg) => {
         if ((result.status === 200) && (result.data === 1)){
          this.buttonDisplay = true;

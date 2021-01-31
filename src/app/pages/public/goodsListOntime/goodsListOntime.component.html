@@ -1,8 +1,13 @@
 <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed" style="height: 100%;" nzPageSize="7"
-  nzPaginationPosition="bottom">
+  nzPaginationPosition="bottom" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
   <thead>
     <tr>
-      <th>口</th>
+      <th
+      [nzSelections]="listOfSelection"
+      [(nzChecked)]="checked"
+      [nzIndeterminate]="indeterminate"
+      (nzCheckedChange)="onAllChecked($event)"
+    ></th>
       <th>编号</th>
       <th>名称</th>
       <th>放置时间</th>
@@ -14,7 +19,7 @@
   <tbody>
     <tr *ngFor="let data of editRowTable.data"  nz-tooltip nzTooltipTitle="位置：{{1}}">
       <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
-        <td>口</td>
+        <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
         <td>{{ data.name }}</td>
         <td>{{ data.age }}</td>
         <td>{{ data.age }}</td>

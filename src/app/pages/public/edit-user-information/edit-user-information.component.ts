@@ -1,10 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
-import { BeforeUpdataUserService } from 'src/app/service/beforeUpdataUser.service';
-import { DatePipe } from '@angular/common';
+import { UsersService } from 'src/app/service/Users.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-edit-user-information',
@@ -22,7 +19,7 @@ export class EditUserInformationComponent implements OnInit {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
-    this.beforeUpdataUser.updataUser(value).subscribe(
+    this.usersService.updataUser(value).subscribe(
       (result: Msg) => {
         if ((result.status === 200) && (result.data === 1)){
           this.buttonDisplay = true;
@@ -57,7 +54,7 @@ export class EditUserInformationComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder, private beforeUpdataUser: BeforeUpdataUserService,private notification: NzNotificationService) {
+  constructor(private fb: FormBuilder, private usersService: UsersService,private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       userName: [{ value: '', disabled: true }],
       userEmail: ['', [Validators.email, Validators.required]],
@@ -67,7 +64,7 @@ export class EditUserInformationComponent implements OnInit {
       userSex: ['', [Validators.required]],
       userBirth: ['', [Validators.required]],
     });
-    this.beforeUpdataUser.beforeUpdataUser().subscribe(
+    this.usersService.beforeUpdataUser().subscribe(
       (result: Msg) => {
         this.validateForm.patchValue({
           userEmail: result.data.userEmail,
