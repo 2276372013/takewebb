@@ -1,5 +1,5 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" 
     [nzTrigger]="null">
     <div class="sidebar-logo">
       <a href="http://localhost:4200/welcome" target="_blank">
@@ -7,7 +7,7 @@
         <h1>Personal Goods Manager</h1>
       </a>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" >
       <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter (click)="navigate('goodslistontime')" nzSelected>
@@ -17,7 +17,7 @@
             <a>物品 列表</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+            <a (click)="navigate('crudgoods')">查询 物品</a>
           </li>
         </ul>
       </li>
@@ -66,9 +66,7 @@
     </nz-header>
     <nz-content>
       <nz-breadcrumb class="breadcrumb" [nzAutoGenerate]="true">
-        <!-- <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-        <nz-breadcrumb-item>List</nz-breadcrumb-item>
-        <nz-breadcrumb-item>App</nz-breadcrumb-item> -->
+        <!--面包屑-->
       </nz-breadcrumb>
       <div class="inner-content">
         <router-outlet></router-outlet>
@@ -76,4 +74,10 @@
     </nz-content>
     <nz-footer>Goods Manager ©2021 Implement By WangHaoLiang</nz-footer>
   </nz-layout>
+  <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100" (nzOnClick)="notify()">
+    <ng-template #tpl>
+      <div class="ant-back-top-inner">UP</div>
+    </ng-template>
+  </nz-back-top>
 </nz-layout>
+

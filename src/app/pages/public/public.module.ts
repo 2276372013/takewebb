@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/service/Users.service';
 import { GoodsService } from 'src/app/service/Goods.service';
 import { NewsComponent } from './news/news.component';
 import { UseractionComponent } from './useraction/useraction.component';
+import { CRUDgoodsComponent } from './crudgoods/crudgoods.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -22,6 +23,7 @@ import { UseractionComponent } from './useraction/useraction.component';
     FriendsgoodslistComponent,
     NewsComponent,
     UseractionComponent,
+    CRUDgoodsComponent,
   ],
 
   imports: [

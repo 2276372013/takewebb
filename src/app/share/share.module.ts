@@ -35,6 +35,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 @NgModule({
   declarations: [],
   imports: [
@@ -55,10 +57,12 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NzMessageModule,
     NzAvatarModule,
     NzTypographyModule,
+    NzCalendarModule,
     NzSpaceModule,
     NzDescriptionsModule,
     NzBadgeModule,
     NzBreadCrumbModule,
+    NzBackTopModule,
     NzEmptyModule,
     NzModalModule,
     NzToolTipModule,
@@ -91,6 +95,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NzLayoutModule,
     NzModalModule,
     NzMenuModule,
+    NzBackTopModule,
     NzDividerModule,
     NzMessageModule,
     NzTypographyModule,
@@ -112,6 +117,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NzUploadModule,
     NzRadioModule,
     NzNotificationModule,
+    NzCalendarModule,
     NzResultModule,
     NzPopconfirmModule,
     NzTagModule

@@ -3,7 +3,7 @@
   (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button>Delete</button>
 <br /><br />
 <nz-table #columnTable [nzBordered]="true" [nzOuterBordered]="true" nzPageSize="6" [nzData]="goodsList"
-  [nzScroll]="{ x: '1500px', y: '343.2px'  }" nzTableLayout="fixed"  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+  [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed"  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
   <thead>
     <tr>
       <th
