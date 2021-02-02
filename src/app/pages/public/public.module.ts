@@ -10,6 +10,8 @@ import { FriendslistComponent } from './friendslist/friendslist.component';
 import { FriendsgoodslistComponent } from './friendsgoodslist/friendsgoodslist.component';
 import { UsersService } from 'src/app/service/Users.service';
 import { GoodsService } from 'src/app/service/Goods.service';
+import { NewsComponent } from './news/news.component';
+import { UseractionComponent } from './useraction/useraction.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -18,6 +20,8 @@ import { GoodsService } from 'src/app/service/Goods.service';
     GoodslistComponent,
     FriendslistComponent,
     FriendsgoodslistComponent,
+    NewsComponent,
+    UseractionComponent,
   ],
 
   imports: [

@@ -83,6 +83,14 @@ nz-header {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 }
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
+  top: 0;
+  margin-top: 0;
+  padding: 0 20px;
+  border-color: #001529;
+  border-bottom: 0;
+  float:right
+}
 
 nz-content {
   margin: 24px 24px 8px 24px;

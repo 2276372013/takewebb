@@ -19,6 +19,8 @@ export class GoodslistComponent implements OnInit {
   expandSet = new Set<number>();
   goodsList: Goods[];
   //
+aabb= true;
+array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
 checked = false;
 indeterminate = false;
 listOfCurrentPageData: ItemData[] = [];

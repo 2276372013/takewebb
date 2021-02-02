@@ -29,6 +29,12 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 @NgModule({
   declarations: [],
   imports: [
@@ -47,13 +53,18 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzMenuModule,
     NzDividerModule,
     NzMessageModule,
+    NzAvatarModule,
     NzTypographyModule,
+    NzSpaceModule,
     NzDescriptionsModule,
     NzBadgeModule,
     NzBreadCrumbModule,
     NzEmptyModule,
+    NzModalModule,
     NzToolTipModule,
     NzPopconfirmModule,
+    NzUploadModule,
+    NzDropDownModule,
     NzCardModule,
     NzStepsModule,
     NzDrawerModule,
@@ -63,18 +74,22 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzRadioModule,
     NzNotificationModule,
     NzResultModule,
+    NzCarouselModule,
     NzTagModule,
   ],
   exports:[
     CommonModule,
+    NzCarouselModule,
     FormsModule,
     NzButtonModule,
+    NzAvatarModule,
     NzFormModule,
     NzInputModule,
     NzIconModule,
     NzSelectModule,
     NzCheckboxModule,
     NzLayoutModule,
+    NzModalModule,
     NzMenuModule,
     NzDividerModule,
     NzMessageModule,
@@ -86,12 +101,15 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzBreadCrumbModule,
     NzEmptyModule,
     NzCardModule,
+    NzDropDownModule,
     NzStepsModule,
     ReactiveFormsModule,
     FormsModule,
     NzTableModule,
     NzDatePickerModule,
     NzToolTipModule,
+    NzSpaceModule,
+    NzUploadModule,
     NzRadioModule,
     NzNotificationModule,
     NzResultModule,

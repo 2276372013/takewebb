@@ -15,6 +15,7 @@ export class PublicComponent implements OnInit {
   }
 
   navigate(type:String){
+    console.log(this.router.url);
     this.router.navigate(['public/'+type]);
   }
 

@@ -6,7 +6,9 @@ import { FriendsgoodslistComponent } from './public/friendsgoodslist/friendsgood
 import { FriendslistComponent } from './public/friendslist/friendslist.component';
 import { GoodslistComponent } from './public/goodslist/goodslist.component';
 import { GoodsListOntimeComponent } from './public/goodsListOntime/goodsListOntime.component';
+import { NewsComponent } from './public/news/news.component';
 import { PublicComponent } from './public/public.component';
+import { UseractionComponent } from './public/useraction/useraction.component';
 import { RegisterComponent} from "./register/register.component";
 import { TestComponent } from './test/test.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -20,12 +22,15 @@ const routes: Routes = [
   {path: 'public', component: PublicComponent,
     children: [
       {path: '', component: TestComponent},
-      {path: 'edituser', component: EditUserInformationComponent},
-      {path: 'goodslistontime', component: GoodsListOntimeComponent},
-      {path: 'goodslist', component: GoodslistComponent},
-      {path: 'friendsgoodslist', component: FriendsgoodslistComponent},
-      {path: 'friendslist', component: FriendslistComponent},
-    ]
+      {path: 'edituser', component: EditUserInformationComponent,data: {breadcrumb: 'public'}},
+      {path: 'goodslistontime', component: GoodsListOntimeComponent,data: {breadcrumb: 'goodslistontime'},},
+      {path: 'goodslist', component: GoodslistComponent,data: {breadcrumb: 'goodslist'},},
+      {path: 'friendsgoodslist', component: FriendsgoodslistComponent,data: {breadcrumb: 'friendsgoodslist'}},
+      {path: 'friendslist', component: FriendslistComponent,data: {breadcrumb: 'friendslist'}},
+      {path: 'news', component: NewsComponent,data: {breadcrumb: 'news'}},
+      {path: 'useraction', component: UseractionComponent,data: {breadcrumb: 'useraction'}},
+    ],
+    data: {breadcrumb: 'public'}
   },
   
 ];

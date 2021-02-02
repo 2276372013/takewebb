@@ -49,81 +49,106 @@
 </nz-table>
 
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
-  nzTitle="Create" [nzFooter]="footerTpl" (nzOnClose)="close()">
+  nzTitle="新建 物品" [nzFooter]="footerTpl" (nzOnClose)="close()">
   <form nz-form *nzDrawerContent>
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label>Name</nz-form-label>
+          <nz-form-label nzRequired>名称</nz-form-label>
           <nz-form-control>
-            <input nz-input placeholder="please enter user name" />
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Url</nz-form-label>
-          <nz-form-control>
-            <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
-              <input type="text" nz-input placeholder="please enter url" />
-            </nz-input-group>
+            <input nz-input placeholder="please enter goods name" />
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
+
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label nzRequired>
+            <a nz-dropdown [nzDropdownMenu]="menu">
+              标签
+              <i nz-icon nzType="down"></i>
+            </a>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                <li nz-menu-item>1st menu item</li>
+                <li nz-menu-item>2nd menu item</li>
+                <li nz-menu-item>3rd menu item</li>
+                <li nz-menu-item nzDanger>4th danger item</li>
+              </ul>
+            </nz-dropdown-menu>
+          </nz-form-label>
+          <nz-form-control>
+            <input nz-input placeholder="please enter goods sign" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label nzRequired>
+              <a nz-dropdown [nzDropdownMenu]="menu">
+                位置
+                <i nz-icon nzType="down"></i>
+              </a>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item>1st menu item</li>
+                  <li nz-menu-item>2nd menu item</li>
+                  <li nz-menu-item>3rd menu item</li>
+                  <li nz-menu-item nzDanger>4th danger item</li>
+                </ul>
+              </nz-dropdown-menu>
+            </nz-form-label>
+            <nz-form-control>
+              <input nz-input placeholder="please enter goods Where" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label>Owner</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please select an owner"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Type</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please choose the type"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>Approver</nz-form-label>
-          <nz-form-control>
-            <nz-select nzPlaceHolder="Please choose the approver"></nz-select>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label>DateTime</nz-form-label>
+          <nz-form-label nzRequired>存放时间</nz-form-label>
           <nz-form-control>
             <nz-range-picker></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
+    
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <label nz-checkbox [(ngModel)]="aabb" name="goodsPublic">
+            <span>是否 公开</span>
+          </label>
+        </nz-form-item>
+      </div>
+    </div>
+
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="24">
         <nz-form-item>
-          <nz-form-label>Description</nz-form-label>
+          <nz-form-label>描述</nz-form-label>
           <nz-form-control>
-            <textarea nz-input placeholder="please enter url description"
+            <textarea nz-input placeholder="please enter goods description, only 255 Byte."
               [nzAutosize]="{ minRows: 4, maxRows: 4 }"></textarea>
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
+    <nz-carousel nzAutoPlay>
+      <div nz-carousel-content *ngFor="let index of array">
+        <img src="{{index}}" alt="">
+      </div>
+    </nz-carousel>
   </form>
-
   <ng-template #footerTpl>
     <div style="float: right">
-      <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
-      <button nz-button nzType="primary" (click)="close()">Submit</button>
+      <button nz-button style="margin-right: 8px;" (click)="close()">取 消</button>
+      <button nz-button nzType="primary" (click)="close()">提 交</button>
     </div>
   </ng-template>
 </nz-drawer>

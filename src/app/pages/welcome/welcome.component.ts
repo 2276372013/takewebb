@@ -37,7 +37,9 @@ export class WelcomeComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    window.sessionStorage.clear();
+   }
 
   register() {
     this.router.navigate(['register']);

@@ -26,7 +26,7 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/public/friendslist">好友 列表</a>
           </li>
-          <li nz-menu-item nzMatchRouter  (click)="navigate('friendsgoodslist')">
+          <li nz-menu-item nzMatchRouter (click)="navigate('friendsgoodslist')">
             <a>好友 物品</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -51,11 +51,13 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header a">
+      <div class="app-header">
         <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-          <li nz-menu-item nzSelected>行为 统计</li>
-          <li nz-menu-item>nav 2</li>
-          <li nz-menu-item>退出登陆</li>
+          <li nz-menu-item ><a routerLink="/welcome">退出登陆</a></li>
+          <li nz-menu-item (click)="navigate('news')">
+            <nz-badge nzDot> <i nz-icon [nzType]="'notification'" [nzTheme]="'twotone'"></i></nz-badge>
+          </li>
+          <li class="a" nz-menu-item (click)="navigate('useraction')">行为 统计</li>
         </ul>
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
@@ -63,10 +65,10 @@
       </div>
     </nz-header>
     <nz-content>
-      <nz-breadcrumb class="breadcrumb">
-        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+      <nz-breadcrumb class="breadcrumb" [nzAutoGenerate]="true">
+        <!-- <nz-breadcrumb-item>Home</nz-breadcrumb-item>
         <nz-breadcrumb-item>List</nz-breadcrumb-item>
-        <nz-breadcrumb-item>App</nz-breadcrumb-item>
+        <nz-breadcrumb-item>App</nz-breadcrumb-item> -->
       </nz-breadcrumb>
       <div class="inner-content">
         <router-outlet></router-outlet>
