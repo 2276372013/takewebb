@@ -4,13 +4,13 @@ import { UsersService } from '../../service/Users.service';
 import { Msg } from '../../interfaceEntity/Entity/Msg.interface';
 import { User } from '../../interfaceEntity/Entity/user.interface';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
   public userId: number;
   public userName: string;
   public userPassword: string;
@@ -27,7 +27,8 @@ export class WelcomeComponent implements OnInit {
         if ((result.status === 200) && (result.data !== null)) {
           this.buttonDisplay = true;
           this.notification.template(template);
-          sessionStorage.setItem('token', result.token);
+          localStorage.setItem('username', result.data.userName);
+          localStorage.setItem('token', result.token);
           this.router.navigate(['public']);
         } else {
           this.buttonDisplay = false;
@@ -38,7 +39,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.sessionStorage.clear();
+    // window.localStorage.clear();
    }
 
   register() {

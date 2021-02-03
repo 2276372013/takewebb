@@ -20,7 +20,7 @@ export class CommonInterceptor implements HttpInterceptor{
   }
 
   public getAuthorizationToken(){
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if(token){
       const jwt = token;
       return jwt;

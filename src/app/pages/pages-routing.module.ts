@@ -13,17 +13,17 @@ import { UseractionComponent } from './public/useraction/useraction.component';
 import { RegisterComponent} from "./register/register.component";
 import { TestComponent } from './test/test.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-
+import { AuthGuard } from '../httpInterceptors/auth.guard';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgetPassWordComponent },
 
-  {path: 'public', component: PublicComponent,
+  {path: 'public', canActivate: [AuthGuard],component: PublicComponent,
     children: [
-      {path: '', component: TestComponent},
-      {path: 'edituser', component: EditUserInformationComponent,data: {breadcrumb: 'public'}},
+      {path: '', component: TestComponent,data: {breadcrumb: 'Echarts'}},
+      {path: 'edituser', component: EditUserInformationComponent,data: {breadcrumb: 'edituser'}},
       {path: 'goodslistontime', component: GoodsListOntimeComponent,data: {breadcrumb: 'goodslistontime'},},
       {path: 'goodslist', component: GoodslistComponent,data: {breadcrumb: 'goodslist'},},
       {path: 'friendsgoodslist', component: FriendsgoodslistComponent,data: {breadcrumb: 'friendsgoodslist'}},
@@ -39,6 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [AuthGuard],
   exports: [RouterModule]
 })
 export class pagesRoutingModule { }
