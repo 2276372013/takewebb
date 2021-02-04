@@ -20,9 +20,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ForgetPassWordComponent },
 
-  {path: 'public', canActivate: [AuthGuard],component: PublicComponent,
+  // {path: 'public', canActivate: [AuthGuard],
+  {path: 'public', 
     children: [
-      {path: '', component: TestComponent,data: {breadcrumb: 'Echarts'}},
+      // {path: '', component: TestComponent,data: {breadcrumb: 'Echarts'}},
+      {path: '', component: TestComponent},
       {path: 'edituser', component: EditUserInformationComponent,data: {breadcrumb: 'edituser'}},
       {path: 'goodslistontime', component: GoodsListOntimeComponent,data: {breadcrumb: 'goodslistontime'},},
       {path: 'goodslist', component: GoodslistComponent,data: {breadcrumb: 'goodslist'},},
@@ -32,6 +34,7 @@ const routes: Routes = [
       {path: 'useraction', component: UseractionComponent,data: {breadcrumb: 'useraction'}},
       {path: 'crudgoods', component:CRUDgoodsComponent,data: {breadcrumb: 'crudgoods'}},
     ],
+    component: PublicComponent,
     data: {breadcrumb: 'public'}
   },
   
