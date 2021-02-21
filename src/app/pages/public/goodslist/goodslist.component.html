@@ -1,8 +1,22 @@
 <button nz-button nzType="primary" (click)="open()">Add</button>
 <button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="Are you sure delete this task?"
   (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button>Delete</button>
+<button nz-button nzType="default" (click)="showModalMiddle()"><i nz-icon nzType="search"></i>Search</button>
+<nz-modal
+  nzWrapClassName="vertical-center-modal"
+  [(nzVisible)]="isVisibleMiddle"
+  nzTitle="Vertically centered modal dialog"
+  (nzOnCancel)="handleCancelMiddle()"
+  (nzOnOk)="handleOkMiddle()"
+>
+  <ng-container *nzModalContent>
+    <p>some contents...</p>
+    <p>some contents...</p>
+    <p>some contents...</p>
+  </ng-container>
+</nz-modal>
 <br /><br />
-<nz-table #columnTable [nzBordered]="true" [nzOuterBordered]="true" nzPageSize="6" [nzData]="goodsList"
+<nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" 
   [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed"  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
   <thead>
     <tr>
@@ -14,7 +28,7 @@
       [nzIndeterminate]="indeterminate"
       (nzCheckedChange)="onAllChecked($event)"
     ></th>
-      <th>分享码</th>
+      <th nzWidth="80px">分享码</th>
       <th nzLeft>编号</th>
       <th nzLeft>名称</th>
       <th>位置</th>
@@ -49,14 +63,15 @@
 </nz-table>
 
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
-  nzTitle="新建 物品" [nzFooter]="footerTpl" (nzOnClose)="close()">
-  <form nz-form *nzDrawerContent>
+  nzTitle="存放 物品"  (nzOnClose)="close()">
+  <form nz-form #fo="ngForm" *nzDrawerContent (ngSubmit)="submitGoods()">
+
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
         <nz-form-item>
           <nz-form-label nzRequired>名称</nz-form-label>
-          <nz-form-control>
-            <input nz-input placeholder="please enter goods name" />
+          <nz-form-control nzHasFeedback >
+            <input nz-input placeholder="please enter goods name" [(ngModel)]="submitgoods.goodsName" name="goodsName" required maxlength="32"/>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -65,21 +80,18 @@
       <div nz-col nzSpan="12">
         <nz-form-item>
           <nz-form-label nzRequired>
-            <a nz-dropdown [nzDropdownMenu]="menu">
+            <a nz-dropdown [nzDropdownMenu]="menu1">
               标签
               <i nz-icon nzType="down"></i>
             </a>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
+            <nz-dropdown-menu #menu1="nzDropdownMenu">
               <ul nz-menu nzSelectable>
-                <li nz-menu-item>1st menu item</li>
-                <li nz-menu-item>2nd menu item</li>
-                <li nz-menu-item>3rd menu item</li>
-                <li nz-menu-item nzDanger>4th danger item</li>
+                <li nz-menu-item nzDanger *ngFor="let item of goodsType" (click)="editGoodsType(item)">{{item}}</li>
               </ul>
             </nz-dropdown-menu>
           </nz-form-label>
-          <nz-form-control>
-            <input nz-input placeholder="please enter goods sign" />
+          <nz-form-control nzHasFeedback >
+            <input nz-input placeholder="please enter goods sign" [(ngModel)]="submitgoods.goodsType" name="editgoodsType" required maxlength="32"/>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -87,21 +99,18 @@
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzRequired>
-              <a nz-dropdown [nzDropdownMenu]="menu">
+              <a nz-dropdown [nzDropdownMenu]="menu2">
                 位置
                 <i nz-icon nzType="down"></i>
               </a>
-              <nz-dropdown-menu #menu="nzDropdownMenu">
+              <nz-dropdown-menu #menu2="nzDropdownMenu">
                 <ul nz-menu nzSelectable>
-                  <li nz-menu-item>1st menu item</li>
-                  <li nz-menu-item>2nd menu item</li>
-                  <li nz-menu-item>3rd menu item</li>
-                  <li nz-menu-item nzDanger>4th danger item</li>
+                  <li nz-menu-item nzDanger *ngFor="let item of goodsPlace" (click)="editGoodsPlace(item)">{{item}}</li>
                 </ul>
               </nz-dropdown-menu>
             </nz-form-label>
-            <nz-form-control>
-              <input nz-input placeholder="please enter goods Where" />
+            <nz-form-control nzHasFeedback >
+              <input nz-input placeholder="please enter goods Where" [(ngModel)]="submitgoods.goodsPlace" name="editgoodsPlace" required maxlength="32"/>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -111,8 +120,8 @@
       <div nz-col nzSpan="12">
         <nz-form-item>
           <nz-form-label nzRequired>存放时间</nz-form-label>
-          <nz-form-control>
-            <nz-range-picker></nz-range-picker>
+          <nz-form-control nzHasFeedback >
+            <nz-range-picker [(ngModel)]="time" name="time" required ></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -121,7 +130,7 @@
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <label nz-checkbox [(ngModel)]="aabb" name="goodsPublic">
+          <label nz-checkbox [(ngModel)]="submitgoods.goodsPublic" name="goodsPublic">
             <span>是否 公开</span>
           </label>
         </nz-form-item>
@@ -134,7 +143,7 @@
           <nz-form-label>描述</nz-form-label>
           <nz-form-control>
             <textarea nz-input placeholder="please enter goods description, only 255 Byte."
-              [nzAutosize]="{ minRows: 4, maxRows: 4 }"></textarea>
+              [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="submitgoods.goodsDescribe" name="goodsDescribe"></textarea>
           </nz-form-control>
         </nz-form-item>
       </div>
@@ -144,11 +153,12 @@
         <img src="{{index}}" alt="">
       </div>
     </nz-carousel>
-  </form>
-  <ng-template #footerTpl>
-    <div style="float: right">
-      <button nz-button style="margin-right: 8px;" (click)="close()">取 消</button>
-      <button nz-button nzType="primary" (click)="close()">提 交</button>
+
+    <br />
+    <div style="margin-left: 20%">
+      <button nz-button style="margin-right: 8%;" (click)="close()">取 消</button>
+      <button nz-button nzType="primary" [disabled]="!fo.valid">提 交</button>
     </div>
-  </ng-template>
+
+</form>
 </nz-drawer>

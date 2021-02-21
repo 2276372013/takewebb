@@ -18,13 +18,19 @@ interface ItemData {
 export class GoodslistComponent implements OnInit {
   expandSet = new Set<number>();
   goodsList: Goods[];
+  goodsType:String[];
+  editgoodsType:String;
+  goodsPlace:String[];
+  editgoodsPlace:String;
+  submitgoods: Goods;
+  time:Date[];
+
   //
-aabb= true;
-array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
-checked = false;
-indeterminate = false;
-listOfCurrentPageData: ItemData[] = [];
-setOfCheckedId = new Set<String>();
+  array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
+  checked = false;
+  indeterminate = false;
+  listOfCurrentPageData: ItemData[] = [];
+  setOfCheckedId = new Set<String>();
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -33,7 +39,7 @@ setOfCheckedId = new Set<String>();
       }
     }
   ];
-//
+  //
   onExpandChange(id: number, checked: boolean): void {
     if (checked) {
       this.expandSet.add(id);
@@ -41,91 +47,43 @@ setOfCheckedId = new Set<String>();
       this.expandSet.delete(id);
     }
   }
-  listOfData = [
-    {
-      id: 1,
-      name: 'John Brown',
-      age: 32,
-      expand: false,
-      address: 'New York No',
-      description: 'My name is John Brown, I am 32 years old'
-    },
-    {
-      id: 2,
-      name: 'Jim Green',
-      age: 42,
-      expand: false,
-      address: 'London No',
-      description: 'My name is Jim Green, I am 42 years old'
-    },
-    {
-      id: 3,
-      name: 'Joe Black',
-      age: 32,
-      expand: false,
-      address: '1 Lake Park',
-      description: 'My name is Joe Black, I am 32 years old'
-    }
-    ,
-    {
-      id: 3,
-      name: 'Joe Black',
-      age: 32,
-      expand: false,
-      address: '1 Lake Park',
-      description: 'My name is Joe Black, I am 32 years old'
-    }
-    ,
-    {
-      id: 3,
-      name: 'Joe Black',
-      age: 32,
-      expand: false,
-      address: 'Lake Park',
-      description: 'My name is Joe Black, I am 32 years old'
-    }
-    ,
-    {
-      id: 3,
-      name: 'Joe Black',
-      age: 32,
-      expand: false,
-      address: 'SidneyPark',
-      description: 'My name is Joe Black, I am 32 years old'
-    }
-    ,
-    {
-      id: 3,
-      name: 'Joe Black',
-      age: 32,
-      expand: false,
-      address: 'Sidney Park',
-      description: 'My name is Joe Black, I am 32 years old'
-    }
-  ];
 
-  
-  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService) { }
+  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService) {
+    this.submitgoods = new Goods();
+    this.submitgoods.goodsPublic = true;
+  }
 
   ngOnInit(): void {
     this.goodsService.finallartist().subscribe(
       (result: Msg) => {
-        if ((result.status === 200)){
-         this.goodsList = result.data;
-         console.log(this.goodsList);
-        }else{
-          console.log("1");
+        if ((result.status === 200)) { 
+          this.goodsList = result.data;
+        } else {
         }
       }
-    )
+    );
+    this.goodsService.findAllGoodsPlace().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.goodsPlace = result.data;
+        } else {
+        }
+      }
+    );
+    this.goodsService.findAllGoodsType().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.goodsType = result.data;
+        } else {
+        }
+      }
+    );
   }
 
   visible = false;
-
   open(): void {
     this.visible = true;
   }
-
   close(): void {
     this.visible = false;
   }
@@ -161,5 +119,60 @@ setOfCheckedId = new Set<String>();
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
   }
+
+
+  submitGoods() {
+      this.submitgoods.placeTime = this.time[0];
+      this.submitgoods.saveTimes = this.time[1];
+      this.goodsService.insertGoods(this.submitgoods).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          alert("success");
+        } else {
+          console.log("1");
+        }
+      }
+    )
+  }
+
+
+//***************************************************** */
+  isVisibleTop = false;
+  isVisibleMiddle = false;
+
+  showModalTop(): void {
+    this.isVisibleTop = true;
+  }
+
+  showModalMiddle(): void {
+    this.isVisibleMiddle = true;
+  }
+
+  handleOkTop(): void {
+    console.log('点击了确定');
+    this.isVisibleTop = false;
+  }
+
+  handleCancelTop(): void {
+    this.isVisibleTop = false;
+  }
+
+  handleOkMiddle(): void {
+    console.log('click ok');
+    this.isVisibleMiddle = false;
+  }
+
+  handleCancelMiddle(): void {
+    this.isVisibleMiddle = false;
+  }
+
+  editGoodsType(data: string): void {
+    this.submitgoods.goodsType = data;
+  }
+
+  editGoodsPlace(data: string): void {
+    this.submitgoods.goodsPlace = data;
+  }
+
 
 }

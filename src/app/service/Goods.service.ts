@@ -12,4 +12,10 @@ export class GoodsService{
   public insertGoods(goods:Goods): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/insertGoods', goods);
   }
+  public findAllGoodsPlace(): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/findallgoodsplace', null);
+  }
+  public findAllGoodsType(): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/findallgoodstype', null);
+  }
 }

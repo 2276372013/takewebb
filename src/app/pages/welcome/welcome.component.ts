@@ -28,6 +28,7 @@ export class WelcomeComponent implements OnInit {
           this.buttonDisplay = true;
           this.notification.template(template);
           localStorage.setItem('username', result.data.userName);
+          localStorage.setItem('userid', result.data.userId);
           localStorage.setItem('token', result.token);
           this.router.navigate(['public']);
         } else {
