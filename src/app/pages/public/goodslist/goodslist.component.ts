@@ -3,12 +3,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { GoodsService } from 'src/app/service/Goods.service';
 import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
-interface ItemData {
-  id: string;
-  name: string;
-  age: number;
-  address: string;
-}
 
 @Component({
   selector: 'app-goodslist',
@@ -16,21 +10,23 @@ interface ItemData {
   styleUrls: ['./goodslist.component.scss']
 })
 export class GoodslistComponent implements OnInit {
+  //变量定义
+  isVisibleTop = false;
+  isVisibleMiddle = false;
   expandSet = new Set<number>();
   goodsList: Goods[];
-  goodsType:String[];
-  editgoodsType:String;
-  goodsPlace:String[];
-  editgoodsPlace:String;
+  goodsType: String[];
+  editgoodsType: String;
+  goodsPlace: String[];
+  editgoodsPlace: String;
   submitgoods: Goods;
-  time:Date[];
-
-  //
+  time: Date[];
   array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
   checked = false;
   indeterminate = false;
-  listOfCurrentPageData: ItemData[] = [];
+  listOfCurrentPageData: Goods[] = [];
   setOfCheckedId = new Set<String>();
+  visible = false;
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -39,29 +35,16 @@ export class GoodslistComponent implements OnInit {
       }
     }
   ];
-  //
-  onExpandChange(id: number, checked: boolean): void {
-    if (checked) {
-      this.expandSet.add(id);
-    } else {
-      this.expandSet.delete(id);
-    }
-  }
-
-  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService) {
+  //依赖注入+init方法
+  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService) {
     this.submitgoods = new Goods();
     this.submitgoods.goodsPublic = true;
   }
 
   ngOnInit(): void {
-    this.goodsService.finallartist().subscribe(
-      (result: Msg) => {
-        if ((result.status === 200)) { 
-          this.goodsList = result.data;
-        } else {
-        }
-      }
-    );
+    //获取goods列表
+    this.getGoodsList();
+    //获取goods位置下拉
     this.goodsService.findAllGoodsPlace().subscribe(
       (result: Msg) => {
         if ((result.status === 200)) {
@@ -70,6 +53,7 @@ export class GoodslistComponent implements OnInit {
         }
       }
     );
+    //获取goods种类下拉
     this.goodsService.findAllGoodsType().subscribe(
       (result: Msg) => {
         if ((result.status === 200)) {
@@ -79,8 +63,14 @@ export class GoodslistComponent implements OnInit {
       }
     );
   }
-
-  visible = false;
+  //下拉以及其他
+  onExpandChange(id: number, checked: boolean): void {
+    if (checked) {
+      this.expandSet.add(id);
+    } else {
+      this.expandSet.delete(id);
+    }
+  }
   open(): void {
     this.visible = true;
   }
@@ -92,13 +82,10 @@ export class GoodslistComponent implements OnInit {
     this.nzMessageService.info('click cancel');
   }
 
-  confirm(): void {
-    this.nzMessageService.info('click confirm');
-  }
-
   onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
+    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.goodsId, value));
     this.refreshCheckedStatus();
+
   }
   updateCheckedSet(id: String, checked: boolean): void {
     if (checked) {
@@ -108,10 +95,10 @@ export class GoodslistComponent implements OnInit {
     }
   }
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.goodsId));
+    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.goodsId)) && !this.checked;
   }
-  onCurrentPageDataChange($event: ItemData[]): void {
+  onCurrentPageDataChange($event: Goods[]): void {
     this.listOfCurrentPageData = $event;
     this.refreshCheckedStatus();
   }
@@ -119,26 +106,6 @@ export class GoodslistComponent implements OnInit {
     this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
   }
-
-
-  submitGoods() {
-      this.submitgoods.placeTime = this.time[0];
-      this.submitgoods.saveTimes = this.time[1];
-      this.goodsService.insertGoods(this.submitgoods).subscribe(
-      (result: Msg) => {
-        if ((result.status === 200)) {
-          alert("success");
-        } else {
-          console.log("1");
-        }
-      }
-    )
-  }
-
-
-//***************************************************** */
-  isVisibleTop = false;
-  isVisibleMiddle = false;
 
   showModalTop(): void {
     this.isVisibleTop = true;
@@ -165,7 +132,24 @@ export class GoodslistComponent implements OnInit {
   handleCancelMiddle(): void {
     this.isVisibleMiddle = false;
   }
-
+  /*********************************************************************************************** */
+  submitGoods() {
+    this.submitgoods.placeTime = this.time[0];
+    this.submitgoods.saveTimes = this.time[1];
+    this.goodsService.insertGoods(this.submitgoods).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.message.create('success', `添加成功！`);
+          this.visible = false;
+          //刷新goods列表
+          this.getGoodsList();
+        } else {
+          this.message.create('error', `添加失败了！`);
+          this.visible = false;
+        }
+      }
+    )
+  }
   editGoodsType(data: string): void {
     this.submitgoods.goodsType = data;
   }
@@ -174,5 +158,43 @@ export class GoodslistComponent implements OnInit {
     this.submitgoods.goodsPlace = data;
   }
 
+  downLoadExcel() {
+    this.goodsService.downLoadExcel();
+  }
 
+  deleteGoods() {
+    const requestData = this.goodsList.filter(data => this.setOfCheckedId.has(data.goodsId));
+    const deleteGoodsId = new Array();
+    //for..of 方法遍历的值是数组中的value值
+    //for..in遍历的值是数组的索引
+    for (let value of requestData) {
+      deleteGoodsId.push(value.goodsId);
+    }
+    if (deleteGoodsId.length != 0) {
+      this.goodsService.deleteGoods(deleteGoodsId).subscribe(
+        (result: Msg) => {
+          if ((result.status === 200)) {
+            this.message.create('success', `删除成功！`);
+            //刷新goods列表
+            this.getGoodsList();
+          } else {
+            this.message.create('error', `删除失败了！`);
+          }
+        }
+      );
+    } else {
+      this.message.create('warning', `请勾选所删除物品`);
+    }
+  }
+
+  getGoodsList() {
+    this.goodsService.finallartist().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.goodsList = result.data;
+        } else {
+        }
+      }
+    );
+  }
 }

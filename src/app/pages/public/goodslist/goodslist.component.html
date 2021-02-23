@@ -1,7 +1,8 @@
-<button nz-button nzType="primary" (click)="open()">Add</button>
-<button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="Are you sure delete this task?"
-  (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button>Delete</button>
+<button nz-button nzType="primary" (click)="open()"><i nz-icon nzType="plus" nzTheme="outline"></i>Add</button>
+<button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="是否确定要删除所选物品?"
+  (nzOnConfirm)="deleteGoods()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button><i nz-icon nzType="minus" nzTheme="outline"></i>Delete</button>
 <button nz-button nzType="default" (click)="showModalMiddle()"><i nz-icon nzType="search"></i>Search</button>
+<button nz-button nzType="dashed" (click)="downLoadExcel()" style="color: green;"><i nz-icon nzType="file-excel" nzTheme="outline"></i>导出 Excel</button>
 <nz-modal
   nzWrapClassName="vertical-center-modal"
   [(nzVisible)]="isVisibleMiddle"
@@ -9,11 +10,6 @@
   (nzOnCancel)="handleCancelMiddle()"
   (nzOnOk)="handleOkMiddle()"
 >
-  <ng-container *nzModalContent>
-    <p>some contents...</p>
-    <p>some contents...</p>
-    <p>some contents...</p>
-  </ng-container>
 </nz-modal>
 <br /><br />
 <nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" 
@@ -42,8 +38,8 @@
   <tbody>
     <ng-container *ngFor="let item of columnTable.data ,let i = index">
       <tr>
-        <td nzLeft [nzChecked]="setOfCheckedId.has(item.id)" (nzCheckedChange)="onItemChecked(item.id, $event)"></td>
-        <td [nzExpand]="expandSet.has(item.id)" (nzExpandChange)="onExpandChange(item.id, $event)"></td>
+        <td nzLeft [nzChecked]="setOfCheckedId.has(item.goodsId)" (nzCheckedChange)="onItemChecked(item.goodsId, $event)"></td>
+        <td [nzExpand]="expandSet.has(item.goodsId)" (nzExpandChange)="onExpandChange(item.goodsId, $event)"></td>
         <td nzLeft>{{ i }}</td>
         <td nzLeft>{{ item.goodsName }}</td>
         <td>{{ item.goodsPlace }}</td>
@@ -55,7 +51,7 @@
           <a (click)="open()">详情</a>
         </td>
       </tr>
-      <tr [nzExpand]="expandSet.has(item.id)">
+      <tr [nzExpand]="expandSet.has(item.goodsId)">
         <span>分享码：{{ item.goodsCode }}</span>
       </tr>
     </ng-container>
@@ -64,7 +60,7 @@
 
 <nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
   nzTitle="存放 物品"  (nzOnClose)="close()">
-  <form nz-form #fo="ngForm" *nzDrawerContent (ngSubmit)="submitGoods()">
+  <form nz-form #fo="ngForm" *nzDrawerContent>
 
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
@@ -157,7 +153,7 @@
     <br />
     <div style="margin-left: 20%">
       <button nz-button style="margin-right: 8%;" (click)="close()">取 消</button>
-      <button nz-button nzType="primary" [disabled]="!fo.valid">提 交</button>
+      <button nz-button nzType="primary" [disabled]="!fo.valid" (click)="submitGoods()">提 交</button>
     </div>
 
 </form>

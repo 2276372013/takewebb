@@ -18,4 +18,11 @@ export class GoodsService{
   public findAllGoodsType(): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/findallgoodstype', null);
   }
+  public downLoadExcel() {
+    window.location.href = 'http://localhost:8080/takeit/goods/downLoadExcel';
+  }
+
+  public deleteGoods(goodsId:String[]): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/deleteGoods', goodsId);
+  }
 }
