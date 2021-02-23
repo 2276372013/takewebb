@@ -97,9 +97,9 @@ export class FriendslistComponent implements OnInit {
       //   //服务器地区
       //   region: 'oss-cn-beijing',
       //   //Accesstoken中的keyid
-      //   accessKeyId: 'LTAI4GDqNLNrM9iBJXFngX7h',
-      //   //Accesstoken中的KeySecret
-      //   accessKeySecret: 'HNGUCQGMUUjDLa0tr0lYxAZVW2O1dg',
+ //     accessKeyId: 'LTAI4GDqNLNrwanghaoliang1992M9iBJXFngX7h',
+  //     //Accesstoken中的KeySecret
+  //     accessKeySecret: 'HNGUCQGMUUjwanghaoliang1992DLa0tr0IYxAZVW2o1dg',
       //   //bucket实例名称
       //   bucket: 'haoliang-bucket',
       // });
