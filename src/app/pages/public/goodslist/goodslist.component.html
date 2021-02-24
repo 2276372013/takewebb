@@ -6,10 +6,42 @@
 <nz-modal
   nzWrapClassName="vertical-center-modal"
   [(nzVisible)]="isVisibleMiddle"
-  nzTitle="Vertically centered modal dialog"
+  nzTitle="填写需要查询的物品信息"
   (nzOnCancel)="handleCancelMiddle()"
   (nzOnOk)="handleOkMiddle()"
 >
+
+<input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+<br />
+<nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+<br />
+<nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+<br />
+<nz-radio-group [(ngModel)]="radioValue">
+  <label nz-radio nzValue="A">公开</label>
+  <label nz-radio nzValue="B">私人</label>
+</nz-radio-group>
+<br />
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+  <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+  <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+  <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+</nz-select>
+<br />
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
+  <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+  <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+  <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+</nz-select>
+<br />
+<nz-input-group [nzSuffix]="suffixTemplate">
+  <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="password" />
+</nz-input-group>
+<ng-template #suffixTemplate>
+  <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+</ng-template>
+
+
 </nz-modal>
 <br /><br />
 <nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" 

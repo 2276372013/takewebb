@@ -35,6 +35,9 @@ export class GoodslistComponent implements OnInit {
       }
     }
   ];
+  passwordVisible = false;
+  password?: string;
+  value = "物品名"
   //依赖注入+init方法
   constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService) {
     this.submitgoods = new Goods();
@@ -197,4 +200,17 @@ export class GoodslistComponent implements OnInit {
       }
     );
   }
+
+  date = null;
+  isEnglish = false;
+
+
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+  }
+
+  radioValue = 'A';
+
+  selectedValue = null;
+
 }
