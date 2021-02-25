@@ -20,6 +20,7 @@ export class GoodslistComponent implements OnInit {
   goodsPlace: String[];
   editgoodsPlace: String;
   submitgoods: Goods;
+  selectGoods: Goods;
   time: Date[];
   array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
   checked = false;
@@ -41,6 +42,7 @@ export class GoodslistComponent implements OnInit {
   //依赖注入+init方法
   constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService) {
     this.submitgoods = new Goods();
+    this.selectGoods = new Goods();
     this.submitgoods.goodsPublic = true;
   }
 
@@ -127,14 +129,10 @@ export class GoodslistComponent implements OnInit {
     this.isVisibleTop = false;
   }
 
-  handleOkMiddle(): void {
-    console.log('click ok');
-    this.isVisibleMiddle = false;
-  }
-
   handleCancelMiddle(): void {
     this.isVisibleMiddle = false;
   }
+
   /*********************************************************************************************** */
   submitGoods() {
     this.submitgoods.placeTime = this.time[0];
@@ -201,16 +199,19 @@ export class GoodslistComponent implements OnInit {
     );
   }
 
-  date = null;
-  isEnglish = false;
+  handleOkMiddle(){
+    this.goodsService.selectLikeGoods(this.selectGoods).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.goodsList = result.data;
+          this.message.create('success', `查找成功！`);
+        } else {
+           console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;") 
+    console.log(this.selectGoods);   
+        }
+      }
+    );
+    this.isVisibleMiddle = false;
 
-
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
   }
-
-  radioValue = 'A';
-
-  selectedValue = null;
-
 }

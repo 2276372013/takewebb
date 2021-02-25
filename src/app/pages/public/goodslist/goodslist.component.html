@@ -10,37 +10,66 @@
   (nzOnCancel)="handleCancelMiddle()"
   (nzOnOk)="handleOkMiddle()"
 >
-
-<input nz-input placeholder="Basic usage" [(ngModel)]="value" />
-<br />
-<nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
-<br />
-<nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
-<br />
-<nz-radio-group [(ngModel)]="radioValue">
-  <label nz-radio nzValue="A">公开</label>
-  <label nz-radio nzValue="B">私人</label>
-</nz-radio-group>
-<br />
-<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
-  <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-  <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-  <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-</nz-select>
-<br />
-<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" [(ngModel)]="selectedValue">
-  <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-  <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-  <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-</nz-select>
-<br />
-<nz-input-group [nzSuffix]="suffixTemplate">
-  <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="password" />
-</nz-input-group>
-<ng-template #suffixTemplate>
-  <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-</ng-template>
-
+<form nz-form class="aaa">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">物品名称</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <input nz-input name="goodsName" [(ngModel)]="selectGoods.goodsName"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">存放日期</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12" >
+      <nz-date-picker [(ngModel)]="selectGoods.saveTimes" name="SaveTimes"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">取走日期</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <nz-date-picker [(ngModel)]="selectGoods.takeTime" name="takeTime"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">公开权限</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-radio-group [(ngModel)]="selectGoods.goodsPublic" name="goodsPublic">
+        <label nz-radio nzValue='true'>公开</label>
+        <label nz-radio nzValue='false'>私密</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">存放位置</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a place" [(ngModel)]="selectGoods.goodsPlace" name="goodsPlace">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">物品种类</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a type" [(ngModel)]="selectGoods.goodsType" name="goodsType">
+        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
+        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
+        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5">分享码</nz-form-label>
+    <nz-form-control nzHasFeedback [nzSpan]="12">
+      <nz-input-group [nzSuffix]="suffixTemplate">
+        <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="selectGoods.goodsCode" name="goodsCode"/>
+      </nz-input-group>
+      <ng-template #suffixTemplate>
+        <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+      </ng-template> 
+    </nz-form-control>
+  </nz-form-item>
+</form>
 
 </nz-modal>
 <br /><br />
