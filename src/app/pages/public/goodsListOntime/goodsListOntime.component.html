@@ -2,50 +2,50 @@
   nzPaginationPosition="bottom" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
   <thead>
     <tr>
-      <th
-      [nzSelections]="listOfSelection"
-      [(nzChecked)]="checked"
-      [nzIndeterminate]="indeterminate"
-      (nzCheckedChange)="onAllChecked($event)"
-    ></th>
       <th>编号</th>
       <th>名称</th>
       <th>放置时间</th>
       <th>截止日期</th>
-      <th [nzBreakWord]="true">状态</th>
+      <th>数量</th>
       <th nzRight>操作</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of editRowTable.data"  nz-tooltip nzTooltipTitle="位置：{{1}}">
-      <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
-        <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.age }}</td>
-        <td nzBreakWord> <nz-alert nzType="error" nzMessage="已过期" nzShowIcon></nz-alert></td>
-        <!-- <nz-alert nzType="success" nzMessage="Success Tips" nzShowIcon></nz-alert>
-        <nz-alert nzType="info" nzMessage="Informational Notes" nzShowIcon></nz-alert>
-        <nz-alert nzType="warning" nzMessage="Warning" nzShowIcon></nz-alert>
-        <nz-alert nzType="error" nzMessage="Error" nzShowIcon></nz-alert> -->
-        <td><a (click)="startEdit(data.id)">延期</a></td>
+    <tr *ngFor="let data of editRowTable.data,let i = index"  nz-tooltip nzTooltipTitle="位置：{{data.goodsPlace}}">
+      <ng-container *ngIf="!editCache[i].edit; else editTemplate">
+        <td>{{i}}</td>
+        <td>{{ data.goodsName }}</td>
+        <td>{{ data.saveTimes }}</td>
+        <td>{{ data.placeTime }}</td>
+        <td>{{ data.goodsNum }}</td>
+        <td><a (click)="startEdit(i)">延期</a></td>
       </ng-container>
       <ng-template #editTemplate>
-        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[data.id].data.name" /></td>
-        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[data.id].data.age" /></td>
-        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[data.id].data.name" /></td>
-        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[data.id].data.age" /></td>
-        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[data.id].data.age" /></td>
+        <td></td>
+        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[i].data.goodsName" /></td>
+        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[i].data.saveTimes" /></td>
         <td>
-          <nz-date-picker [(ngModel)]="editCache[data.id].data.address" ngDefaultControl name="birthday">
+          <nz-date-picker [(ngModel)]="editCache[i].data.placeTime" ngDefaultControl name="placeTime">
           </nz-date-picker>
         </td>
+        <td><input [disabled]="true" nz-input [(ngModel)]="editCache[i].data.goodsNum" /></td>
         <td>
-          <a (click)="saveEdit(data.id)" class="save">Save</a>
-          <a nz-popconfirm nzTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>
+          <a (click)="saveEdit(data.goodsId,i,template)" class="save">Save</a>
+          <a nz-popconfirm nzTitle="Sure to cancel?" (click)="cancelEdit(i)">Cancel</a>
         </td>
       </ng-template>
     </tr>
   </tbody>
 </nz-table>
+
+<ng-template #template>
+    <div class="ant-notification-notice-content">
+      <div class="ant-notification-notice-with-icon">
+        <span class="ant-notification-notice-icon"><i nz-icon nzType="smile" style="color: rgb(16, 142, 233);"></i></span>
+        <div class="ant-notification-notice-message">延期成功啦！！！.</div>
+        <div class="ant-notification-notice-description">
+           希望你以后能够定时来查看自己的物品呦. 养成合理收纳的好习惯.
+        </div>
+      </div>
+    </div>
+</ng-template>

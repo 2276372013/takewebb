@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
-import { GoodsService } from 'src/app/service/Goods.service';
+import { Msg } from '../../../interfaceEntity/Entity/Msg.interface';
+import { GoodsService } from '../../../service/Goods.service';
 import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
 
 @Component({

@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-interface ItemData {
-  id: string;
-  name: string;
-  age: number;
-  address: string;
-}
+import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Msg } from '../../../interfaceEntity/Entity/Msg.interface';
+import { GoodsService } from '../../../service/Goods.service';
+import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-goods-list-ontime',
@@ -12,89 +10,71 @@ interface ItemData {
   styleUrls: ['./goodsListOntime.component.scss']
 })
 export class GoodsListOntimeComponent implements OnInit {
+  constructor(private goodsService: GoodsService,private notification: NzNotificationService) {}
 
-  constructor() { }
-  
-  editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
-  listOfData: ItemData[] = [];
-//
-checked = false;
-indeterminate = false;
-listOfCurrentPageData: ItemData[] = [];
-setOfCheckedId = new Set<String>();
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      }
-    }
-  ];
-//
+  editCache: { [key: string]: { edit: boolean; data: Goods } } = {};
+  listOfData: Goods[] = [];
+  goods: Goods[];
+  checked = false;
+  indeterminate = false;
+  listOfCurrentPageData: Goods[] = [];
+  setOfCheckedId = new Set<String>();
+
   startEdit(id: string): void {
     this.editCache[id].edit = true;
   }
 
-  cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false
-    };
+  cancelEdit(index: string): void {
+    this.editCache[index].edit = false;
   }
 
-  saveEdit(id: string): void {
-    const index = this.listOfData.findIndex(item => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
+  saveEdit(id: string,index:string,template: TemplateRef<{}>): void {
+    this.goodsService.updatePassTime(id,this.editCache[index].data.placeTime).subscribe((result: Msg) => {
+      if (result.status === 200) {
+        if(result.data == 1){
+         this.getList()
+         this.notification.template(template);
+        }else{
+        }
+      } else {
+      }
+    });
+    this.editCache[index].edit = false;
   }
 
   updateEditCache(): void {
-    this.listOfData.forEach(item => {
-      this.editCache[item.id] = {
+    this.listOfData.forEach((item, index) => {
+      this.editCache[index] = {
         edit: false,
         data: { ...item }
       };
     });
   }
 
+  getList(){
+    this.goodsService.finallwilltime().subscribe((result: Msg) => {
+      if (result.status === 200) {
+        this.listOfData = result.data;
+        this.listOfCurrentPageData = result.data;
+        this.updateEditCache();
+      } else {
+      }
+    });
+  }
   ngOnInit(): void {
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        id: `${i}`,
-        name: `${i}`,
-        age: 32,
-        address: `London Park no. ${i}`
-      });
-    }
-    this.listOfData = data;
-    this.listOfCurrentPageData = data;
-    this.updateEditCache();
-  }
-
-
-  onAllChecked(value: boolean): void {
-    this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.id, value));
-    this.refreshCheckedStatus();
-  }
-  updateCheckedSet(id: String, checked: boolean): void {
-    if (checked) {
-      this.setOfCheckedId.add(id);
-    } else {
-      this.setOfCheckedId.delete(id);
-    }
+    this.getList()
   }
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
-    this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
+    this.checked = this.listOfCurrentPageData.every(item =>
+      this.setOfCheckedId.has(item.goodsId)
+    );
+    this.indeterminate =
+      this.listOfCurrentPageData.some(item =>
+        this.setOfCheckedId.has(item.goodsId)
+      ) && !this.checked;
   }
-  onCurrentPageDataChange($event: ItemData[]): void {
+  onCurrentPageDataChange($event: Goods[]): void {
     this.listOfCurrentPageData = $event;
-    this.refreshCheckedStatus();
-  }
-  onItemChecked(id: String, checked: boolean): void {
-    this.updateCheckedSet(id, checked);
     this.refreshCheckedStatus();
   }
 }

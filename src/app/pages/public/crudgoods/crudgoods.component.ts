@@ -26,7 +26,9 @@ export class CRUDgoodsComponent implements OnInit {
       { type: 'error', content: 'This is error event 4.' }
     ]
   };
-
+log(){
+  console.log("text")
+}
   getMonthData(date: Date): number | null {
     if (date.getMonth() === 8) {
       return 1394;

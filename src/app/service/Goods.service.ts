@@ -27,4 +27,10 @@ export class GoodsService{
   public selectLikeGoods(goods:Goods): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/selectLikeGoods', goods);
   }
+  public finallwilltime(): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/findGoodsWilltime', null);
+  }
+  public updatePassTime(goodsId:string,updateTime:Date): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/updatePassTime/'+goodsId+'/'+updateTime,null);
+  }
 }

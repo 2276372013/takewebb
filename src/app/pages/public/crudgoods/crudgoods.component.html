@@ -7,11 +7,11 @@
           </li>
         </ng-container>
         <ng-container *ngSwitchCase="10">
-          <li *ngFor="let item of listDataMap.ten">
+          <li *ngFor="let item of listDataMap.ten" (click)="log()">
             <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
           </li>
         </ng-container>
-        <ng-container *ngSwitchCase="11">
+        <ng-container *ngSwitchCase="11" >
           <li *ngFor="let item of listDataMap.eleven">
             <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
           </li>
