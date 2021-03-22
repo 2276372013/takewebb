@@ -1,8 +1,9 @@
-<button nz-button nzType="primary" (click)="open()"><i nz-icon nzType="plus" nzTheme="outline"></i>Add</button>
+<button nz-button nzType="primary" (click)="open('add')"><i nz-icon nzType="plus" nzTheme="outline"></i>Add</button>
 <button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="是否确定要删除所选物品?"
   (nzOnConfirm)="deleteGoods()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button><i nz-icon nzType="minus" nzTheme="outline"></i>Delete</button>
 <button nz-button nzType="default" (click)="showModalMiddle()"><i nz-icon nzType="search"></i>Search</button>
 <button nz-button nzType="dashed" (click)="downLoadExcel()" style="color: green;"><i nz-icon nzType="file-excel" nzTheme="outline"></i>导出 Excel</button>
+<button nz-button nzType="dashed" (click)="open('details')" style="color: blue;"><i nz-icon nzType="ordered-list" nzTheme="outline"></i>详情</button>
 <nz-modal
   nzWrapClassName="vertical-center-modal"
   [(nzVisible)]="isVisibleMiddle"
@@ -88,11 +89,10 @@
       <th nzWidth="80px">分享码</th>
       <th nzLeft>编号</th>
       <th nzLeft>名称</th>
-      <th>位置</th>
       <th>权限</th>
-      <th>放置时间</th>
+      <th>放置到</th>
       <th>存放时间</th>
-      <th>分类</th>
+      <th>数量</th>
       <th nzRight>操作</th>
     </tr>
   </thead>
@@ -103,13 +103,12 @@
         <td [nzExpand]="expandSet.has(item.goodsId)" (nzExpandChange)="onExpandChange(item.goodsId, $event)"></td>
         <td nzLeft>{{ i }}</td>
         <td nzLeft>{{ item.goodsName }}</td>
-        <td>{{ item.goodsPlace }}</td>
         <td>{{ item.goodsPublic }}</td>
         <td>{{ item.placeTime }}</td>
         <td>{{ item.saveTimes }}</td>
-        <td>{{ item.typeName }}</td>
+        <td>{{ item.goodsNum }}</td>
         <td nzRight>
-          <a (click)="open()">详情</a>
+          <a (click)="open()">取走</a>
         </td>
       </tr>
       <tr [nzExpand]="expandSet.has(item.goodsId)">
@@ -174,16 +173,27 @@
       </div>
 
     <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="12">
+      <div nz-col nzSpan="16">
         <nz-form-item>
           <nz-form-label nzRequired>存放时间</nz-form-label>
           <nz-form-control nzHasFeedback >
-            <nz-range-picker [(ngModel)]="time" name="time" required ></nz-range-picker>
+            <nz-range-picker [nzRanges]="ranges" name="time" required [(ngModel)]="time"></nz-range-picker>
           </nz-form-control>
         </nz-form-item>
       </div>
     </div>
     
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+          <nz-form-item>
+            <nz-form-label>数量</nz-form-label>
+            <nz-form-control nzHasFeedback >
+              <nz-input-number [(ngModel)]="submitgoods.goodsNum" [nzMin]="1" [nzStep]="1" name="goodsNum"></nz-input-number>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
     <div nz-row [nzGutter]="8">
       <div nz-col nzSpan="12">
         <nz-form-item>

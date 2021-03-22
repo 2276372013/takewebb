@@ -37,6 +37,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 @NgModule({
   declarations: [],
   imports: [
@@ -53,6 +54,7 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
     NzCheckboxModule,
     NzLayoutModule,
     NzMenuModule,
+    NzInputNumberModule,
     NzDividerModule,
     NzMessageModule,
     NzAvatarModule,
@@ -85,6 +87,7 @@ import { NzBackTopModule } from 'ng-zorro-antd/back-top';
     CommonModule,
     NzCarouselModule,
     FormsModule,
+    NzInputNumberModule,
     NzButtonModule,
     NzAvatarModule,
     NzFormModule,

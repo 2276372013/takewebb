@@ -3,7 +3,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Msg } from '../../../interfaceEntity/Entity/Msg.interface';
 import { GoodsService } from '../../../service/Goods.service';
 import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
-
+import endOfMonth from 'date-fns/endOfMonth';
 @Component({
   selector: 'app-goodslist',
   templateUrl: './goodslist.component.html',
@@ -21,6 +21,7 @@ export class GoodslistComponent implements OnInit {
   editgoodsPlace: String;
   submitgoods: Goods;
   selectGoods: Goods;
+  nullGoods: Goods;
   time: Date[];
   array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
   checked = false;
@@ -28,6 +29,7 @@ export class GoodslistComponent implements OnInit {
   listOfCurrentPageData: Goods[] = [];
   setOfCheckedId = new Set<String>();
   visible = false;
+  ranges = { Today: [new Date(), new Date()], 'This Month': [new Date(), endOfMonth(new Date())] };
   listOfSelection = [
     {
       text: 'Select All Row',
@@ -43,6 +45,8 @@ export class GoodslistComponent implements OnInit {
   constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService) {
     this.submitgoods = new Goods();
     this.selectGoods = new Goods();
+    this.nullGoods = new Goods();
+    this.time = new Array();
     this.submitgoods.goodsPublic = true;
   }
 
@@ -76,8 +80,28 @@ export class GoodslistComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
-  open(): void {
-    this.visible = true;
+  open(stype:String): void {
+
+    if(stype=="add"){
+      this.submitgoods =  this.nullGoods;
+      this.visible = true;
+    }else{
+      const requestData = this.goodsList.filter(data => this.setOfCheckedId.has(data.goodsId));
+      const GoodsIds = new Array();
+      for (let value of requestData) {
+        GoodsIds.push(value.goodsId);
+      }
+      if (GoodsIds.length == 1) {
+        this.submitgoods = this.goodsList.filter(data => (data.goodsId==GoodsIds[0]))[0];
+        this.time[0] = new Date(this.submitgoods.placeTime.toString().replace(/-/g, "/"));
+        this.time[1] =  new Date(this.submitgoods.saveTimes.toString().replace(/-/g, "/"));
+        this.visible = true;
+        console.log(this.time)
+      } else {
+        this.message.create('warning', `请勾选一个物品呦👉`);
+      }
+    }
+
   }
   close(): void {
     this.visible = false;
