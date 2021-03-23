@@ -13,6 +13,10 @@ import { GoodsService } from 'src/app/service/Goods.service';
 import { NewsComponent } from './news/news.component';
 import { UseractionComponent } from './useraction/useraction.component';
 import { CRUDgoodsComponent } from './crudgoods/crudgoods.component';
+import { NewslistComponent } from './newslist/newslist.component';
+import { ManagerlistComponent } from './managerlist/managerlist.component';
+import { GoodstypelistComponent } from './goodstypelist/goodstypelist.component';
+import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -24,6 +28,10 @@ import { CRUDgoodsComponent } from './crudgoods/crudgoods.component';
     NewsComponent,
     UseractionComponent,
     CRUDgoodsComponent,
+    NewslistComponent,
+    ManagerlistComponent,
+    GoodstypelistComponent,
+    GoodsplacelistComponent,
   ],
 
   imports: [

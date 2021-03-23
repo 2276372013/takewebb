@@ -1,83 +1,92 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" 
-    [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="http://localhost:4200/welcome" target="_blank">
-        <img src="../../../assets/images/housekeeper.png" alt="logo">
-        <h1>当前用户：{{username}}</h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" >
-      <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter (click)="navigate('goodslistontime')" nzSelected>
-            <a>过期 物表</a>
-          </li>
-          <li nz-menu-item nzMatchRouter (click)="navigate('goodslist')">
-            <a>物品 列表</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a (click)="navigate('crudgoods')">查询 物品</a>
-          </li>
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="sidebar-logo">
+            <a href="http://localhost:4200/welcome" target="_blank">
+                <img src="../../../assets/images/housekeeper.png" alt="logo">
+                <h1>当前用户：{{username}}</h1>
+            </a>
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <li nz-submenu nzOpen nzTitle="物品 管理" nzIcon="profile">
+                <ul>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('goodslistontime')" nzSelected>
+                        <a>过期 物表</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('goodslist')">
+                        <a>物品 列表</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('goodsplacelist')">
+                        <a>收纳地点 管理</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('goodstypelist')">
+                        <a>物品种类 管理</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen nzTitle="关联 好友" nzIcon="team">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/public/friendslist">好友 列表</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('friendsgoodslist')">
+                        <a>好友 物品</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen nzTitle="管理员 管理" nzIcon="user">
+                <ul>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('managerlist')">
+                        <a>系统管理员列表</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen nzTitle="消息 管理" nzIcon="mail">
+                <ul>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('newslist')">
+                        <a>消息列表</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen nzTitle="我的 信息" nzIcon="form">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a (click)="navigate('crudgoods')">收纳 记录</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter (click)="navigate('edituser')">
+                        <a>修改信息</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="关联 好友" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/public/friendslist">好友 列表</a>
-          </li>
-          <li nz-menu-item nzMatchRouter (click)="navigate('friendsgoodslist')">
-            <a>好友 物品</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="我的 信息" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter (click)="navigate('edituser')">
-            <a>修改信息</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
-          <li nz-menu-item ><a routerLink="/welcome">退出登陆</a></li>
-          <li nz-menu-item (click)="navigate('news')">
-            <nz-badge nzDot> <i nz-icon [nzType]="'notification'" [nzTheme]="'twotone'"></i></nz-badge>
-          </li>
-          <li class="a" nz-menu-item (click)="navigate('useraction')">行为 统计</li>
-        </ul>
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+                <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+                    <li nz-menu-item><a routerLink="/welcome">退出登陆</a></li>
+                    <li nz-menu-item (click)="navigate('news')">
+                        <nz-badge nzDot> <i nz-icon [nzType]="'notification'" [nzTheme]="'twotone'"></i></nz-badge>
+                    </li>
+                    <li class="a" nz-menu-item (click)="navigate('useraction')">行为 统计</li>
+                </ul>
+                <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <nz-breadcrumb class="breadcrumb" [nzAutoGenerate]="true">
-        <!--面包屑-->
-      </nz-breadcrumb>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-    <nz-footer>Goods Manager ©2021 Implement By WangHaoLiang</nz-footer>
-  </nz-layout>
-  <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100" (nzOnClick)="notify()">
-    <ng-template #tpl>
-      <div class="ant-back-top-inner">UP</div>
-    </ng-template>
-  </nz-back-top>
+            </div>
+        </nz-header>
+        <nz-content>
+            <nz-breadcrumb class="breadcrumb" [nzAutoGenerate]="true">
+                <!--面包屑-->
+            </nz-breadcrumb>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <nz-footer>Goods Manager ©2021 Implement By WangHaoLiang</nz-footer>
+    </nz-layout>
+    <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100" (nzOnClick)="notify()">
+        <ng-template #tpl>
+            <div class="ant-back-top-inner">UP</div>
+        </ng-template>
+    </nz-back-top>
 </nz-layout>
-

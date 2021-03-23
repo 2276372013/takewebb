@@ -14,6 +14,10 @@ import { RegisterComponent} from "./register/register.component";
 import { TestComponent } from './test/test.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthGuard } from '../httpInterceptors/auth.guard';
+import { GoodsplacelistComponent } from './public/goodsplacelist/goodsplacelist.component';
+import { GoodstypelistComponent } from './public/goodstypelist/goodstypelist.component';
+import { ManagerlistComponent } from './public/managerlist/managerlist.component';
+import { NewslistComponent } from './public/newslist/newslist.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: 'welcome', component: WelcomeComponent },
@@ -23,7 +27,6 @@ const routes: Routes = [
   // {path: 'public', canActivate: [AuthGuard],
   {path: 'public', 
     children: [
-      // {path: '', component: TestComponent,data: {breadcrumb: 'Echarts'}},
       {path: '', component: TestComponent},
       {path: 'edituser', component: EditUserInformationComponent,data: {breadcrumb: 'edituser'}},
       {path: 'goodslistontime', component: GoodsListOntimeComponent,data: {breadcrumb: 'goodslistontime'},},
@@ -33,6 +36,10 @@ const routes: Routes = [
       {path: 'news', component: NewsComponent,data: {breadcrumb: 'news'}},
       {path: 'useraction', component: UseractionComponent,data: {breadcrumb: 'useraction'}},
       {path: 'crudgoods', component:CRUDgoodsComponent,data: {breadcrumb: 'crudgoods'}},
+      {path: 'goodsplacelist', component:GoodsplacelistComponent,data: {breadcrumb: 'goodsplacelist'}},
+      {path: 'goodstypelist', component:GoodstypelistComponent,data: {breadcrumb: 'goodstypelist'}},
+      {path: 'managerlist', component:ManagerlistComponent,data: {breadcrumb: 'managerlist'}},
+      {path: 'newslist', component:NewslistComponent,data: {breadcrumb: 'newslist'}},
     ],
     component: PublicComponent,
     data: {breadcrumb: 'public'}
