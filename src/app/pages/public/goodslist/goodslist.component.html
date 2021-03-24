@@ -1,231 +1,239 @@
 <button nz-button nzType="primary" (click)="open('add')"><i nz-icon nzType="plus" nzTheme="outline"></i>Add</button>
-<button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="是否确定要删除所选物品?"
-  (nzOnConfirm)="deleteGoods()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button><i nz-icon nzType="minus" nzTheme="outline"></i>Delete</button>
+<button nz-button nzType="primary" nzDanger nz-popconfirm nzPopconfirmTitle="是否确定要删除所选物品?" (nzOnConfirm)="deleteGoods()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="bottom" nz-button><i nz-icon nzType="minus" nzTheme="outline"></i>Delete</button>
 <button nz-button nzType="default" (click)="showModalMiddle()"><i nz-icon nzType="search"></i>Search</button>
 <button nz-button nzType="dashed" (click)="downLoadExcel()" style="color: green;"><i nz-icon nzType="file-excel" nzTheme="outline"></i>导出 Excel</button>
 <button nz-button nzType="dashed" (click)="open('details')" style="color: blue;"><i nz-icon nzType="ordered-list" nzTheme="outline"></i>详情</button>
-<nz-modal
-  nzWrapClassName="vertical-center-modal"
-  [(nzVisible)]="isVisibleMiddle"
-  nzTitle="填写需要查询的物品信息"
-  (nzOnCancel)="handleCancelMiddle()"
-  (nzOnOk)="handleOkMiddle()"
->
-<form nz-form class="aaa">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">物品名称</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12">
-      <input nz-input name="goodsName" [(ngModel)]="selectGoods.goodsName"/>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">存放日期</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12" >
-      <nz-date-picker [(ngModel)]="selectGoods.saveTimes" name="SaveTimes"></nz-date-picker>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">取走日期</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12">
-      <nz-date-picker [(ngModel)]="selectGoods.takeTime" name="takeTime"></nz-date-picker>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">公开权限</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <nz-radio-group [(ngModel)]="selectGoods.goodsPublic" name="goodsPublic">
-        <label nz-radio nzValue='true'>公开</label>
-        <label nz-radio nzValue='false'>私密</label>
-      </nz-radio-group>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">存放位置</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12">
-      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a place" [(ngModel)]="selectGoods.goodsPlace" name="goodsPlace">
-        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">物品种类</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12">
-      <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a type" [(ngModel)]="selectGoods.goodsType" name="goodsType">
-        <nz-option nzLabel="Jack" nzValue="jack"></nz-option>
-        <nz-option nzLabel="Lucy" nzValue="lucy"></nz-option>
-        <nz-option nzLabel="Tom" nzValue="tom"></nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="5">分享码</nz-form-label>
-    <nz-form-control nzHasFeedback [nzSpan]="12">
-      <nz-input-group [nzSuffix]="suffixTemplate">
-        <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="selectGoods.goodsCode" name="goodsCode"/>
-      </nz-input-group>
-      <ng-template #suffixTemplate>
-        <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-      </ng-template> 
-    </nz-form-control>
-  </nz-form-item>
-</form>
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="isVisibleMiddle" nzTitle="填写需要查询的物品信息" (nzOnCancel)="handleCancelMiddle()" (nzOnOk)="handleOkMiddle()">
+    <form nz-form class="aaa">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">物品名称</nz-form-label>
+            <nz-form-control nzHasFeedback [nzSpan]="12">
+                <input nz-input name="goodsName" [(ngModel)]="selectGoods.goodsName" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">存放日期</nz-form-label>
+            <nz-form-control nzHasFeedback [nzSpan]="12">
+                <nz-date-picker [(ngModel)]="selectGoods.saveTimes" name="SaveTimes"></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">取走日期</nz-form-label>
+            <nz-form-control nzHasFeedback [nzSpan]="12">
+                <nz-date-picker [(ngModel)]="selectGoods.takeTime" name="takeTime"></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">公开权限</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+                <nz-radio-group [(ngModel)]="selectGoods.goodsPublic" name="goodsPublic">
+                    <label nz-radio nzValue='true'>公开</label>
+                    <label nz-radio nzValue='false'>私密</label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired>
+                <a nz-dropdown [nzDropdownMenu]="menu2">
+      位置
+      <i nz-icon nzType="down"></i>
+    </a>
+                <nz-dropdown-menu #menu2="nzDropdownMenu">
+                    <ul nz-menu nzSelectable>
+                        <li nz-menu-item nzDanger *ngFor="let item of goodsPlace" (click)="editGoodsPlace(item,'selectGoods')">{{item}}</li>
+                    </ul>
+                </nz-dropdown-menu>
+            </nz-form-label>
+            <nz-form-control nzHasFeedback>
+                <input nz-input placeholder="please enter goods Where" [(ngModel)]="selectGoods.goodsPlace" name="goodsPlace" maxlength="32" style="width: 180px;" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label nzRequired>
+                <a nz-dropdown [nzDropdownMenu]="menu1">
+        标签
+        <i nz-icon nzType="down"></i>
+                </a>
+                <nz-dropdown-menu #menu1="nzDropdownMenu">
+                    <ul nz-menu nzSelectable>
+                        <li nz-menu-item nzDanger *ngFor="let item of goodsType" (click)="editGoodsType(item,'selectGoods')">{{item}}</li>
+                    </ul>
+                </nz-dropdown-menu>
+            </nz-form-label>
+            <nz-form-control nzHasFeedback>
+                <input nz-input placeholder="please enter goods sign" [(ngModel)]="selectGoods.goodsType" name="goodsType" maxlength="32" style="width: 180px;" />
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="5">分享码</nz-form-label>
+            <nz-form-control nzHasFeedback [nzSpan]="12">
+                <nz-input-group [nzSuffix]="suffixTemplate">
+                    <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" [(ngModel)]="selectGoods.goodsCode" name="goodsCode" />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                    <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
 
 </nz-modal>
 <br /><br />
-<nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" 
-  [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed"  (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
-  <thead>
-    <tr>
-      <th
-      nzLeft
-      nzWidth="50px"
-      [nzSelections]="listOfSelection"
-      [(nzChecked)]="checked"
-      [nzIndeterminate]="indeterminate"
-      (nzCheckedChange)="onAllChecked($event)"
-    ></th>
-      <th nzWidth="80px">分享码</th>
-      <th nzLeft>编号</th>
-      <th nzLeft>名称</th>
-      <th>权限</th>
-      <th>放置到</th>
-      <th>存放时间</th>
-      <th>数量</th>
-      <th nzRight>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let item of columnTable.data ,let i = index">
-      <tr>
-        <td nzLeft [nzChecked]="setOfCheckedId.has(item.goodsId)" (nzCheckedChange)="onItemChecked(item.goodsId, $event)"></td>
-        <td [nzExpand]="expandSet.has(item.goodsId)" (nzExpandChange)="onExpandChange(item.goodsId, $event)"></td>
-        <td nzLeft>{{ i }}</td>
-        <td nzLeft>{{ item.goodsName }}</td>
-        <td>{{ item.goodsPublic }}</td>
-        <td>{{ item.placeTime }}</td>
-        <td>{{ item.saveTimes }}</td>
-        <td>{{ item.goodsNum }}</td>
-        <td nzRight>
-          <a (click)="open()">取走</a>
-        </td>
-      </tr>
-      <tr [nzExpand]="expandSet.has(item.goodsId)">
-        <span>分享码：{{ item.goodsCode }}</span>
-      </tr>
-    </ng-container>
-  </tbody>
+<nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+    <thead>
+        <tr>
+            <th nzLeft nzWidth="50px" [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
+            <th nzWidth="80px">分享码</th>
+            <th nzLeft>编号</th>
+            <th nzLeft>名称</th>
+            <th>权限</th>
+            <th>放置到</th>
+            <th>存放时间</th>
+            <th>数量</th>
+            <th nzRight>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of columnTable.data ,let i = index">
+            <tr>
+                <td nzLeft [nzChecked]="setOfCheckedId.has(item.goodsId)" (nzCheckedChange)="onItemChecked(item.goodsId, $event)"></td>
+                <td [nzExpand]="expandSet.has(item.goodsId)" (nzExpandChange)="onExpandChange(item.goodsId, $event)"></td>
+                <td nzLeft>{{ i }}</td>
+                <td nzLeft>{{ item.goodsName }}</td>
+                <td>{{ item.goodsPublic }}</td>
+                <td>{{ item.placeTime }}</td>
+                <td>{{ item.saveTimes }}</td>
+                <td>{{ item.goodsNum }}</td>
+                <td nzRight>
+                    <button nz-button nzType="dashed" nzDanger (click)="showModal(item.goodsNum,item.goodsId)">
+                        取走
+                    </button>
+                </td>
+            </tr>
+            <tr [nzExpand]="expandSet.has(item.goodsId)">
+                <span>分享码：{{ item.goodsCode }}</span>
+            </tr>
+        </ng-container>
+    </tbody>
 </nz-table>
 
-<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="false" [nzWidth]="720" [nzVisible]="visible"
-  nzTitle="存放 物品"  (nzOnClose)="close()">
-  <form nz-form #fo="ngForm" *nzDrawerContent>
+<nz-drawer [nzWidth]="720" [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="存放 物品" (nzOnClose)="close()">
+    <form nz-form #fo="ngForm" *nzDrawerContent>
 
-    <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label nzRequired>名称</nz-form-label>
-          <nz-form-control nzHasFeedback >
-            <input nz-input placeholder="please enter goods name" [(ngModel)]="submitgoods.goodsName" name="goodsName" required maxlength="32"/>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired>名称</nz-form-label>
+                    <nz-form-control nzHasFeedback>
+                        <input nz-input placeholder="please enter goods name" [(ngModel)]="submitgoods.goodsName" name="goodsName" required maxlength="32" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
 
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <nz-form-label nzRequired>
-            <a nz-dropdown [nzDropdownMenu]="menu1">
+        <div nz-col nzSpan="12">
+            <nz-form-item>
+                <nz-form-label nzRequired>
+                    <a nz-dropdown [nzDropdownMenu]="menu1">
               标签
               <i nz-icon nzType="down"></i>
             </a>
-            <nz-dropdown-menu #menu1="nzDropdownMenu">
-              <ul nz-menu nzSelectable>
-                <li nz-menu-item nzDanger *ngFor="let item of goodsType" (click)="editGoodsType(item)">{{item}}</li>
-              </ul>
-            </nz-dropdown-menu>
-          </nz-form-label>
-          <nz-form-control nzHasFeedback >
-            <input nz-input placeholder="please enter goods sign" [(ngModel)]="submitgoods.goodsType" name="editgoodsType" required maxlength="32"/>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label nzRequired>
-              <a nz-dropdown [nzDropdownMenu]="menu2">
+                    <nz-dropdown-menu #menu1="nzDropdownMenu">
+                        <ul nz-menu nzSelectable>
+                            <li nz-menu-item nzDanger *ngFor="let item of goodsType" (click)="editGoodsType(item,'submitgoods')">{{item}}</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </nz-form-label>
+                <nz-form-control nzHasFeedback>
+                    <input nz-input placeholder="please enter goods sign" [(ngModel)]="submitgoods.goodsType" name="editgoodsType" required maxlength="32" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label nzRequired>
+                        <a nz-dropdown [nzDropdownMenu]="menu2">
                 位置
                 <i nz-icon nzType="down"></i>
               </a>
-              <nz-dropdown-menu #menu2="nzDropdownMenu">
-                <ul nz-menu nzSelectable>
-                  <li nz-menu-item nzDanger *ngFor="let item of goodsPlace" (click)="editGoodsPlace(item)">{{item}}</li>
-                </ul>
-              </nz-dropdown-menu>
-            </nz-form-label>
-            <nz-form-control nzHasFeedback >
-              <input nz-input placeholder="please enter goods Where" [(ngModel)]="submitgoods.goodsPlace" name="editgoodsPlace" required maxlength="32"/>
-            </nz-form-control>
-          </nz-form-item>
+                        <nz-dropdown-menu #menu2="nzDropdownMenu">
+                            <ul nz-menu nzSelectable>
+                                <li nz-menu-item nzDanger *ngFor="let item of goodsPlace" (click)="editGoodsPlace(item,'submitgoods')">{{item}}</li>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </nz-form-label>
+                    <nz-form-control nzHasFeedback>
+                        <input nz-input placeholder="please enter goods Where" [(ngModel)]="submitgoods.goodsPlace" name="editgoodsPlace" required maxlength="32" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
-      </div>
 
-    <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="16">
-        <nz-form-item>
-          <nz-form-label nzRequired>存放时间</nz-form-label>
-          <nz-form-control nzHasFeedback >
-            <nz-range-picker [nzRanges]="ranges" name="time" required [(ngModel)]="time"></nz-range-picker>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    
-    <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <nz-form-item>
-            <nz-form-label>数量</nz-form-label>
-            <nz-form-control nzHasFeedback >
-              <nz-input-number [(ngModel)]="submitgoods.goodsNum" [nzMin]="1" [nzStep]="1" name="goodsNum"></nz-input-number>
-            </nz-form-control>
-          </nz-form-item>
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="16">
+                <nz-form-item>
+                    <nz-form-label nzRequired>存放时间</nz-form-label>
+                    <nz-form-control nzHasFeedback>
+                        <nz-range-picker [nzRanges]="ranges" name="time" required [(ngModel)]="time"></nz-range-picker>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
-      </div>
 
-    <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="12">
-        <nz-form-item>
-          <label nz-checkbox [(ngModel)]="submitgoods.goodsPublic" name="goodsPublic">
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label>数量</nz-form-label>
+                    <nz-form-control nzHasFeedback>
+                        <nz-input-number [(ngModel)]="submitgoods.goodsNum" [nzMin]="1" [nzStep]="1" name="goodsNum"></nz-input-number>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <label nz-checkbox [(ngModel)]="submitgoods.goodsPublic" name="goodsPublic">
             <span>是否 公开</span>
           </label>
-        </nz-form-item>
-      </div>
-    </div>
+                </nz-form-item>
+            </div>
+        </div>
 
-    <div nz-row [nzGutter]="8">
-      <div nz-col nzSpan="24">
-        <nz-form-item>
-          <nz-form-label>描述</nz-form-label>
-          <nz-form-control>
-            <textarea nz-input placeholder="please enter goods description, only 255 Byte."
-              [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="submitgoods.goodsDescribe" name="goodsDescribe"></textarea>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
-    </div>
-    <nz-carousel nzAutoPlay>
-      <div nz-carousel-content *ngFor="let index of array">
-        <img src="{{index}}" alt="">
-      </div>
-    </nz-carousel>
+        <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>描述</nz-form-label>
+                    <nz-form-control>
+                        <textarea nz-input placeholder="please enter goods description, only 255 Byte." [nzAutosize]="{ minRows: 4, maxRows: 4 }" [(ngModel)]="submitgoods.goodsDescribe" name="goodsDescribe"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <nz-carousel nzAutoPlay>
+            <div nz-carousel-content *ngFor="let index of array">
+                <img src="{{index}}" alt="">
+            </div>
+        </nz-carousel>
 
-    <br />
-    <div style="margin-left: 20%">
-      <button nz-button style="margin-right: 8%;" (click)="close()">取 消</button>
-      <button nz-button nzType="primary" [disabled]="!fo.valid" (click)="submitGoods()">提 交</button>
-    </div>
+        <br />
+        <div style="margin-left: 20%">
+            <button nz-button style="margin-right: 8%;" (click)="close()">取消</button>
+            <button nz-button nzType="primary" [disabled]="!fo.valid" (click)="submitGoods()">提 交</button>
+        </div>
 
-</form>
+    </form>
 </nz-drawer>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzTitle="取走多少？">
+    <ng-container *nzModalContent>
+        当前剩余：{{surplus}}
+        <br/>取走数量：
+        <nz-input-number [(ngModel)]="takeNum" [nzMin]="1" [nzStep]="1" name="takeNum" (ngModelChange)="checkNum(takeNum)"></nz-input-number>
+        <div ngDefaultControl [(ngModel)]="resultNum" *ngIf="resultNum">
+            <em style="color: red;"> 取走数量必须小等于 当前物品数量,且不为0</em>
+        </div>
+    </ng-container>
+</nz-modal>

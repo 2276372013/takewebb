@@ -11,9 +11,9 @@ function getBase64(file: File): Promise<string | ArrayBuffer | null> {
   });
 }
 @Component({
-  selector: 'app-friendslist',
-  templateUrl: './friendslist.component.html',
-  styleUrls: ['./friendslist.component.scss']
+  selector: 'app-photo',
+  templateUrl: './photo.component.html',
+  styleUrls: ['./photo.component.scss']
 })
 export class PhotoComponent implements OnInit {
   client: any;

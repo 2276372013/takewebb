@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Goods } from '../interfaceEntity/Entity/Goods.interface';
-
+import { ExcelTemplate } from '../interfaceEntity/Entity/ExcelTemplate';
 @Injectable()
 export class GoodsService{
   constructor(private httpClient: HttpClient) {}
@@ -19,7 +19,19 @@ export class GoodsService{
     return this.httpClient.post('http://localhost:8080/takeit/goods/findallgoodstype', null);
   }
   public downLoadExcel() {
-    window.location.href = 'http://localhost:8080/takeit/goods/downLoadExcel';
+  // public downLoadExcel(template: ExcelTemplate) {
+    // window.location.href = 'http://localhost:8080/takeit/goods/download';
+  //   const options = {
+  //     responseType: 'blob' as 'json'
+  // };
+  // return this.http.post<Blob>(`/api/excel/export`, template, options)
+  //     .pipe(retry(2), catchError(this.handleError.bind(this))).subscribe(rs => {
+  //         if (rs) {
+  //             const blob = new Blob([rs], {type: 'application/octet-stream'});
+  //             saveAs(blob, `${template.name}.xlsx`);
+  //         }
+  //     });
+  return this.httpClient.get('http://localhost:8080/takeit/goods/download');
   }
   public deleteGoods(goodsId:String[]): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/deleteGoods', goodsId);
@@ -32,5 +44,8 @@ export class GoodsService{
   }
   public updatePassTime(goodsId:string,updateTime:Date): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/updatePassTime/'+goodsId+'/'+updateTime,null);
+  }
+  public takeGoods(goodsId:String,updateTime:Date,goodsNum:number): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/takeGoods/'+goodsId+'/'+updateTime+'/'+goodsNum,null);
   }
 }

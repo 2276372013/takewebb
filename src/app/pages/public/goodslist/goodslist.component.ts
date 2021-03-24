@@ -4,6 +4,10 @@ import { Msg } from '../../../interfaceEntity/Entity/Msg.interface';
 import { GoodsService } from '../../../service/Goods.service';
 import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
 import endOfMonth from 'date-fns/endOfMonth';
+import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
+import { ExcelService } from '../../../service/ExcelService.service';
+import { PERSONS, Person } from '../../../interfaceEntity/Entity/Person';
 @Component({
   selector: 'app-goodslist',
   templateUrl: './goodslist.component.html',
@@ -19,9 +23,15 @@ export class GoodslistComponent implements OnInit {
   editgoodsType: String;
   goodsPlace: String[];
   editgoodsPlace: String;
+  id: String;
+  a:number;
   submitgoods: Goods;
   selectGoods: Goods;
   nullGoods: Goods;
+  isVisible = false;
+  takeNum: number;
+  surplus: string;
+  resultNum = false;
   time: Date[];
   array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
   checked = false;
@@ -40,14 +50,21 @@ export class GoodslistComponent implements OnInit {
   ];
   passwordVisible = false;
   password?: string;
-  value = "物品名"
+  value = "物品名";
   //依赖注入+init方法
-  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService) {
+  data = [
+    ['1','a','aa'],
+    ['2','b','bb'],
+    ['3','c','cc']
+  ]
+  persons:Person[];
+  constructor(private excelService: ExcelService,private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService,private http:HttpClient) {
     this.submitgoods = new Goods();
     this.selectGoods = new Goods();
     this.nullGoods = new Goods();
     this.time = new Array();
     this.submitgoods.goodsPublic = true;
+    this.persons = PERSONS;
   }
 
   ngOnInit(): void {
@@ -80,21 +97,21 @@ export class GoodslistComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
-  open(stype:String): void {
+  open(stype: String): void {
 
-    if(stype=="add"){
-      this.submitgoods =  this.nullGoods;
+    if (stype == "add") {
+      this.submitgoods = this.nullGoods;
       this.visible = true;
-    }else{
+    } else {
       const requestData = this.goodsList.filter(data => this.setOfCheckedId.has(data.goodsId));
       const GoodsIds = new Array();
       for (let value of requestData) {
         GoodsIds.push(value.goodsId);
       }
       if (GoodsIds.length == 1) {
-        this.submitgoods = this.goodsList.filter(data => (data.goodsId==GoodsIds[0]))[0];
+        this.submitgoods = this.goodsList.filter(data => (data.goodsId == GoodsIds[0]))[0];
         this.time[0] = new Date(this.submitgoods.placeTime.toString().replace(/-/g, "/"));
-        this.time[1] =  new Date(this.submitgoods.saveTimes.toString().replace(/-/g, "/"));
+        this.time[1] = new Date(this.submitgoods.saveTimes.toString().replace(/-/g, "/"));
         this.visible = true;
         console.log(this.time)
       } else {
@@ -110,7 +127,9 @@ export class GoodslistComponent implements OnInit {
   cancel(): void {
     this.nzMessageService.info('click cancel');
   }
-
+  confirm(): void {
+    this.nzMessageService.info('click confirm');
+  }
   onAllChecked(value: boolean): void {
     this.listOfCurrentPageData.forEach(item => this.updateCheckedSet(item.goodsId, value));
     this.refreshCheckedStatus();
@@ -141,6 +160,9 @@ export class GoodslistComponent implements OnInit {
   }
 
   showModalMiddle(): void {
+    this.selectGoods = new Goods();
+    this.selectGoods.goodsType = '';
+    this.selectGoods.goodsPlace = '';
     this.isVisibleMiddle = true;
   }
 
@@ -156,7 +178,43 @@ export class GoodslistComponent implements OnInit {
   handleCancelMiddle(): void {
     this.isVisibleMiddle = false;
   }
+  showModal(num: string, id: string): void {
+    this.takeNum = this.a;
+    this.surplus = num;
+    this.id = id;
+    this.isVisible = true;
+    this.resultNum = false;
+  }
 
+  handleOk(): void {
+    console.log(this.resultNum)
+    if (this.resultNum) {
+    } else {
+      this.goodsService.takeGoods(this.id, new Date(), this.takeNum).subscribe(
+        (result: Msg) => {
+          if ((result.status === 200)) {
+            this.message.create('success', `取走成功！`);
+            //刷新goods列表
+            this.getGoodsList();
+          } else {
+            this.message.create('error', `失败了！`);
+          }
+        }
+      )
+      this.isVisible = false;
+    }
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+  checkNum(num: number) {
+    if (((num - parseInt(this.surplus)) > 0)||(parseInt(this.surplus) <= 0)) {
+      this.resultNum = true;
+    } else {
+      this.resultNum = false;
+    }
+  }
   /*********************************************************************************************** */
   submitGoods() {
     this.submitgoods.placeTime = this.time[0];
@@ -175,16 +233,58 @@ export class GoodslistComponent implements OnInit {
       }
     )
   }
-  editGoodsType(data: string): void {
-    this.submitgoods.goodsType = data;
+  editGoodsType(data: String, who: String): void {
+    if (who == 'submitgoods') {
+      this.submitgoods.goodsType = data;
+    } else {
+      this.selectGoods.goodsType = data;
+    }
   }
 
-  editGoodsPlace(data: string): void {
-    this.submitgoods.goodsPlace = data;
+  editGoodsPlace(data: String, who: String): void {
+    if (who == 'submitgoods') {
+      this.submitgoods.goodsPlace = data;
+    } else {
+      this.selectGoods.goodsPlace = data;
+    }
   }
 
   downLoadExcel() {
-    this.goodsService.downLoadExcel();
+    this.excelService.exportAsExcelFile("name",null, null, this.persons );
+    // this.http.get('http://localhost:8080/takeit/goods/download').subscribe(data =>console.log(data))
+    // const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+    // const ws2: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
+ 
+    // /* generate workbook and add the worksheet */
+    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    // XLSX.utils.book_append_sheet(wb, ws2, 'Sheet2');
+ 
+    // console.log(wb)
+    // /* save to file */
+    // XLSX.writeFile(wb, 'SheetJS.xlsx');
+
+      //  this.goodsService.downLoadExcel().subscribe(
+      //   (result: Msg) => {
+      //     if ((result.status === 200)) {
+      //       this.message.create('success', `删除成功！`);
+      //     } else {
+      //       this.message.create('error', `删除失败了！`);
+      //     }
+      //   }
+      // );
+  //   if (!!this.listOfAllData) {
+      // const template = new ExcelTemplate();
+      // const header = ['参数名称', '用途', '参数类型', '单位', '可选值', '描述'];
+      // template.name = '工艺参数表';
+      // template.header = header.map(h => [h]);
+      // // console.log()
+      // template.data = this.listOfAllData.map(data => [
+      //     data.name, this.transformUsage(data.usages).join(','), this.transformType(data.type),
+      //     data.unit, data.valueCandicatesStr, data.comments]);
+  //     console.log('export excel template: %o', template);
+      // this.goodsService.downLoadExcel(template);
+  // }
   }
 
   deleteGoods() {
@@ -223,15 +323,15 @@ export class GoodslistComponent implements OnInit {
     );
   }
 
-  handleOkMiddle(){
+  handleOkMiddle() {
     this.goodsService.selectLikeGoods(this.selectGoods).subscribe(
       (result: Msg) => {
         if ((result.status === 200)) {
           this.goodsList = result.data;
           this.message.create('success', `查找成功！`);
         } else {
-           console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;") 
-    console.log(this.selectGoods);   
+          console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
+          console.log(this.selectGoods);
         }
       }
     );
