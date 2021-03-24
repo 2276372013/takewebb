@@ -17,6 +17,8 @@ import { NewslistComponent } from './newslist/newslist.component';
 import { ManagerlistComponent } from './managerlist/managerlist.component';
 import { GoodstypelistComponent } from './goodstypelist/goodstypelist.component';
 import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.component';
+import { PhotoComponent } from './photo/photo.component';
+import { TuchuangComponent } from './tuchuang/tuchuang.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -32,6 +34,8 @@ import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.compone
     ManagerlistComponent,
     GoodstypelistComponent,
     GoodsplacelistComponent,
+    PhotoComponent,
+    TuchuangComponent,
   ],
 
   imports: [
