@@ -5,9 +5,7 @@ import { GoodsService } from '../../../service/Goods.service';
 import { Goods } from '../../../interfaceEntity/Entity/Goods.interface';
 import endOfMonth from 'date-fns/endOfMonth';
 import { HttpClient } from '@angular/common/http';
-import * as XLSX from 'xlsx';
-import { ExcelService } from '../../../service/ExcelService.service';
-import { PERSONS, Person } from '../../../interfaceEntity/Entity/Person';
+import * as XLSX from 'xlsx';//数据导出导入所需要的依赖
 @Component({
   selector: 'app-goodslist',
   templateUrl: './goodslist.component.html',
@@ -52,19 +50,12 @@ export class GoodslistComponent implements OnInit {
   password?: string;
   value = "物品名";
   //依赖注入+init方法
-  data = [
-    ['1','a','aa'],
-    ['2','b','bb'],
-    ['3','c','cc']
-  ]
-  persons:Person[];
-  constructor(private excelService: ExcelService,private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService,private http:HttpClient) {
+  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService,private http:HttpClient) {
     this.submitgoods = new Goods();
     this.selectGoods = new Goods();
     this.nullGoods = new Goods();
     this.time = new Array();
     this.submitgoods.goodsPublic = true;
-    this.persons = PERSONS;
   }
 
   ngOnInit(): void {
@@ -250,41 +241,30 @@ export class GoodslistComponent implements OnInit {
   }
 
   downLoadExcel() {
-    this.excelService.exportAsExcelFile("name",null, null, this.persons );
-    // this.http.get('http://localhost:8080/takeit/goods/download').subscribe(data =>console.log(data))
-    // const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
-    // const ws2: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
- 
-    // /* generate workbook and add the worksheet */
-    // const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    // XLSX.utils.book_append_sheet(wb, ws2, 'Sheet2');
- 
-    // console.log(wb)
-    // /* save to file */
-    // XLSX.writeFile(wb, 'SheetJS.xlsx');
+    const data = [{
+      '姓名': 'zhangsan',
+      '年龄': 20,
+      '性别': '男'
+  },{
+    '姓名': 'zhangsan',
+    '年龄': 20,
+    '性别': '男'
+  }];
+         // 新建空workbook，然后加入worksheet
+         const ws = XLSX.utils.json_to_sheet(data)
+         // 设置每列的列宽，10代表10个字符，注意中文占2个字符
+         ws['!cols'] = [
+           { wch: 10 },
+           { wch: 30 },
+           { wch: 25 }
+         ]
+         // 新建book
+         const wb = XLSX.utils.book_new()
+         // 生成xlsx文件(book,sheet数据,sheet命名)
+         XLSX.utils.book_append_sheet(wb, ws, '数据详情')
+         // 写文件(book,xlsx文件名称)
+         XLSX.writeFile(wb, '列表详情.xlsx')
 
-      //  this.goodsService.downLoadExcel().subscribe(
-      //   (result: Msg) => {
-      //     if ((result.status === 200)) {
-      //       this.message.create('success', `删除成功！`);
-      //     } else {
-      //       this.message.create('error', `删除失败了！`);
-      //     }
-      //   }
-      // );
-  //   if (!!this.listOfAllData) {
-      // const template = new ExcelTemplate();
-      // const header = ['参数名称', '用途', '参数类型', '单位', '可选值', '描述'];
-      // template.name = '工艺参数表';
-      // template.header = header.map(h => [h]);
-      // // console.log()
-      // template.data = this.listOfAllData.map(data => [
-      //     data.name, this.transformUsage(data.usages).join(','), this.transformType(data.type),
-      //     data.unit, data.valueCandicatesStr, data.comments]);
-  //     console.log('export excel template: %o', template);
-      // this.goodsService.downLoadExcel(template);
-  // }
   }
 
   deleteGoods() {

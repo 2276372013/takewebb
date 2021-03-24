@@ -19,7 +19,6 @@ import { GoodstypelistComponent } from './goodstypelist/goodstypelist.component'
 import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.component';
 import { PhotoComponent } from './photo/photo.component';
 import { TuchuangComponent } from './tuchuang/tuchuang.component';
-import { ExcelService } from 'src/app/service/ExcelService.service';
 @NgModule({
   declarations: [
     TestComponent,
@@ -57,8 +56,7 @@ import { ExcelService } from 'src/app/service/ExcelService.service';
   ],
   providers: [
     UsersService,
-    GoodsService,
-    ExcelService
+    GoodsService
   ]
 })
 

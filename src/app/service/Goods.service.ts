@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Goods } from '../interfaceEntity/Entity/Goods.interface';
-import { ExcelTemplate } from '../interfaceEntity/Entity/ExcelTemplate';
 @Injectable()
 export class GoodsService{
   constructor(private httpClient: HttpClient) {}
