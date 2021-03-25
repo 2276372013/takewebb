@@ -17,6 +17,7 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -38,6 +39,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 @NgModule({
   declarations: [],
   imports: [
@@ -46,8 +48,10 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzButtonModule,
     NzGridModule,
     NzTableModule,
+    NzCollapseModule,
     NzAlertModule,
     NzFormModule,
+    NzPaginationModule,
     NzInputModule,
     NzIconModule,
     NzSelectModule,
@@ -92,9 +96,11 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzAvatarModule,
     NzFormModule,
     NzInputModule,
+    NzCollapseModule,
     NzIconModule,
     NzSelectModule,
     NzCheckboxModule,
+    NzPaginationModule,
     NzLayoutModule,
     NzModalModule,
     NzMenuModule,

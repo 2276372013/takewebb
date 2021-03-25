@@ -1,1 +1,42 @@
-hello friendslist
+<nz-input-group nzAddOnBefore="好友名称：" nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" style="display: inline-block;width: 40%;">
+    <input type="text" nz-input placeholder="input search text" />
+</nz-input-group>
+<ng-template #suffixButton>
+    <button nz-button nzType="primary" nzSize="large" nzSearch><i nz-icon nzType="search"></i></button>
+</ng-template>
+<br />
+<br />
+<nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple style="margin-bottom: 10px;">
+</nz-pagination>
+<nz-collapse [nzBordered]="false">
+    <nz-collapse-panel *ngFor="let panel of panels" [nzHeader]="editName" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+        <p style="margin:0;">
+            A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+        </p>
+        <nz-descriptions nzTitle="Responsive Descriptions" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+            <nz-descriptions-item nzTitle="Product">
+                Cloud Database
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Billing">Prepaid</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="time">18:00:00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Amount">$80.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Discount">$20.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Official">$60.00</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Config Info">
+                Data disk type: MongoDB
+                <br /> Database version: 3.4
+                <br /> Package: dds.mongo.mid
+                <br /> Storage space: 10 GB
+                <br /> Replication_factor:3
+                <br /> Region: East China 1
+                <br />
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </nz-collapse-panel>
+</nz-collapse>
+
+<ng-template #editName>
+    <input nz-input placeholder="borderless" nzBorderless [nzSuffix]="suffixTemplateInfo" style="width: 10%;" />
+    <i nz-icon nzType="edit" nzTheme="outline" style="display: inline-block;"></i>
+    <i nz-icon nzType="close" nzTheme="outline" style="float:right"></i>
+</ng-template>
