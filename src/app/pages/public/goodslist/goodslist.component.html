@@ -24,11 +24,11 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label [nzSpan]="5">公开权限</nz-form-label>
+            <nz-form-label [nzSpan]="5">对外 可见性</nz-form-label>
             <nz-form-control [nzSpan]="12">
                 <nz-radio-group [(ngModel)]="selectGoods.goodsPublic" name="goodsPublic">
-                    <label nz-radio nzValue='true'>公开</label>
-                    <label nz-radio nzValue='false'>私密</label>
+                    <label nz-radio nzValue='true'>true</label>
+                    <label nz-radio nzValue='false'>false</label>
                 </nz-radio-group>
             </nz-form-control>
         </nz-form-item>
@@ -86,7 +86,7 @@
             <th nzWidth="80px">分享码</th>
             <th nzLeft>编号</th>
             <th nzLeft>名称</th>
-            <th>权限</th>
+            <th>对外可见性</th>
             <th>放置到</th>
             <th>存放时间</th>
             <th>数量</th>
@@ -221,7 +221,8 @@
         <br />
         <div style="margin-left: 20%">
             <button nz-button style="margin-right: 8%;" (click)="close()">取消</button>
-            <button nz-button nzType="primary" [disabled]="!fo.valid" (click)="submitGoods()">提 交</button>
+            <button nz-button nzType="primary" *ngIf="stype == 'add'" [disabled]="!fo.valid" (click)="submitGoods()">提 交</button>
+            <button nz-button nzType="primary" *ngIf="stype == 'details'" [disabled]="!fo.valid" (click)="editGoods()">提交 修改</button>
         </div>
 
     </form>
