@@ -17,21 +17,6 @@ export class GoodsService{
   public findAllGoodsType(): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/findallgoodstype', null);
   }
-  public downLoadExcel() {
-  // public downLoadExcel(template: ExcelTemplate) {
-    // window.location.href = 'http://localhost:8080/takeit/goods/download';
-  //   const options = {
-  //     responseType: 'blob' as 'json'
-  // };
-  // return this.http.post<Blob>(`/api/excel/export`, template, options)
-  //     .pipe(retry(2), catchError(this.handleError.bind(this))).subscribe(rs => {
-  //         if (rs) {
-  //             const blob = new Blob([rs], {type: 'application/octet-stream'});
-  //             saveAs(blob, `${template.name}.xlsx`);
-  //         }
-  //     });
-  return this.httpClient.get('http://localhost:8080/takeit/goods/download');
-  }
   public deleteGoods(goodsId:String[]): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/deleteGoods', goodsId);
   }
@@ -46,5 +31,8 @@ export class GoodsService{
   }
   public takeGoods(goodsId:String,updateTime:Date,goodsNum:number): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/takeGoods/'+goodsId+'/'+updateTime+'/'+goodsNum,null);
+  }
+  public updataGoods(goods:Goods): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/updataGoods', goods);
   }
 }

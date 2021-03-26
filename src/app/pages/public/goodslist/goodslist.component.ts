@@ -22,7 +22,7 @@ export class GoodslistComponent implements OnInit {
   goodsPlace: String[];
   editgoodsPlace: String;
   id: String;
-  a:number;
+  a: number;
   submitgoods: Goods;
   selectGoods: Goods;
   nullGoods: Goods;
@@ -30,6 +30,7 @@ export class GoodslistComponent implements OnInit {
   takeNum: number;
   surplus: string;
   resultNum = false;
+  stype: string;
   time: Date[];
   array = ["../../../../assets/images/1.png", "../../../../assets/images/2.png", "../../../../assets/images/3.png"];
   checked = false;
@@ -50,7 +51,7 @@ export class GoodslistComponent implements OnInit {
   password?: string;
   value = "物品名";
   //依赖注入+init方法
-  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService,private http:HttpClient) {
+  constructor(private nzMessageService: NzMessageService, private goodsService: GoodsService, private message: NzMessageService, private http: HttpClient) {
     this.submitgoods = new Goods();
     this.selectGoods = new Goods();
     this.nullGoods = new Goods();
@@ -88,8 +89,8 @@ export class GoodslistComponent implements OnInit {
       this.expandSet.delete(id);
     }
   }
-  open(stype: String): void {
-
+  open(stype: string): void {
+    this.stype = stype;
     if (stype == "add") {
       this.submitgoods = this.nullGoods;
       this.visible = true;
@@ -101,10 +102,9 @@ export class GoodslistComponent implements OnInit {
       }
       if (GoodsIds.length == 1) {
         this.submitgoods = this.goodsList.filter(data => (data.goodsId == GoodsIds[0]))[0];
-        this.time[0] = new Date(this.submitgoods.placeTime.toString().replace(/-/g, "/"));
-        this.time[1] = new Date(this.submitgoods.saveTimes.toString().replace(/-/g, "/"));
+        const date: Date[] = [new Date(this.submitgoods.placeTime.toString().replace(/-/g, "/")), new Date(this.submitgoods.saveTimes.toString().replace(/-/g, "/"))];
+        this.time = date;
         this.visible = true;
-        console.log(this.time)
       } else {
         this.message.create('warning', `请勾选一个物品呦👉`);
       }
@@ -158,7 +158,6 @@ export class GoodslistComponent implements OnInit {
   }
 
   handleOkTop(): void {
-    console.log('点击了确定');
     this.isVisibleTop = false;
   }
 
@@ -178,7 +177,6 @@ export class GoodslistComponent implements OnInit {
   }
 
   handleOk(): void {
-    console.log(this.resultNum)
     if (this.resultNum) {
     } else {
       this.goodsService.takeGoods(this.id, new Date(), this.takeNum).subscribe(
@@ -200,7 +198,7 @@ export class GoodslistComponent implements OnInit {
     this.isVisible = false;
   }
   checkNum(num: number) {
-    if (((num - parseInt(this.surplus)) > 0)||(parseInt(this.surplus) <= 0)) {
+    if (((num - parseInt(this.surplus)) > 0) || (parseInt(this.surplus) <= 0)) {
       this.resultNum = true;
     } else {
       this.resultNum = false;
@@ -241,30 +239,21 @@ export class GoodslistComponent implements OnInit {
   }
 
   downLoadExcel() {
-    const data = [{
-      '姓名': 'zhangsan',
-      '年龄': 20,
-      '性别': '男'
-  },{
-    '姓名': 'zhangsan',
-    '年龄': 20,
-    '性别': '男'
-  }];
-         // 新建空workbook，然后加入worksheet
-         const ws = XLSX.utils.json_to_sheet(data)
-         // 设置每列的列宽，10代表10个字符，注意中文占2个字符
-         ws['!cols'] = [
-           { wch: 10 },
-           { wch: 30 },
-           { wch: 25 }
-         ]
-         // 新建book
-         const wb = XLSX.utils.book_new()
-         // 生成xlsx文件(book,sheet数据,sheet命名)
-         XLSX.utils.book_append_sheet(wb, ws, '数据详情')
-         // 写文件(book,xlsx文件名称)
-         XLSX.writeFile(wb, '列表详情.xlsx')
-
+    const data = this.goodsList;
+    // 新建空workbook，然后加入worksheet
+    const ws = XLSX.utils.json_to_sheet(data)
+    // 设置每列的列宽，10代表10个字符，注意中文占2个字符
+    //  ws['!cols'] = [
+    //    { wch: 10 },
+    //    { wch: 30 },
+    //    { wch: 25 }
+    //  ]
+    // 新建book
+    const wb = XLSX.utils.book_new()
+    // 生成xlsx文件(book,sheet数据,sheet命名)
+    XLSX.utils.book_append_sheet(wb, ws, '数据详情')
+    // 写文件(book,xlsx文件名称)
+    XLSX.writeFile(wb, '列表详情.xlsx')
   }
 
   deleteGoods() {
@@ -303,6 +292,21 @@ export class GoodslistComponent implements OnInit {
     );
   }
 
+  editGoods() {
+    this.submitgoods.placeTime = this.time[0];
+    this.submitgoods.saveTimes = this.time[1];
+    this.goodsService.updataGoods(this.submitgoods).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.message.create('success', `更改成功！`);
+          this.getGoodsList();
+          this.visible = false;
+        } else {
+        }
+      }
+    );
+  }
+
   handleOkMiddle() {
     this.goodsService.selectLikeGoods(this.selectGoods).subscribe(
       (result: Msg) => {
@@ -310,8 +314,7 @@ export class GoodslistComponent implements OnInit {
           this.goodsList = result.data;
           this.message.create('success', `查找成功！`);
         } else {
-          console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
-          console.log(this.selectGoods);
+          //          console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
         }
       }
     );

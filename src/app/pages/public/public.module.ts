@@ -8,6 +8,9 @@ import { GoodsListOntimeComponent } from './goodsListOntime/goodsListOntime.comp
 import { GoodslistComponent } from './goodslist/goodslist.component';
 import { FriendslistComponent } from './friendslist/friendslist.component';
 import { FriendsgoodslistComponent } from './friendsgoodslist/friendsgoodslist.component';
+import { FriendsService } from 'src/app/service/Friends.service';
+import { NewsService } from 'src/app/service/News.service';
+import { ManagerService } from 'src/app/service/Manager.service';
 import { UsersService } from 'src/app/service/Users.service';
 import { GoodsService } from 'src/app/service/Goods.service';
 import { NewsComponent } from './news/news.component';
@@ -19,6 +22,7 @@ import { GoodstypelistComponent } from './goodstypelist/goodstypelist.component'
 import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.component';
 import { PhotoComponent } from './photo/photo.component';
 import { TuchuangComponent } from './tuchuang/tuchuang.component';
+import { AboutmeComponent } from './aboutme/aboutme.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -36,6 +40,7 @@ import { TuchuangComponent } from './tuchuang/tuchuang.component';
     GoodsplacelistComponent,
     PhotoComponent,
     TuchuangComponent,
+    AboutmeComponent,
   ],
 
   imports: [
@@ -56,7 +61,10 @@ import { TuchuangComponent } from './tuchuang/tuchuang.component';
   ],
   providers: [
     UsersService,
-    GoodsService
+    GoodsService,
+    FriendsService,
+    ManagerService,
+    NewsService
   ]
 })
 
