@@ -40,6 +40,7 @@ import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzAffixModule } from 'ng-zorro-antd/affix';
 @NgModule({
   declarations: [],
   imports: [
@@ -48,6 +49,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzButtonModule,
     NzGridModule,
     NzTableModule,
+    NzAffixModule,
     NzCollapseModule,
     NzAlertModule,
     NzFormModule,
@@ -90,6 +92,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
   exports:[
     CommonModule,
     NzCarouselModule,
+    NzAffixModule,
     FormsModule,
     NzInputNumberModule,
     NzButtonModule,

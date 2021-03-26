@@ -10,11 +10,20 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-            <nz-card nzHoverable style="width:90%" [nzCover]="coverTemplate2" (click)="open()">
-                <nz-card-meta nzTitle="xxl-job 设置推送时间" nzDescription="http://localhost:4200/welcome"></nz-card-meta>
+            <nz-card nzHoverable style="width:90%" [nzCover]="coverTemplate2" (click)="open('http://localhost:8088/xxl-job-admin/')">
+                <nz-card-meta nzTitle="xxl-job 设置推送时间" nzDescription="http://localhost:8088/xxl-job-admin/"></nz-card-meta>
             </nz-card>
             <ng-template #coverTemplate2>
                 <img alt="example" src="../../../../assets/images/hudei.gif" />
+            </ng-template>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <nz-card nzHoverable style="width:90%" [nzCover]="coverTemplate3" (click)="open('http://localhost:8001/applications')">
+                <nz-card-meta nzTitle="Spring Admin" nzDescription="http://localhost:8001/applications"></nz-card-meta>
+            </nz-card>
+            <ng-template #coverTemplate3>
+                <img alt="example" src="../../../../assets/images/mianhua.gif" />
             </ng-template>
         </div>
     </div>
@@ -25,8 +34,8 @@
         <form nz-form [formGroup]="form" nzLayout="vertical">
             <nz-form-item>
                 <nz-form-control>
-                    <nz-textarea-count [nzMaxCharacterCount]="100">
-                        <textarea rows="4" formControlName="comment" nz-input></textarea>
+                    <nz-textarea-count [nzMaxCharacterCount]="500">
+                        <textarea rows="4" formControlName="comment" nz-input [(ngModel)]="Wechat"></textarea>
                     </nz-textarea-count>
                 </nz-form-control>
             </nz-form-item>
@@ -35,7 +44,7 @@
     <ng-template #footerTpl>
         <div style="float: right">
             <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>
-            <button nz-button nzType="primary" (click)="close()">Submit</button>
+            <button nz-button nzType="primary" (click)="close('send')">Submit</button>
         </div>
     </ng-template>
 </nz-drawer>

@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class FriendslistComponent implements OnInit {
 
   constructor() {}
-
+  offsetTop = 10;
+  visible = false;
+  childrenVisible = false;
+  vegetables = ['asparagus', 'bamboo', 'potato', 'carrot', 'cilantro', 'potato', 'eggplant'];
+  
   ngOnInit(): void {}
 
   panels = [
@@ -35,5 +39,24 @@ export class FriendslistComponent implements OnInit {
       name: 'This is panel header 3'
     }
   ];
-  
+
+  setOffsetTop(): void {
+    this.offsetTop += 10;
+    console.log("Hello")
+  }
+
+  open(): void {
+    this.visible = true;
+  }
+  close(): void {
+    this.visible = false;
+  }
+
+  openChildren(): void {
+    this.childrenVisible = true;
+  }
+
+  closeChildren(): void {
+    this.childrenVisible = false;
+  }
 }
