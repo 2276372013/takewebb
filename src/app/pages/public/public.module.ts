@@ -19,6 +19,7 @@ import { GoodstypelistComponent } from './goodstypelist/goodstypelist.component'
 import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.component';
 import { PhotoComponent } from './photo/photo.component';
 import { TuchuangComponent } from './tuchuang/tuchuang.component';
+import { AboutmeComponent } from './aboutme/aboutme.component';
 @NgModule({
   declarations: [
     TestComponent,
@@ -36,6 +37,7 @@ import { TuchuangComponent } from './tuchuang/tuchuang.component';
     GoodsplacelistComponent,
     PhotoComponent,
     TuchuangComponent,
+    AboutmeComponent,
   ],
 
   imports: [

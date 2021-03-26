@@ -13,14 +13,4 @@ export class TestComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  date: Date[] = [new Date(),new Date()];
-
-  onChange(result: Date[]): void {
-    console.log('onChange: ', result);
-    console.log(this.date)
-  }
-
-  getWeek(result: Date[]): void {
-    console.log('week: ', result.map(getISOWeek));
-  }
 }

@@ -20,6 +20,7 @@ import { ManagerlistComponent } from './public/managerlist/managerlist.component
 import { NewslistComponent } from './public/newslist/newslist.component';
 import { PhotoComponent } from './public/photo/photo.component';
 import { TuchuangComponent } from './public/tuchuang/tuchuang.component';
+import { AboutmeComponent } from './public/aboutme/aboutme.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: 'welcome', component: WelcomeComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
       {path: 'goodstypelist', component:GoodstypelistComponent,data: {breadcrumb: 'goodstypelist'}},
       {path: 'managerlist', component:ManagerlistComponent,data: {breadcrumb: 'managerlist'}},
       {path: 'newslist', component:NewslistComponent,data: {breadcrumb: 'newslist'}},
+      {path: 'aboutme', component:AboutmeComponent,data: {breadcrumb: 'aboutme'}},
       {path: 'photo', component:PhotoComponent,data: {breadcrumb: 'photo'}},
       {path: 'tuchuang', component:TuchuangComponent,data: {breadcrumb: 'tuchuang'}},
     ],
