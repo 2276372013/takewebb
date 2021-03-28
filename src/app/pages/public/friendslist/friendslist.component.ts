@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { User } from '../../../interfaceEntity/Entity/user.interface';
+import { FriendsService } from '../../../service/Friends.service';
+import { Msg } from '../../../interfaceEntity/Entity/Msg.interface';
 
 @Component({
   selector: 'app-friendslist',
@@ -7,13 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendslistComponent implements OnInit {
 
-  constructor() {}
+  constructor(private friendsService: FriendsService) {}
   offsetTop = 10;
   visible = false;
   childrenVisible = false;
   vegetables = ['asparagus', 'bamboo', 'potato', 'carrot', 'cilantro', 'potato', 'eggplant'];
+  friendsList:User[];
+  @Input() values: string;
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.friendsService.findAllFriends().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.friendsList = result.data;
+          console.log(this.friendsList)
+        } else {
+        }
+      }
+    );
+  }
 
   panels = [
     {

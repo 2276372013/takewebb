@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class FriendsService {
   constructor(private httpClient: HttpClient) { }
-  public beforeUpdataUser(): Observable<any> {
-    return this.httpClient.get('http://localhost:8080/takeit/user/beforeUpdataUser');
+  public findAllFriends(): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/friends/findAllFriends',null);
   }
 }

@@ -7,4 +7,5 @@ export class User {
   userSex: number; 
   userBirth: Date; 
   userLevel: number; 
+  childName: string; 
 }

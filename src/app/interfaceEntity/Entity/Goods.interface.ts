@@ -12,6 +12,7 @@ export class Goods {
      frequency: String;//'操作频率'
      goodsPhoto: String;//'物品照片
      goodsDescribe: String;//'物品描述'
+     goodsNum:number;
 }
 export class GoodsType {
      typeid: String;//标签id'
