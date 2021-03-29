@@ -11,73 +11,57 @@
 <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple style="margin-bottom: 10px;">
 </nz-pagination>
 <nz-collapse [nzBordered]="false">
-    <nz-collapse-panel #collaspsepanel *ngFor="let panel of panels" [nzHeader]="editName" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+    <nz-collapse-panel #collaspsepanel *ngFor="let panel of friendsList" [nzHeader]="editName">
         <p style="margin:0;">
             A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
         </p>
-        <nz-descriptions nzTitle="Responsive Descriptions" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
-            <nz-descriptions-item nzTitle="Product">
-                Cloud Database
+        <nz-descriptions nzTitle="Friend information" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
+            <nz-descriptions-item nzTitle="名称">
+                {{panel.userName}}
             </nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Billing">Prepaid</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="time">18:00:00</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Amount">$80.00</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Discount">$20.00</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Official">$60.00</nz-descriptions-item>
-            <nz-descriptions-item nzTitle="Config Info">
-                Data disk type: MongoDB
-                <br /> Database version: 3.4
-                <br /> Package: dds.mongo.mid
-                <br /> Storage space: 10 GB
-                <br /> Replication_factor:3
-                <br /> Region: East China 1
-                <br />
+            <nz-descriptions-item nzTitle="性别">{{panel.userSex}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="电话">{{panel.userCall}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Email">{{panel.userEmail}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="生日">{{panel.userBirth | date:"yy/dd/MM" }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="头像">
+                <img src="http://haoliang-bucket.oss-cn-beijing.aliyuncs.com/object.png" alt="头像加载失败">
             </nz-descriptions-item>
         </nz-descriptions>
         <ng-template #editName>
-            <!-- <input nz-input placeholder="borderless" nzBorderless [nzSuffix]="suffixTemplateInfo" style="width: 10%;" /> -->
-            <input nz-input placeholder="borderless" nzBorderless style="width: 10%;"/>
-            <h1>hello:{{panel.name}}</h1>
+            <input nz-input placeholder="borderless" nzBorderless style="width: 10%;" [(ngModel)]="panel.childName" />
             <i nz-icon nzType="edit" nzTheme="outline" style="display: inline-block;"></i>
             <i nz-icon nzType="close" nzTheme="outline" style="float:right"></i>
         </ng-template>
     </nz-collapse-panel>
 </nz-collapse>
 
-<nz-drawer
-      [nzClosable]="false"
-      [nzOffsetX]="childrenVisible ? 180 : 0"
-      [nzWidth]="320"
-      [nzVisible]="visible"
-      nzTitle="Cookbook"
-      (nzOnClose)="close()"
-    >
-      <form *nzDrawerContent nz-form>
+<nz-drawer [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="320" [nzVisible]="visible" nzTitle="Cookbook" (nzOnClose)="close()">
+    <form *nzDrawerContent nz-form>
         <div nz-row>
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Name</nz-form-label>
-              <nz-form-control>
-                <input nz-input placeholder="please enter cookbook name" />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>Name</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input placeholder="please enter cookbook name" />
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
         <div nz-row>
-          <div nz-col nzSpan="24">
-            <nz-form-item>
-              <nz-form-label>Food</nz-form-label>
-              <nz-form-control>
-                <nz-tag>potato</nz-tag>
-                <nz-tag>eggplant</nz-tag>
-                <nz-tag (click)="openChildren()">+</nz-tag>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-label>Food</nz-form-label>
+                    <nz-form-control>
+                        <nz-tag>potato</nz-tag>
+                        <nz-tag>eggplant</nz-tag>
+                        <nz-tag (click)="openChildren()">+</nz-tag>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
-      </form>
-      <nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
+    </form>
+    <nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
 
         <h1>hello</h1>
-      </nz-drawer>
     </nz-drawer>
+</nz-drawer>

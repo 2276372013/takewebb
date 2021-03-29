@@ -30,7 +30,13 @@ export class UsersService {
   }
   public isLogin(): Observable<any> {
     // return window.localStorage.getItem('isLogin');
-    return this.httpClient.post('http://localhost:8080/takeit/goods/okToken',null).pipe(map((res: { banners: Msg }) => res.banners));;
+    return this.httpClient.post('http://localhost:8080/takeit/goods/okToken',null).pipe(map((res: { banners: Msg }) => res.banners));
+  }
+  public photoAinfo(): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/user/photoAinfo',null);
+  }
+  public photoInsert(url:String): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/user/photoInsert',url);
   }
 
 }

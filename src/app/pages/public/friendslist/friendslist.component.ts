@@ -16,7 +16,6 @@ export class FriendslistComponent implements OnInit {
   childrenVisible = false;
   vegetables = ['asparagus', 'bamboo', 'potato', 'carrot', 'cilantro', 'potato', 'eggplant'];
   friendsList:User[];
-  @Input() values: string;
   
   ngOnInit(): void {
     this.friendsService.findAllFriends().subscribe(
@@ -32,8 +31,6 @@ export class FriendslistComponent implements OnInit {
 
   panels = [
     {
-      active: false,
-      disabled: false,
       name: ' <input nz-input placeholder="borderless" nzBorderless />',
       childPannel: [
         {
@@ -44,13 +41,9 @@ export class FriendslistComponent implements OnInit {
       ]
     },
     {
-      active: false,
-      disabled: false,
       name: 'This is panel header 2'
     },
     {
-      active: false,
-      disabled: false,
       name: 'This is panel header 3'
     }
   ];
