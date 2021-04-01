@@ -4,6 +4,7 @@ import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { UsersService } from 'src/app/service/Users.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as OSS from 'ali-oss'
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-edit-user-information',
   templateUrl: './edit-user-information.component.html',
@@ -58,7 +59,7 @@ export class EditUserInformationComponent implements OnInit {
     return {};
   };
 
-  constructor(private formBuilder: FormBuilder, private fb: FormBuilder, private usersService: UsersService, private notification: NzNotificationService) {
+  constructor(private message: NzMessageService, private formBuilder: FormBuilder, private fb: FormBuilder, private usersService: UsersService, private notification: NzNotificationService) {
     this.validateForm = this.fb.group({
       userName: [{ value: '', disabled: true }],
       userEmail: ['', [Validators.email, Validators.required]],
@@ -88,7 +89,7 @@ export class EditUserInformationComponent implements OnInit {
     this.getInfor();
   }
 
-  getInfor(){
+  getInfor() {
     this.usersService.photoAinfo().subscribe(
       (result: Msg) => {
         result.data.forEach(item => {
@@ -121,8 +122,9 @@ export class EditUserInformationComponent implements OnInit {
     });
     var base64Data;
     const reader2 = new FileReader()
+    const fileName = fileInput.target.files[0].name;
     reader2.readAsDataURL(fileInput.target.files[0]);
-    reader2.onload = function () {
+    reader2.onload = () => {
       base64Data = reader2.result;
       // console.log(reader2.result); //获取到base64格式图片
 
@@ -144,25 +146,43 @@ export class EditUserInformationComponent implements OnInit {
         type: mimeString
       });
 
-      let userNam = 'takeit/userPhoto/' + window.localStorage.getItem('username') + '/' + window.localStorage.getItem('username') + '.png';
+      let userNam = 'takeit/userPhoto/' + window.localStorage.getItem('username') + '/' + fileName + '.png';
 
-      client.put(userNam, blob).then(function (r1) {
-        // console.log('put success: %j', r1);
+      client.put(userNam, blob).then(r1 => {
+        console.log('put success: %j', r1);
         this.usersService.photoInsert(r1.url).subscribe(
           (result: Msg) => {
-            console.log(result.data)
+            if ((result.status === 200)) {
+              this.message.create('success', `更新成功！`);
+              //刷新goods列表
+              this.getInfor();
+            } else {
+              this.message.create('error', `更新失败了！`);
+            }
           }
         );
-
-        this.getInfor();
         // return client.get(userNam);
-      }).then(function (r2) {
+      }).then(r2 => {
         // console.log('get success: %j', r2);
-      }).catch(function (err) {
+      }).catch(err => {
         // console.error('error: %j', err);
       });
     };
 
+  }
+
+  editDescribe(){
+    this.usersService.editDescribe(this.userdescribe).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.message.create('success', `更新成功！`);
+          //刷新goods列表
+          this.getInfor();
+        } else {
+          this.message.create('error', `更新失败了！`);
+        }
+      }
+    );
   }
 
 }

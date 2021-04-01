@@ -38,5 +38,7 @@ export class UsersService {
   public photoInsert(url:String): Observable<any> {
     return this.httpClient.post('http://localhost:8080/takeit/user/photoInsert',url);
   }
-
+  public editDescribe(userdescribe:String): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/user/editDescribe',userdescribe);
+  }
 }
