@@ -10,10 +10,10 @@
 <br />
 <nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple style="margin-bottom: 10px;">
 </nz-pagination>
-<nz-collapse [nzBordered]="false">
-    <nz-collapse-panel #collaspsepanel *ngFor="let panel of friendsList" [nzHeader]="editName">
+<nz-collapse [nzBordered]="false" [nzAccordion]="true">
+    <nz-collapse-panel #collaspsepanel *ngFor="let panel of friendsList" [nzHeader]="editName" (nzActiveChange)="Hello($event,panel.userId)">
         <p style="margin:0;">
-            A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.
+            {{userDescribe}}
         </p>
         <nz-descriptions nzTitle="Friend information" nzBordered [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }">
             <nz-descriptions-item nzTitle="名称">
@@ -24,7 +24,7 @@
             <nz-descriptions-item nzTitle="Email">{{panel.userEmail}}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="生日">{{panel.userBirth | date:"yy/dd/MM" }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="头像">
-                <img src="http://haoliang-bucket.oss-cn-beijing.aliyuncs.com/object.png" alt="头像加载失败">
+                <img [src]=userPhoto alt="头像加载失败" style="zoom: 0.5;">
             </nz-descriptions-item>
         </nz-descriptions>
         <ng-template #editName>
@@ -35,33 +35,26 @@
     </nz-collapse-panel>
 </nz-collapse>
 
-<nz-drawer [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="320" [nzVisible]="visible" nzTitle="Cookbook" (nzOnClose)="close()">
-    <form *nzDrawerContent nz-form>
-        <div nz-row>
-            <div nz-col nzSpan="24">
-                <nz-form-item>
-                    <nz-form-label>Name</nz-form-label>
-                    <nz-form-control>
-                        <input nz-input placeholder="please enter cookbook name" />
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-        </div>
-        <div nz-row>
-            <div nz-col nzSpan="24">
-                <nz-form-item>
-                    <nz-form-label>Food</nz-form-label>
-                    <nz-form-control>
-                        <nz-tag>potato</nz-tag>
-                        <nz-tag>eggplant</nz-tag>
-                        <nz-tag (click)="openChildren()">+</nz-tag>
-                    </nz-form-control>
-                </nz-form-item>
-            </div>
-        </div>
-    </form>
-    <nz-drawer [nzClosable]="false" [nzVisible]="childrenVisible" nzTitle="Food" (nzOnClose)="closeChildren()">
-
-        <h1>hello</h1>
-    </nz-drawer>
+<nz-drawer [nzClosable]="false" nzWidth="40%" [nzVisible]="visible" nzPlacement="right" nzTitle="添加 好友" (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+            <input type="text" nz-input placeholder="input search text" [(ngModel)]="userName" />
+        </nz-input-group>
+        <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch (click)="findUser()"><i nz-icon nzType="search"></i></button>
+        </ng-template>
+        <br />
+        <br />
+        <nz-card *ngIf="show" nzHoverable style="width:240px" [nzCover]="coverTemplate">
+            <nz-card-meta nzTitle="个性签名" [nzDescription]=userDescribe></nz-card-meta>
+        </nz-card>
+        <ng-template #coverTemplate>
+            <img [src]=userPhoto alt="头像加载失败" style="zoom: 0.5;">
+        </ng-template>
+        <br />
+        <br />
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+    </ng-container>
 </nz-drawer>
