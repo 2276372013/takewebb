@@ -8,7 +8,7 @@
 </ng-template>
 <br />
 <br />
-<nz-pagination [nzPageIndex]="2" [nzTotal]="50" nzSimple style="margin-bottom: 10px;">
+<nz-pagination [nzPageIndex]="1" [nzTotal]="50" nzSimple style="margin-bottom: 10px;">
 </nz-pagination>
 <nz-collapse [nzBordered]="false" [nzAccordion]="true">
     <nz-collapse-panel #collaspsepanel *ngFor="let panel of friendsList" [nzHeader]="editName" (nzActiveChange)="Hello($event,panel.userId)">
@@ -53,6 +53,12 @@
         </ng-template>
         <br />
         <br />
+        <nz-input-group *ngIf="show" nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+            <input type="text" nz-input placeholder="好友备注" [(ngModel)]="childNa"/>
+          </nz-input-group>
+          <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" (click)="addFriends()" nzSearch>添加</button>
+          </ng-template>
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>

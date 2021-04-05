@@ -6,4 +6,5 @@ export interface Friends {
  type:String
  friendId:String
  addFriendtType:String
+ userName:String
 }

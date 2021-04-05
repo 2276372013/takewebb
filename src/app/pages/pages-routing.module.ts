@@ -21,6 +21,8 @@ import { NewslistComponent } from './public/newslist/newslist.component';
 import { PhotoComponent } from './public/photo/photo.component';
 import { TuchuangComponent } from './public/tuchuang/tuchuang.component';
 import { AboutmeComponent } from './public/aboutme/aboutme.component';
+import { FriendnewsComponent } from './public/news/friendnews/friendnews.component';
+import { ManagernewsComponent } from './public/news/managernews/managernews.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: 'welcome', component: WelcomeComponent },
@@ -36,7 +38,14 @@ const routes: Routes = [
       {path: 'goodslist', component: GoodslistComponent,data: {breadcrumb: 'goodslist'},},
       {path: 'friendsgoodslist', component: FriendsgoodslistComponent,data: {breadcrumb: 'friendsgoodslist'}},
       {path: 'friendslist', component: FriendslistComponent,data: {breadcrumb: 'friendslist'}},
-      {path: 'news', component: NewsComponent,data: {breadcrumb: 'news'}},
+      {path: 'news', 
+        children: [
+          { path: '', component: FriendnewsComponent ,data: {breadcrumb: 'friendnews'} },
+          { path: 'friendnews', component: FriendnewsComponent,data: {breadcrumb: 'friendnews'} },
+          { path: 'managernews', component: ManagernewsComponent,data: {breadcrumb: 'managernews'}}, 
+        ],
+      component: NewsComponent,
+      data: {breadcrumb: 'news'}},
       {path: 'useraction', component: UseractionComponent,data: {breadcrumb: 'useraction'}},
       {path: 'crudgoods', component:CRUDgoodsComponent,data: {breadcrumb: 'crudgoods'}},
       {path: 'goodsplacelist', component:GoodsplacelistComponent,data: {breadcrumb: 'goodsplacelist'}},

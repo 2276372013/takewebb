@@ -14,4 +14,7 @@ export class FriendsService {
   public findUser(userName:String): Observable<any> {
     return this.httpClient.post('http://localhost:8080/takeit/friends/findUser',userName);
   }
+  public addFriends(friendId:String,childName:String): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/friends/addFriends',{friendId:friendId,childName:childName});
+  }
 }

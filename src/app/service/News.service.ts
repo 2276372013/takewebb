@@ -8,4 +8,7 @@ export class NewsService {
   public insertWechat(text:String): Observable<any> {
     return this.httpClient.post('http://localhost:8080/takeit/manager/insertWechat', text);
   }
+  public handleShip(): Observable<any> {
+    return this.httpClient.get('http://localhost:8080/takeit/friends/handleShip');
+  }
 }

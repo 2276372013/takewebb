@@ -23,6 +23,7 @@ import { GoodsplacelistComponent } from './goodsplacelist/goodsplacelist.compone
 import { PhotoComponent } from './photo/photo.component';
 import { TuchuangComponent } from './tuchuang/tuchuang.component';
 import { AboutmeComponent } from './aboutme/aboutme.component';
+import { NewsModule } from '.././../pages/public/news/news.module';
 @NgModule({
   declarations: [
     TestComponent,
@@ -45,6 +46,7 @@ import { AboutmeComponent } from './aboutme/aboutme.component';
 
   imports: [
     ShareModule,
+    NewsModule,
     NgxEchartsModule.forRoot({
       echarts,
     })
@@ -52,6 +54,7 @@ import { AboutmeComponent } from './aboutme/aboutme.component';
   exports:[
     ShareModule,
     TestComponent,
+    NewsModule,
     EditUserInformationComponent,
     NgxEchartsModule,
     GoodsListOntimeComponent,
