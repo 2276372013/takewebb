@@ -11,4 +11,7 @@ export class NewsService {
   public handleShip(): Observable<any> {
     return this.httpClient.get('http://localhost:8080/takeit/friends/handleShip');
   }
+  public returnAdd(result:String,friendsId:String): Observable<any> {
+    return this.httpClient.post('http://localhost:8080/takeit/friends/returnAdd/'+result+'/'+friendsId,null);
+  }
 }
