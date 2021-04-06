@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit {
   public userId: number;
   public userName: string;
   public userPassword: string;
-  public user: User;u
+  public user: User;
   buttonDisplay: boolean;
   constructor(private router: Router, private usersService: UsersService, private notification: NzNotificationService) {
     this.user = new User();

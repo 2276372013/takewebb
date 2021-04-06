@@ -16,11 +16,10 @@ export class FriendnewsComponent implements OnInit {
   ngOnInit(): void {
     this.newsService.handleShip().subscribe((result: Msg) => {
       if (result.status === 200) {
-        // this.handleShipList = result.data;
-        console.log(result.data)
+        this.handleShipList = result.data;
+        console.log(this.handleShipList)
       } else {
       }
     });
   }
-
 }
