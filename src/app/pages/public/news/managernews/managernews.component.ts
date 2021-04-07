@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NewsService } from '../../../../service/News.service';
+import { Msg } from '../../../../interfaceEntity/Entity/Msg.interface';
+import { Wechat } from '../../../../interfaceEntity/Entity/Wechat.interface';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-managernews',
   templateUrl: './managernews.component.html',
@@ -7,34 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagernewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private newsService: NewsService, private message: NzMessageService) { }
+  handleShipList: Wechat[];
 
   ngOnInit(): void {
+    this.newsService.findManagerNews().subscribe((result: Msg) => {
+      if (result.status === 200) {
+        this.handleShipList = result.data;
+        console.log(this.handleShipList)
+      } else {
+      }
+    });
   }
-
-    panels = [
-    {
-      active: true,
-      disabled: false,
-      name: 'This is panel header 1',
-      childPannel: [
-        {
-          active: false,
-          disabled: true,
-          name: 'This is panel header 1-1'
-        }
-      ]
-    },
-    {
-      active: false,
-      disabled: true,
-      name: 'This is panel header 2'
-    },
-    {
-      active: false,
-      disabled: false,
-      name: 'This is panel header 3'
-    }
-  ];
-
 }
+

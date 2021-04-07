@@ -4,4 +4,5 @@ export interface Wechat {
  updataTime:String//'更新时间'
  contentUrl:String//'URL'
  state:String//'状态'
+ managerName:String
 }

@@ -10,15 +10,15 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class FriendnewsComponent implements OnInit {
 
-  constructor(private newsService:NewsService,private message: NzMessageService) { }
+  constructor(private newsService: NewsService, private message: NzMessageService) { }
   handleShipList: Friends[];
 
   ngOnInit(): void {
-this.handleShip();
+    this.handleShip();
   }
 
-  returnADD(result:String,friendsId:String){
-    this.newsService.returnAdd(result,friendsId).subscribe((result: Msg) => {
+  returnADD(result: String, friendsId: String, userName:String) {
+    this.newsService.returnAdd(result, friendsId,userName).subscribe((result: Msg) => {
       if (result.status === 200) {
         this.message.create('success', `操作成功`);
         this.handleShip();
@@ -27,11 +27,10 @@ this.handleShip();
     });
   }
 
-  handleShip(){
+  handleShip() {
     this.newsService.handleShip().subscribe((result: Msg) => {
       if (result.status === 200) {
         this.handleShipList = result.data;
-        console.log(this.handleShipList)
       } else {
       }
     });
