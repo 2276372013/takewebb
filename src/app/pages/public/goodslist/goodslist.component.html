@@ -79,7 +79,7 @@
 
 </nz-modal>
 <br /><br />
-<nz-table #columnTable nzBordered nzPageSize="6" [nzData]="goodsList" [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
+<nz-table #columnTable nzBordered nzPageSize="5" [nzData]="goodsList" [nzScroll]="{ x: '1500px'  }" nzTableLayout="fixed" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)">
     <thead>
         <tr>
             <th nzLeft nzWidth="50px" [nzSelections]="listOfSelection" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>

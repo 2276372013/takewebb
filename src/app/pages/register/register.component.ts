@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
   loadOne(template: TemplateRef<any>): void {
     this.isLoadingOne = true;
-    console.log(this.user);
     this.usersService.register(this.user).subscribe(
       (result: Msg) => {
         if ((result.status === 200) && (result.data === 1)){

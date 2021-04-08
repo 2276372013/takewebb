@@ -17,7 +17,6 @@ export class ManagernewsComponent implements OnInit {
     this.newsService.findManagerNews().subscribe((result: Msg) => {
       if (result.status === 200) {
         this.handleShipList = result.data;
-        console.log(this.handleShipList)
       } else {
       }
     });

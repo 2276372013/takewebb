@@ -47,7 +47,6 @@ export class FriendslistComponent implements OnInit {
   }
 
   Hello(e: MouseEvent, userId: String) {
-    console.log(userId);
     this.findPhotoDescribe(userId);
   }
 
@@ -108,7 +107,6 @@ export class FriendslistComponent implements OnInit {
 
   setOffsetTop(): void {
     this.offsetTop += 10;
-    console.log('Hello');
   }
 
   open(): void {
@@ -132,7 +130,6 @@ export class FriendslistComponent implements OnInit {
         .addFriends(this.addFriendsId,this.str)
         .subscribe((result: Msg) => {
           if (result.status === 200) {
-            console.log(result);
           } else {
           }
         });
@@ -141,7 +138,6 @@ export class FriendslistComponent implements OnInit {
         .addFriends(this.addFriendsId,this.childNa)
         .subscribe((result: Msg) => {
           if (result.status === 200) {
-            console.log(result);
           } else {
           }
         });

@@ -27,7 +27,6 @@ export class CRUDgoodsComponent implements OnInit {
     ]
   };
 log(){
-  console.log("text")
 }
   getMonthData(date: Date): number | null {
     if (date.getMonth() === 8) {

@@ -21,7 +21,6 @@ export class PublicComponent implements OnInit {
     this.router.navigate(['public/'+type]);
   }
   notify(): void {
-    console.log('notify');
   }
 
 }

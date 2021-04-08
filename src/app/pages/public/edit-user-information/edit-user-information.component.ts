@@ -149,7 +149,6 @@ export class EditUserInformationComponent implements OnInit {
       let userNam = 'takeit/userPhoto/' + window.localStorage.getItem('username') + '/' + fileName + '.png';
 
       client.put(userNam, blob).then(r1 => {
-        console.log('put success: %j', r1);
         this.usersService.photoInsert(r1.url).subscribe(
           (result: Msg) => {
             if ((result.status === 200)) {

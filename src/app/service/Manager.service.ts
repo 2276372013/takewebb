@@ -7,7 +7,6 @@ import { Manager } from '../interfaceEntity/Entity/Manager.interface';
 export class ManagerService {
   constructor(private httpClient: HttpClient) { }
   public findAllManager(manName?:String): Observable<any> {
-    console.log(manName)
     if(manName){
        return this.httpClient.get('http://localhost:8080/takeit/manager/findAllManager?managerName='+manName);
     }

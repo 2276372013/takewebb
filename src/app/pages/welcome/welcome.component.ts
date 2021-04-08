@@ -22,7 +22,6 @@ export class WelcomeComponent implements OnInit {
 
   public login(template: TemplateRef<any>) {
 
-    console.log(this.user)
     this.usersService.login(this.user).subscribe(
       (result: Msg) => {
         if ((result.status === 200) && (result.data !== null)) {

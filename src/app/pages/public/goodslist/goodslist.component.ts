@@ -314,7 +314,7 @@ export class GoodslistComponent implements OnInit {
           this.goodsList = result.data;
           this.message.create('success', `查找成功！`);
         } else {
-          //          console.log("\n %c 云上博客%c https://www.ni5.top \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
+          //console.log("\n %c 巴啦啦小魔仙%c https://www.baidu.com \n", "color: #48dbfb; background: #1b1c1d; padding:5px 0;", "background: #fadfa3; padding:5px 0;")
         }
       }
     );
