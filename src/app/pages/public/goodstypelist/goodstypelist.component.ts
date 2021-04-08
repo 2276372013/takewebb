@@ -145,5 +145,6 @@ export class GoodstypelistComponent implements OnInit {
     this.nzMessageService.info('click confirm');
   }
 
+  inputValue: string = 'my site';
 
 }

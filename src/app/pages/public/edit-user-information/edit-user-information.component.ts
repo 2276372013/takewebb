@@ -2,9 +2,10 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 import { UsersService } from 'src/app/service/Users.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as OSS from 'ali-oss'
-import { NzMessageService } from 'ng-zorro-antd/message';
+
 @Component({
   selector: 'app-edit-user-information',
   templateUrl: './edit-user-information.component.html',
