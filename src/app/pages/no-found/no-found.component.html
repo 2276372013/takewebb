@@ -1,7 +1,35 @@
 <div class="NotFound">
-  <nz-result nzStatus="404" nzTitle="404" nzSubTitle="抱歉，您访问的页面不存在。">
-    <div nz-result-extra>
-      <button nz-button nzType="primary" (click)="BackWelcome($event)">返回 首页</button>
-    </div>
-  </nz-result>
+    <nz-result nzStatus="404" nzTitle="404" nzSubTitle="抱歉，您访问的页面不存在。">
+        <div nz-result-extra>
+            <button nz-button nzType="primary" (click)="BackWelcome($event)">返回 首页</button>
+        </div>
+    </nz-result>
 </div>
+<!-- <p>大家好 </p>
+<div class="player unsound" id="p1"></div>
+<div class="player sound" id="p2"></div>
+<video autoplay loop muted id="music">
+			<source src="assets/images/housework.mp4" type="video/mp4" />
+			Your browser does not support the video tag.
+		</video>
+<script type="text/javascript">
+    // (function () {
+    // 	alert("hha")
+    let close = document.getElementById("p1");
+    let open = document.getElementById("p2");
+    let m = document.querySelector("#music");
+    let c = function() {
+        m.muted = false;
+        close.style.display = "none";
+        open.style.display = "block";
+    }
+    close.addEventListener("click", c, false);
+
+    let o = function() {
+        m.muted = true;
+        close.style.display = "block";
+        open.style.display = "none";
+    }
+    open.addEventListener("click", o, false);
+    // })
+</script> -->

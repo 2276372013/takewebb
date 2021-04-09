@@ -1,6 +1,53 @@
-.NotFound{
+.NotFound {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+// * {
+//     margin: 0px;
+//     padding: 0px;
+// }
+// video {
+//     position: fixed;
+//     right: 0px;
+//     bottom: 0px;
+//     min-width: 100%;
+//     min-height: 100%;
+//     height: auto;
+//     width: auto;
+//     /*加滤镜*/
+//     /*filter: blur(15px); //背景模糊设置 */
+//     /*-webkit-filter: grayscale(100%);*/
+//     /*filter:grayscale(100%); //背景灰度设置*/
+//     z-index: -11
+// }
+// source {
+//     min-width: 100%;
+//     min-height: 100%;
+//     height: auto;
+//     width: auto;
+// }
+// p {
+//     width: 100%;
+//     text-align: center;
+//     font-size: 40px;
+//     color: white;
+// }
+// .player {
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     width: 22px;
+//     height: 22px;
+//     cursor: pointer;
+//     margin-top: 17px;
+// }
+// .unsound {
+//     background-image: url("../../../assets/images/close.png");
+// }
+// .sound {
+//     display: none;
+//     background-image: url("../../../assets/images/open.png");
+// }

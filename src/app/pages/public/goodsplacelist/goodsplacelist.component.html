@@ -1,66 +1,65 @@
 <button nz-button nzType="primary" class="but" nzShape="circle" (click)="showModal()"><i nz-icon nzType="plus" nzTheme="outline"></i></button>
-<button nz-button nzType="primary" class="but" nzDanger nzShape="circle"       nz-popconfirm
-nzPopconfirmTitle="Are you sure delete this task?"
-nzPopconfirmPlacement="bottom"
-(nzOnConfirm)="confirm()"
-(nzOnCancel)="cancel()"><i nz-icon nzType="minus" nzTheme="outline"></i></button>
+<button nz-button nzType="primary" class="but" nzDanger nzShape="circle" nz-popconfirm nzPopconfirmTitle="Are you sure delete this task?" nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirm()" (nzOnCancel)="cancel()"><i nz-icon nzType="minus" nzTheme="outline"></i></button>
 <button nz-button nzType="default" class="but" (click)="showModal()"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
 <br /><br />
-<nz-table #rowSelectionTable nzShowSizeChanger [nzData]="listOfData" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzPageSize]="6">
+<nz-table #rowSelectionTable nzShowSizeChanger [nzData]="goodsPlace" (nzCurrentPageDataChange)="onCurrentPageDataChange($event)" [nzPageSize]="6">
     <thead>
-      <tr>
-        <th
-          [nzSelections]="listOfSelection"
-          [(nzChecked)]="checked"
-          [nzIndeterminate]="indeterminate"
-          (nzCheckedChange)="onAllChecked($event)"
-        ></th>
-        <th>Age</th>
-        <th nzCustomFilter>
-          Name
-          <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i nz-icon nzType="search"></i>
-          </nz-filter-trigger>
-        </th>
-        <th nzRight>Action</th>
-      </tr>
+        <tr>
+            <th [(nzChecked)]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
+            <th>序号</th>
+            <th nzCustomFilter>
+                地点名称
+                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+            </th>
+            <th nzRight>查看图片</th>
+        </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of rowSelectionTable.data">
-        <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
-        <td>{{ data.age }}</td>
-        <td>{{ data.name }}</td>
-        <td nzRight>
-          <a>action</a>
-        </td>
-      </tr>
+        <tr *ngFor="let data of rowSelectionTable.data;let i = index">
+            <td [nzChecked]="setOfCheckedId.has(data.id)" (nzCheckedChange)="onItemChecked(data.id, $event)"></td>
+            <td>{{i}}</td>
+            <td>{{ data.placeName }}</td>
+            <td nzRight>
+                <a (click)="showModalPhoto(data.placePhoto)">Photo</a>
+            </td>
+        </tr>
     </tbody>
-  </nz-table>
-  <nz-dropdown-menu #menu="nzDropdownMenu">
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
     <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
-        <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
           Search
         </button>
-        <button nz-button nzSize="small" (click)="reset()">Reset</button>
-      </div>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
     </div>
-  </nz-dropdown-menu>
+</nz-dropdown-menu>
 
-  <nz-modal [(nzVisible)]="isVisible" nzTitle="新增物品地点" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+<nz-modal [(nzVisible)]="isVisible" nzTitle="新增物品地点" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" style="width: auto;height: auto;">
     <ng-container *nzModalContent>
-      <div>
-        <nz-input-group nzAddOnBefore="名称">
-          <input type="text" nz-input [(ngModel)]="inputValue" />
-        </nz-input-group>
-      </div>
-      <br />
-      <br />
-      <div>
-          <!-- <input class="aload" type='button' value='上传附件' onClick='javascript:$("#hiddenFile").click();' /> -->
-          <!-- <input id='hiddenFile' type="file" (change)="fileEvent($event)" style="display:none"> -->
-          <input type="file" (change)="fileEvent($event)">
-      </div>
+        <div>
+            <nz-input-group nzAddOnBefore="名称">
+                <input type="text" nz-input [(ngModel)]="placeName" />
+            </nz-input-group>
+        </div>
+        <br />
+        <br />
+        <div>
+            <input type="file" (change)="fileEvent($event) ">
+        </div>
     </ng-container>
-  </nz-modal>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisible2" nzTitle="地点图片" (nzOnCancel)="handleCancel()" nzOkDisabled style="width: auto;height: auto;">
+    <ng-container *nzModalContent>
+        <br />
+        <br />
+        <div>
+            <img [src]=placePhoto alt=" 物品地点加载失败 " style="zoom: 0.5;">
+        </div>
+    </ng-container>
+</nz-modal>

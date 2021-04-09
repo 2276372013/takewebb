@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Goods } from '../interfaceEntity/Entity/Goods.interface';
+import { Goods, GoodsPlace, GoodsType } from '../interfaceEntity/Entity/Goods.interface';
 @Injectable()
 export class GoodsService{
   constructor(private httpClient: HttpClient) {}
@@ -34,5 +34,23 @@ export class GoodsService{
   }
   public updataGoods(goods:Goods): Observable<any>{
     return this.httpClient.post('http://localhost:8080/takeit/goods/updataGoods', goods);
+  }
+  public findGoodsTypes(): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/takeit/goods/findGoodsTypes');
+  }
+  public findGoodsPlaces(): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/takeit/goods/findGoodsPlaces');
+  }
+  public updateGoodsPlaces(goodsPlace:GoodsPlace): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/updateGoodsPlaces', goodsPlace);
+  }
+  public updateGoodsTypes(goodsType:GoodsType): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/updateGoodsPlaces', goodsType);
+  }
+  public insertGoodsType(goodsType:GoodsType): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/insertGoodsType', goodsType);
+  }
+  public insertGoodsPlace(goodsPlace:GoodsPlace): Observable<any>{
+    return this.httpClient.post('http://localhost:8080/takeit/goods/insertGoodsPlace', goodsPlace);
   }
 }

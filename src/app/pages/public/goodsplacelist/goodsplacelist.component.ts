@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
-import { UsersService } from 'src/app/service/Users.service';
+import { GoodsService } from 'src/app/service/Goods.service';
 import * as OSS from 'ali-oss'
+import { GoodsPlace } from 'src/app/interfaceEntity/Entity/Goods.interface';
 
 interface ItemData {
   id: number;
-  name: string;
-  age: number;
-  address: string;
-}
-interface DataItem {
   name: string;
   age: number;
   address: string;
@@ -22,30 +18,11 @@ interface DataItem {
 })
 export class GoodsplacelistComponent implements OnInit {
 
-  constructor(private message: NzMessageService, private nzMessageService: NzMessageService, private usersService: UsersService) { }
-
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      }
-    },
-    {
-      text: 'Select Odd Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
-        this.refreshCheckedStatus();
-      }
-    },
-    {
-      text: 'Select Even Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
-        this.refreshCheckedStatus();
-      }
-    }
-  ];
+  photoUrl='';
+  constructor(private message: NzMessageService, private nzMessageService: NzMessageService, private goodsService: GoodsService) {
+    this.goodsplace = new GoodsPlace();
+  }
+  
   checked = false;
   indeterminate = false;
   listOfCurrentPageData: ItemData[] = [];
@@ -80,7 +57,10 @@ export class GoodsplacelistComponent implements OnInit {
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
   }
 
+  goodsPlace: GoodsPlace[];
+  goodsplace: GoodsPlace;
   ngOnInit(): void {
+    this.init();
     this.listOfData = new Array(200).fill(0).map((_, index) => {
       return {
         id: index,
@@ -90,32 +70,23 @@ export class GoodsplacelistComponent implements OnInit {
       };
     });
   }
+  init() {
+    this.goodsService.findGoodsPlaces().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          // this.message.create('success', `更新成功！`);
+          //刷新goods列表
+          this.goodsPlace = result.data;
+          console.log(this.goodsPlace)
+        } else {
+          // this.message.create('error', `更新失败了！`);
+        }
+      }
+    );
+  }
 
   searchValue = '';
   visible = false;
-  listOfData1: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
-  listOfDisplayData = [...this.listOfData1];
 
   reset(): void {
     this.searchValue = '';
@@ -124,21 +95,46 @@ export class GoodsplacelistComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData1.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   isVisible = false;
-
+  isVisible2 = false;
+  isPhoto = false;
+  isinput = true;
+  placePhoto = '';
+  placeName = '';
   showModal(): void {
+    this.placePhoto = '';
+    this.placeName = '';
     this.isVisible = true;
+  }
+  showModalPhoto(placePhoto): void {
+    this.placePhoto = placePhoto;
+    this.isVisible2 = true;
   }
 
   handleOk(): void {
+    this.goodsplace.placeName = this.placeName;
+    this.goodsplace.userId = window.localStorage.getItem('userid');
+    this.goodsplace.placePhoto = this.photoUrl;
+    this.goodsService.insertGoodsPlace(this.goodsplace).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.message.create('success', `添加成功！`);
+          console.log(result)
+          this.init();
+        } else {
+          this.message.create('error', `添加失败了！`);
+        }
+        this.isVisible = false;
+      }
+    );
     this.isVisible = false;
   }
 
   handleCancel(): void {
     this.isVisible = false;
+    this.isVisible2 = false;
   }
 
   cancel(): void {
@@ -148,9 +144,7 @@ export class GoodsplacelistComponent implements OnInit {
   confirm(): void {
     this.nzMessageService.info('click confirm');
   }
-
-  inputValue: string = 'my site';
-
+ 
   fileEvent(fileInput: any) {
     let client = new OSS({
       region: 'oss-cn-beijing',
@@ -184,24 +178,13 @@ export class GoodsplacelistComponent implements OnInit {
         type: mimeString
       });
 
-      let userNam = 'takeit/userPhoto/' + window.localStorage.getItem('username') + '/' + fileName + '.png';
+      let userNam = 'takeit/userPhoto/' + window.localStorage.getItem('username') + '/goodsPlace/' + fileName + '.png';
 
       client.put(userNam, blob).then(r1 => {
-        this.usersService.photoInsert(r1.url).subscribe(
-          (result: Msg) => {
-            if ((result.status === 200)) {
-              this.message.create('success', `更新成功！`);
-              //刷新goods列表
-            } else {
-              this.message.create('error', `更新失败了！`);
-            }
-          }
-        );
-        // return client.get(userNam);
-      }).then(r2 => {
-        // console.log('get success: %j', r2);
+        this.photoUrl=r1.url;
+        return client.get(userNam);
       }).catch(err => {
-        // console.error('error: %j', err);
+        this.message.create('error', `图片上传失败`);
       });
     };
 

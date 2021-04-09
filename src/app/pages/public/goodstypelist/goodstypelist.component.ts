@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { GoodsType } from 'src/app/interfaceEntity/Entity/Goods.interface';
+import { GoodsService } from 'src/app/service/Goods.service';
+import { Msg } from 'src/app/interfaceEntity/Entity/Msg.interface';
 interface ItemData {
   id: number;
   name: string;
@@ -18,30 +21,9 @@ interface DataItem {
 })
 export class GoodstypelistComponent implements OnInit {
 
-  constructor(private nzMessageService: NzMessageService) { }
-
-  listOfSelection = [
-    {
-      text: 'Select All Row',
-      onSelect: () => {
-        this.onAllChecked(true);
-      }
-    },
-    {
-      text: 'Select Odd Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 !== 0));
-        this.refreshCheckedStatus();
-      }
-    },
-    {
-      text: 'Select Even Row',
-      onSelect: () => {
-        this.listOfCurrentPageData.forEach((data, index) => this.updateCheckedSet(data.id, index % 2 === 0));
-        this.refreshCheckedStatus();
-      }
-    }
-  ];
+  constructor(private message: NzMessageService, private nzMessageService: NzMessageService, private goodsService: GoodsService) {
+    this.goodstype = new GoodsType();
+  }
   checked = false;
   indeterminate = false;
   listOfCurrentPageData: ItemData[] = [];
@@ -75,8 +57,10 @@ export class GoodstypelistComponent implements OnInit {
     this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
   }
-
+  goodsType: GoodsType[];
+  goodstype: GoodsType;
   ngOnInit(): void {
+    this.init();
     this.listOfData = new Array(200).fill(0).map((_, index) => {
       return {
         id: index,
@@ -86,32 +70,22 @@ export class GoodstypelistComponent implements OnInit {
       };
     });
   }
-
+  init() {
+    this.goodsService.findGoodsTypes().subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          // this.message.create('success', `更新成功！`);
+          //刷新goods列表
+          this.goodsType = result.data;
+          console.log(this.goodsType)
+        } else {
+          // this.message.create('error', `更新失败了！`);
+        }
+      }
+    );
+  }
   searchValue = '';
   visible = false;
-  listOfData1: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
-  listOfDisplayData = [...this.listOfData1];
 
   reset(): void {
     this.searchValue = '';
@@ -120,7 +94,6 @@ export class GoodstypelistComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData1.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
   isVisible = false;
@@ -130,7 +103,19 @@ export class GoodstypelistComponent implements OnInit {
   }
 
   handleOk(): void {
-    this.isVisible = false;
+    this.goodstype.userId = window.localStorage.getItem('userid');
+    this.goodsService.insertGoodsType(this.goodstype).subscribe(
+      (result: Msg) => {
+        if ((result.status === 200)) {
+          this.message.create('success', `添加成功！`);
+          console.log(result)
+          this.init();
+        } else {
+          this.message.create('error', `添加失败了！`);
+        }
+        this.isVisible = false;
+      }
+    );
   }
 
   handleCancel(): void {
@@ -144,7 +129,5 @@ export class GoodstypelistComponent implements OnInit {
   confirm(): void {
     this.nzMessageService.info('click confirm');
   }
-
-  inputValue: string = 'my site';
 
 }
